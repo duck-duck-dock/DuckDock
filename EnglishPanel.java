@@ -39,6 +39,7 @@ public class EnglishPanel extends JPanel {
 
     private void initGUI() {
         //Li Wen: 实验代码
+//        Word currentWord;
         Word ww1 = new Word(w1,m1,e1);
         Word ww2 = new Word(w2,m2,e2);
         Word ww3 = new Word(w3,m3,e3);

@@ -17,6 +17,8 @@ public class User {
     private Vector<Problem> Problems;//他的题目表
 
 
+    public User() {
+    }
 }
 
 /*
