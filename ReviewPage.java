@@ -1,15 +1,34 @@
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.util.Vector;
 
 public class ReviewPage extends JPanel {
     JLabel TestLabel;//Yuxin Zhu: 测试用标签，后续删掉换自己写的组件
     JButton BackButton;
 
-    Box h1Box;//Li Wen: 横向Box容器
-    Box v1Box;//Li Wen: 纵向Box容器
+    Box h1Box;//Li Wen: Box容器
+    Box v1Box;
     EnglishPanel AEnglishPage; //Li Wen: 单词学习页
+    User ThisUser;//Li Wen: 当前用户
 
+    /*
+    created by Li Wen in 2021/4/20
+
+    Abstract:
+    ReviewPage的构造函数，
+    初始化ThisUser当前用户
+
+    Para:
+    ThisUser：当前用户
+
+    Return value：
+    null
+    */
+    public ReviewPage(User ThisUser){
+        ThisUser = ThisUser;
+
+    }
 
     private void initGUI() {
         Border lineBorder = BorderFactory.createLineBorder(Color.GREEN);
@@ -21,7 +40,7 @@ public class ReviewPage extends JPanel {
         {
             h1Box = Box.createHorizontalBox();
             v1Box = Box.createVerticalBox();
-            AEnglishPage = new EnglishPanel();
+            AEnglishPage = new EnglishPanel(ThisUser);
             AEnglishPage.setPreferredSize(new Dimension(480,400));
 
             this.setBackground(Color.green);
