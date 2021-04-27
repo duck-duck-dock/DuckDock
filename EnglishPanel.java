@@ -12,6 +12,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.Vector;
 
+/*
+created by Li Wen in 2021/04/1
+
+ */
 public class EnglishPanel extends JPanel {
     JButton QueryButton;        //Li Wen: 打开查单词页面按键
     JButton MemoryButton;       //Li Wen: 打开背单词页面按键
@@ -55,30 +59,15 @@ public class EnglishPanel extends JPanel {
     初始化MemoryingWords他正在背的15个单词列表。
 
     Para:
-    user：当前用户
+    thisuser：当前用户
 
     Return value：
     null
     */
-    public EnglishPanel(User user){
-        ThisUser = user;
-        WordList = user.getWords();
+    public EnglishPanel(User thisuser){
+        ThisUser = thisuser;
+        WordList = thisuser.getWords();
         MemoryingWords = new Vector<>();
-    }
-
-    private void initGUI() {
-
-        Border lineBorder = BorderFactory.createLineBorder(Color.BLUE);
-        this.setBorder(lineBorder);
-        this.setPreferredSize(new Dimension(480,400));
-
-        //Li Wen: 生成EnglishPanel界面
-        initEnglishPanel();
-
-    }
-
-    //Yuxin Zhu: construction func, DON'T change this func unless necessary
-    public EnglishPanel() {
         initGUI();
     }
 
@@ -192,18 +181,46 @@ public class EnglishPanel extends JPanel {
 
             //MemoryPagePanel布局
             {
-                MemoryPagePanel.setPreferredSize(EnglishPages.getPreferredSize());
+                MemWordText.setEditable(false);//不可被编辑
+                MemMeanText.setEditable(false);
+                MemSentenceText.setEditable(false);
+
+                MemWordText.setBackground(Color.gray);
+                MemMeanText.setBackground(Color.gray);
+                MemSentenceText.setBackground(Color.gray);
+
+                MemWordText.setPreferredSize(new Dimension(80,50));
+                MemMeanText.setPreferredSize(new Dimension(100,80));
+                MemSentenceText.setPreferredSize(new Dimension(120,80));
 
                 Box Memv1 = Box.createVerticalBox();
+                Box Memv2 = Box.createVerticalBox();
                 Box Memh1 = Box.createHorizontalBox();
-                MemoryPagePanel.add(Memv1);
+
+                //Li Wen: 存放单词、释义、例句的布局
+                Memv2.add(MemWordText);
+                Memv2.add(Box.createVerticalStrut(20));
+                Memv2.add(MemMeanText);
+                Memv2.add(Box.createVerticalStrut(20));
+                Memv2.add(MemSentenceText);
+                Memv2.add(Box.createVerticalStrut(20));
+                Memv2.add(Box.createVerticalGlue());
+
+                //Li Wen: 存放容易、模糊、困难按键的布局
+                Memh1.add(MemHardButton);
                 Memh1.add(Box.createHorizontalStrut(60));
-                Memv1.add(MemHardButton);
-                Memv1.add(Box.createHorizontalStrut(60));
-                Memv1.add(MemMediumButton);
-                Memv1.add(Box.createHorizontalStrut(60));
-                Memv1.add(MemEasyButton);
-                Memv1.add(Box.createHorizontalGlue());
+                Memh1.add(MemMediumButton);
+                Memh1.add(Box.createHorizontalStrut(60));
+                Memh1.add(MemEasyButton);
+                Memh1.add(Box.createHorizontalGlue());
+
+                //Li Wen: Memory总体布局
+                Memv1.add(Box.createVerticalStrut(30));
+                Memv1.add(Memv2);
+                Memv1.add(Box.createVerticalStrut(30));
+                Memv1.add(Memh1);
+                Memv1.add(Box.createVerticalGlue());
+                MemoryPagePanel.add(Memv1);
             }
 
             //MyListPagePanel布局
@@ -310,7 +327,11 @@ public class EnglishPanel extends JPanel {
                 MemEasyButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        currentWord.setRight(1);//Right+1
+                        currentWord.setRight(1);
+                        //当前记住15个单词时，进入拼写模式
+                        if (MemoryingWords.size()>14){
+
+                        }
                         getNextWord();
                     }
                 });
@@ -372,6 +393,7 @@ public class EnglishPanel extends JPanel {
     public void getNextWord(){
 
     }
+
 
     /*
     created by Li Wen in 2021/4/20
@@ -456,5 +478,21 @@ public class EnglishPanel extends JPanel {
             }
         }
         return null;
+    }
+    
+    private void initGUI() {
+
+        Border lineBorder = BorderFactory.createLineBorder(Color.BLUE);
+        this.setBorder(lineBorder);
+        this.setPreferredSize(new Dimension(480,400));
+
+        //Li Wen: 生成EnglishPanel界面
+        initEnglishPanel();
+
+    }
+
+    //Yuxin Zhu: construction func, DON'T change this func unless necessary
+    public EnglishPanel() {
+        initGUI();
     }
 }
