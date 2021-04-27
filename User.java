@@ -32,6 +32,34 @@ public class User {
     public int getWordNum(){
         return WordNum;
     }
+
+    public String getUserName() {
+        return UserName;
+    }
+    public void setUserName(String userName) {
+        UserName = userName;
+    }
+    public String getPassword() {
+        return Password;
+    }
+    public void setPassword(String password) {
+        Password = password;
+    }
+    public void setUserID(String userID) {
+        UserID = userID;
+    }
+    public void setGrade(int grade) {
+        Grade = grade;
+    }
+    public void setSchool(String school) {
+        School = school;
+    }
+    public void setDreamSchool(String dreamSchool) {
+        DreamSchool = dreamSchool;
+    }
+    public void setDateOfTest(Date dateOfTest) {
+        DateOfTest = dateOfTest;
+    }
 }
 
 /*
@@ -45,6 +73,12 @@ class AllUser{
 
     public Vector<User> getAllUser() {
         return Users;
+    }
+    public Vector<User> getUsers() {
+        return Users;
+    }
+    public int getUserNum() {
+        return UserNum;
     }
 }
 
