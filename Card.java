@@ -10,11 +10,25 @@ public abstract class Card {
     private String FrontSide, BackSide; //卡片正面和背面内容
     private int right = 0, wrong = 0;   //正确、错误次数
     private int star;   //星级，1-5的整数
-    private boolean marked; //是否被标注，true/false，标注即进入拼写队列。
-    private int forget = 0; //Li Wen: 默认为0, 为1时表示已掌握。
+    private boolean marked; //是否被标注，true/false
+    private int forget = 0; //Li Wen: 默认为0, 为1时表示已掌握, 为-1时表示该去拼写。
 
 
-    //Li Wen: Card构造函数
+    /*
+    created by Li Wen in 2021/4/20
+
+    Abstract:
+    Card的构造函数，
+    初始化FrontSide单词，
+    初始化BackSide单词信息。
+
+    Para:
+    frontside: 单词，
+    backside: 单词信息。
+
+    Return value:
+    null
+    */
     public void Card(String frontside, String backside) {
         FrontSide = frontside;
         BackSide = backside;
@@ -32,10 +46,10 @@ public abstract class Card {
 
     //Li Wen: 获取掌握情况
     public boolean isForget(){
-        if (forget == 1){
-            return true;
+        if (forget == 0){
+            return false;
         }
-        else return false;
+        else return true;
     }
 
     //Li Wen: 掌握单词
@@ -53,11 +67,7 @@ public abstract class Card {
         }
     }
 
-
-
-
     public abstract void display();//需要在派生类里override的函数，负责在图形界面显示卡片
-
 
 }
 

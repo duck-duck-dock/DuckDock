@@ -23,6 +23,8 @@ public class MainMenu extends JFrame {
     DefaultPage DefaultFrame;
     CardLayout MainLayout;//卡片布局
 
+    User ThisUser;
+
     //Yuxin Zhu: initialize the memu GUI
     private void initTools() {
         BottomMenu = new JToolBar();
@@ -100,7 +102,7 @@ public class MainMenu extends JFrame {
         PracticeFrame.setSize(MainPanel.getSize());
         ProcessFrame = new ProcessPage();
         ProcessFrame.setSize(MainPanel.getSize());
-        ReviewFrame = new ReviewPage();
+        ReviewFrame = new ReviewPage(ThisUser);
         ReviewFrame.setSize(MainPanel.getSize());
         SettingFrame = new SettingPage();
         SettingFrame.setSize(MainPanel.getSize());
@@ -163,8 +165,9 @@ public class MainMenu extends JFrame {
     }
 
     //Yuxin Zhu: main func, DON'T change this func
-    public MainMenu() {
+    public MainMenu(User thisuser) {
         super("主页");
+        ThisUser = thisuser;
         initGUI();
     }
 

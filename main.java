@@ -3,20 +3,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
+/*
+created by Yuxin Zhu in 2021/03/21
+class:主函数
+ */
 public class main {
-    private AllUser alluser;
+    private AllUser Users;
     public AllUser getAlluser() {
-
-        return alluser;
+        return Users;
     }
     public main(){
-        this.alluser=new AllUser();
+        this.Users=new AllUser();
     }
-    public  static void main(String[] args) {
-        main M=new main();
-        LoginMenu Login = new LoginMenu(M.getAlluser());
-        MainMenu Menu = new MainMenu();
-        Login.LogLoginJButton.addActionListener(new ActionListener() {
+    public static void main(String[] args) {
+        LoginMenu Login = new LoginMenu();
+        MainMenu Menu = new MainMenu(Users.getUsers().elementAt(0));
+
+        Login.NextPage.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(Login.JudgeLogin()){
@@ -27,7 +30,6 @@ public class main {
         });
 
         Login.show();
-
     }
 }
 

@@ -12,23 +12,6 @@ public class ReviewPage extends JPanel {
     EnglishPanel AEnglishPage; //Li Wen: 单词学习页
     User ThisUser;//Li Wen: 当前用户
 
-    /*
-    created by Li Wen in 2021/4/20
-
-    Abstract:
-    ReviewPage的构造函数，
-    初始化ThisUser当前用户
-
-    Para:
-    ThisUser：当前用户
-
-    Return value：
-    null
-    */
-    public ReviewPage(User ThisUser){
-        ThisUser = ThisUser;
-
-    }
 
     private void initGUI() {
         Border lineBorder = BorderFactory.createLineBorder(Color.GREEN);
@@ -55,6 +38,24 @@ public class ReviewPage extends JPanel {
             v1Box.add(AEnglishPage);
             v1Box.add(Box.createHorizontalGlue());
         }
+    }
+
+    /*
+created by Li Wen in 2021/4/20
+
+Abstract:
+ReviewPage的构造函数，
+初始化ThisUser当前用户
+
+Para:
+ThisUser：当前用户
+
+Return value：
+null
+*/
+    public ReviewPage(User thisuser){
+        ThisUser = thisuser;
+        initGUI();
     }
 
     //Yuxin Zhu: construction func, DON'T change this func unless necessary
