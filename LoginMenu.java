@@ -22,11 +22,6 @@ public class LoginMenu extends JFrame{//zyx:登陆界面
     JXDatePicker DatePick;
     JComboBox RegGradeJComboBox,RegSchoolJComboBox,RegDreamSchoolJComboBox;//年级,学校
     CardLayout cl;
-
-    public LoginMenu() {
-        initGUI();
-    }
-
     private void initLogTools() {
         LogNameJLabel=new JLabel("用户名");
         LogPwdJLabel=new JLabel("密   码");
@@ -99,52 +94,6 @@ public class LoginMenu extends JFrame{//zyx:登陆界面
         RegJPanel.add(RegRegisterJButton);
         RegJPanel.add(RegCancelJButton);
         RegJPanel.add(RegMsgLabel);
-
-        /*RegRegisterJButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //this.setVisible(false);
-                //Menu.setVisible(true);
-                //设置信息标签为空 清楚原来的历史信息
-                RegMsgLabel.setText("");
-                //获取用户输入的用户名
-                String strName = RegTxtNameJTextField.getText();
-                if (strName==null||strName.equals("")) {
-
-                    RegMsgLabel.setText("用户名不能为空");
-                    return;
-                }
-                //获取用户名密码
-                String strPwd = new String(RegReTxtPwdJPasswordField.getPassword());
-                if (strPwd==null||strPwd.equals("")) {
-
-                    RegMsgLabel.setText("密码不能为空");
-                    return;
-                }
-                String strRePwd = new String(RegReTxtPwdJPasswordField.getPassword());
-                if (strRePwd==null||strRePwd.equals("")) {
-
-                    RegMsgLabel.setText("确认密码不能为空");
-                    return;
-                }
-
-                //判断确认密码是否跟密码相同
-                if (!strRePwd.equals(strPwd)) {
-
-                    RegMsgLabel.setText("确认密码跟密码不同");
-                    return;
-                }
-                JOptionPane.showMessageDialog(null,"注册成功！" );
-                //转到登录界面
-                cl.show(CardsJPanel,"card1");//转到登录界面
-            }
-        });
-        RegCancelJButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cl.show(CardsJPanel,"card1");//转到登录界面
-            }
-        });*/
     }
     private void initReg2Tools(){
         RegGradeJLabel=new JLabel("年级：");
@@ -152,20 +101,20 @@ public class LoginMenu extends JFrame{//zyx:登陆界面
         RegDreamSchoolJLabel=new JLabel("目标院校：");
         RegTimeJLabel=new JLabel("考研时间：");
         RegReserveJButton=new JButton("保存");
-        RegOfTestDate=new Date();
-        final JXDatePicker DatePick = new JXDatePicker();
+        Date RegOfTestDate=new Date();
+        DatePick = new JXDatePicker();
         DatePick.setDate(RegOfTestDate);
-        JComboBox RegGradeJComboBox=new JComboBox();
+         RegGradeJComboBox=new JComboBox();
         RegGradeJComboBox.addItem("1");
         RegGradeJComboBox.addItem("2");
         RegGradeJComboBox.addItem("3");
         RegGradeJComboBox.addItem("4");
-        JComboBox RegSchoolJComboBox=new JComboBox();
+         RegSchoolJComboBox=new JComboBox();
         RegSchoolJComboBox.addItem("学校1");
         RegSchoolJComboBox.addItem("学校2");
         RegSchoolJComboBox.addItem("学校3");
         RegSchoolJComboBox.addItem("学校4");
-        JComboBox RegDreamSchoolJComboBox=new JComboBox();
+        RegDreamSchoolJComboBox=new JComboBox();
         RegDreamSchoolJComboBox.addItem("学校1");
         RegDreamSchoolJComboBox.addItem("学校2");
         RegDreamSchoolJComboBox.addItem("学校3");
@@ -251,19 +200,24 @@ public class LoginMenu extends JFrame{//zyx:登陆界面
                     RegMsgLabel.setText("确认密码跟密码不同");
                     return;
                 }
-                //判断是否用户名已存在
-                if(getUser()!=null) {
-                    for (int i = 0; i < getUser().getUserNum(); i++) {
-                        if (strName == getUser().getUsers().get(i).getUserName()) {
+                //判断是否没有初始化
+                //判断是否没有用户
+                if(Users!=null) {//判断是否用户名已存在
+                    for (int i = 0; i < Users.getUserNum(); i++) {
+                        if (strName.equals(Users.getUsers().get(i).getUserName())) {
                             RegMsgLabel.setText("该用户名已被使用");
                             return;
                         }
                     }
                 }
+                else{ }
                 //保存用户名和密码，并创立用户ID
-                getUser().getUsers().get(getUser().getUserNum()).setUserName(strName);
-                getUser().getUsers().get(getUser().getUserNum()).setPassword(strPwd);
-                getUser().getUsers().get(getUser().getUserNum()).setUserID(RandomStringUtils.randomAlphanumeric(5));
+                User tempUser=new User();
+                tempUser.setUserName(strName);
+                tempUser.setPassword(strPwd);
+                tempUser.setUserID(RandomStringUtils.randomAlphanumeric(5));
+                Users.getUsers().add(tempUser);
+                Users.setUserNum(Users.getUserNum()+1);
                 JOptionPane.showMessageDialog(null, "注册成功！");
                 RegTxtNameJTextField.setText(null);
                 RegTxtPwdJPasswordField.setText(null);
@@ -283,10 +237,11 @@ public class LoginMenu extends JFrame{//zyx:登陆界面
         RegReserveJButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getUser().getUsers().get(getUser().getUserNum()).setGrade((int)RegGradeJComboBox.getSelectedItem());
-                getUser().getUsers().get(getUser().getUserNum()).setSchool((String)RegSchoolJComboBox.getSelectedItem());
-                getUser().getUsers().get(getUser().getUserNum()).setDreamSchool((String)RegDreamSchoolJComboBox.getSelectedItem());
-                getUser().getUsers().get(getUser().getUserNum()).setDateOfTest((Date)DatePick.getDate());
+
+                Users.getUsers().get(Users.getUserNum()-1).setGrade(Integer.parseInt(String.valueOf(RegGradeJComboBox.getSelectedItem())));
+                Users.getUsers().get(Users.getUserNum()-1).setSchool((String)RegSchoolJComboBox.getSelectedItem());
+                Users.getUsers().get(Users.getUserNum()-1).setDreamSchool((String)RegDreamSchoolJComboBox.getSelectedItem());
+                Users.getUsers().get(Users.getUserNum()-1).setDateOfTest(DatePick.getDate());
                 JOptionPane.showMessageDialog(null, "保存成功！");
                 cl.show(CardsJPanel, "card1");
             }
@@ -295,16 +250,13 @@ public class LoginMenu extends JFrame{//zyx:登陆界面
     private void initGUI(){//zyx:初始化界面
         initTools();
     }
-    public AllUser getUser() {
-        return Users;
-    }
     /*
-created by LHM in 2021/04/17
-Abstract:
-判断用户名和密码是否匹配
-Return value:
-boolean类型，表示是否查到此用户名和密码
-*/
+        created by LHM in 2021/04/17
+        Abstract:
+        判断用户名和密码是否匹配
+        Return value:
+        boolean类型，表示是否查到此用户名和密码
+        */
     public boolean JudgeLogin(){
         //设置信息标签为空 清楚原来的历史信息
         LogMsgLabel.setText("");
@@ -324,9 +276,9 @@ boolean类型，表示是否查到此用户名和密码
             LogMsgLabel.setText("密码不能为空");
             return false;
         }
-        //判断密码是否与用户名相匹配
-        for (int i = 0; i < getUser().getUserNum(); i++) {
-            if (strName == getUser().getUsers().get(i).getUserName() && strPwd == getUser().getUsers().get(i).getPassword()) {
+       //判断密码是否与用户名相匹配
+        for (int i = 0; i < Users.getUserNum(); i++) {
+            if (strName.equals(Users.getUsers().get(i).getUserName()) && strPwd.equals(Users.getUsers().get(i).getPassword())) {
                 JOptionPane.showMessageDialog(null, "登录成功！");
                 return true;
             }
@@ -336,8 +288,8 @@ boolean类型，表示是否查到此用户名和密码
     }
     public LoginMenu(AllUser alluser){
         super("登录界面");
-        AllUser Users=new AllUser();
-        Users=alluser;
+        Users = new AllUser();
+        Users = alluser;
         initGUI();
 
     }
