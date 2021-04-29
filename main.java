@@ -8,18 +8,17 @@ created by Yuxin Zhu in 2021/03/21
 class:主函数
  */
 public class main {
-    private AllUser Users;
+    private static AllUser Users;
+
     public AllUser getAlluser() {
         return Users;
     }
-    public main(){
-        this.Users=new AllUser();
-    }
+
     public static void main(String[] args) {
+        Users=new AllUser();
         LoginMenu Login = new LoginMenu();
         MainMenu Menu = new MainMenu(Users.getUsers().elementAt(0));
-
-        Login.NextPage.addActionListener(new ActionListener() {
+        Login.LogLoginJButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(Login.JudgeLogin()){

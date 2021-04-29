@@ -24,7 +24,7 @@ public class LoginMenu extends JFrame{//zyx:登陆界面
     CardLayout cl;
 
     public LoginMenu() {
-
+        initGUI();
     }
 
     private void initLogTools() {
@@ -252,10 +252,12 @@ public class LoginMenu extends JFrame{//zyx:登陆界面
                     return;
                 }
                 //判断是否用户名已存在
-                for (int i = 0; i < getUser().getUserNum(); i++) {
-                    if (strName == getUser().getUsers().get(i).getUserName()) {
-                        RegMsgLabel.setText("该用户名已被使用");
-                        return;
+                if(getUser()!=null) {
+                    for (int i = 0; i < getUser().getUserNum(); i++) {
+                        if (strName == getUser().getUsers().get(i).getUserName()) {
+                            RegMsgLabel.setText("该用户名已被使用");
+                            return;
+                        }
                     }
                 }
                 //保存用户名和密码，并创立用户ID
