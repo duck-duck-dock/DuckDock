@@ -2,15 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08ed4f62-65e2-4bd1-8cfa-b2115c07d3d4" name="Default Changelist" comment="added TomatoFrame.java">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DefaultPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnglishPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoginMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticePage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProcessPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReviewPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SettingPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TomatoFrame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UploadPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lwbranchREADME.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pgSQL-create_table.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="Login" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
