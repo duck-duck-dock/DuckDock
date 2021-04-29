@@ -66,7 +66,7 @@ public class EnglishPanel extends JPanel {
     */
     public EnglishPanel(User thisuser){
         ThisUser = thisuser;
-        WordList = thisuser.getWords();
+//        WordList = thisuser.getWords();
         MemoryingWords = new Vector<>();
         initGUI();
     }
