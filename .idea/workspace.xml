@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="08ed4f62-65e2-4bd1-8cfa-b2115c07d3d4" name="Default Changelist" comment="added TomatoFrame.java">
+      <change beforePath="$PROJECT_DIR$/Card.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DefaultPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnglishPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoginMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticePage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProcessPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReviewPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SettingPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TomatoFrame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UploadPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lwbranchREADME.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pgSQL-create_table.txt" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Login" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="ProjectId" id="1rqSw5uWk1tv9ZYQiuvQCB4PM5P" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="jdk.selected.JAVA_MODULE" value="14" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/Tencent Files/752928525/FileRecv/lwlib" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.16509435" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RunManager">
+    <configuration name="tomato" type="Java Scratch">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="DuckDock" />
+      <option name="SCRATCH_FILE_URL" value="file://$PROJECT_DIR$/src/TomatoFrame.java" />
+      <shortenClasspath name="NONE" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="08ed4f62-65e2-4bd1-8cfa-b2115c07d3d4" name="Default Changelist" comment="" />
+      <created>1619702368645</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1619702368645</updated>
+    </task>
+    <task id="LOCAL-00001" summary="added TomatoFrame.java">
+      <created>1619703946366</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1619703946366</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added TomatoFrame.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="added TomatoFrame.java" />
+  </component>
+</project>
