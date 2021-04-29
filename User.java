@@ -116,6 +116,9 @@ class AllUser{
     }
 
     //获得Users对象
+    public Vector<User> getUsers(){
+        return Users;
+    }
 
     public Vector<User> getUsers() {
         return Users;
