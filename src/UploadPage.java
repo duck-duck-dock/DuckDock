@@ -148,7 +148,7 @@ class SingleWordUploadPanel extends JPanel{
                     ExplainText.setForeground(Color.lightGray);
                     ExplainText.setText("--请输入解释--");
                 }
-                else Explain=ExplainText.getText().toString();
+                 else Explain=ExplainText.getText().toString();
             }
         });
         //确认上传成功弹窗
