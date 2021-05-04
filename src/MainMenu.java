@@ -166,7 +166,9 @@ public class MainMenu extends JFrame {
 
     }
 
-    public MainMenu(){}
+    public MainMenu(){
+        initGUI();
+    }
     //Yuxin Zhu: main func, DON'T change this func
     public MainMenu(User thisuser) {
         super("主页");
