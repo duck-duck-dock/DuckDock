@@ -1,3 +1,5 @@
+import com.sun.tools.javac.Main;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -6,14 +8,15 @@ import java.awt.event.ActionListener;
 
 /*
 created by Yuxin Zhu in 2021/03/21
-
+updated by Yuxin Zhu in 2021/04/22
+new feature: Tomato Clock
  */
 public class MainMenu extends JFrame {
     JToolBar BottomMenu;//zyx:底部菜单栏
     Box ButtonBar;//底部按钮布局
     Box MainBar;//总布局
     JPanel MainPanel;//主界面
-    JButton Review, Practice, Upload, Process, Setting;//按钮组件
+    JButton Review, Practice, Upload, Process, Setting,Tomato;//按钮组件
     UploadPage UploadFrame;//功能模块
     SettingPage SettingFrame;//下为内嵌的分功能页面
     ReviewPage ReviewFrame;
@@ -163,6 +166,9 @@ public class MainMenu extends JFrame {
 
     }
 
+    public MainMenu(){
+        initGUI();
+    }
     //Yuxin Zhu: main func, DON'T change this func
     public MainMenu(User thisuser) {
         super("主页");
