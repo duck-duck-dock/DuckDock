@@ -161,6 +161,7 @@ public class MainMenu extends JFrame {
     //Yuxin Zhu: init all the GUI
     private void initGUI() {//zyx:初始化界面
         this.setSize(800, 600);
+        this.setResizable(false);
         initTools();
         initPages();
 

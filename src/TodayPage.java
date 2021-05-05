@@ -13,7 +13,7 @@ import java.io.*;
 import java.net.*;
 import java.util.Calendar;
 
-public class TodayPage extends JFrame {
+public class TodayPage extends JPanel {
 
     JPanel TodayPagePanel;      //Li Wen: 今日页面: 是父组件
     JPanel WordPanel;           //Li Wen: 今日鸡汤组件
@@ -120,27 +120,31 @@ public class TodayPage extends JFrame {
             //页面布局: 主页面
             {
                 //设置组件的大小
-                this.setSize(new Dimension(800,600));
                 WordPanel.setPreferredSize(new Dimension(780,150));
-                NewsPanel.setPreferredSize(new Dimension(780,150));
-                WeatherPanel.setPreferredSize(new Dimension(350,300));
-                TodoPanel.setPreferredSize(new Dimension(460,300));
+                NewsPanel.setPreferredSize(new Dimension(300,150));
+                WeatherPanel.setPreferredSize(new Dimension(300,150));
+                TodoPanel.setPreferredSize(new Dimension(480,440));
 
                 //主页面布局
                 Box h1 = Box.createHorizontalBox();
                 Box v1 = Box.createVerticalBox();
+                Box v2 = Box.createVerticalBox();
 
-                h1.add(WeatherPanel);
+                v1.add(WordPanel);
+                v1.add(Box.createVerticalStrut(5));
+                v1.add(h1);
+                v1.add(Box.createVerticalGlue());
+
+                h1.add(v2);
                 h1.add(Box.createHorizontalStrut(5));
                 h1.add(TodoPanel);
                 h1.add(Box.createHorizontalGlue());
 
-                v1.add(WordPanel);
-                v1.add(Box.createVerticalStrut(5));
-                v1.add(NewsPanel);
-                v1.add(Box.createVerticalStrut(5));
-                v1.add(h1);
-                v1.add(Box.createVerticalGlue());
+                v2.add(WeatherPanel);
+                v2.add(Box.createVerticalStrut(5));
+                v2.add(NewsPanel);
+                v2.add(Box.createVerticalStrut(5));
+                v2.add(Box.createVerticalGlue());
 
                 TodayPagePanel.add(v1);
                 this.add(TodayPagePanel);
@@ -492,10 +496,10 @@ public class TodayPage extends JFrame {
         initTodayPage();
     }
 
-    public static void main(String[] args){
-        TodayPage tempTodayPage = new TodayPage();
-        tempTodayPage.show();
-    }
+//    public static void main(String[] args){
+//        TodayPage tempTodayPage = new TodayPage();
+//        tempTodayPage.show();
+//    }
 
 }
 
