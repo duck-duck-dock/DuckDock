@@ -38,6 +38,7 @@ public class User {
         Words=new Vector<Word>();
         Problems=new Vector<Problem>();
     }
+
     public void addWord(Word word){ this.Words.add(word); }
     public void addProblem(Problem problem){
         this.Problems.add(problem);
@@ -80,6 +81,11 @@ public class User {
     public Vector<Problem> getProblems() {
         return Problems;
     }
+    public void setProblems(Vector<Problem> problems){//设置单词列表
+        Problems=problems;
+    }
+
+
 }
 
 /*

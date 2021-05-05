@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Vector;
+
 /*
 created by Yuxin Zhu in 2021/03/21
 class:卡片（单词、题目）
@@ -58,50 +61,27 @@ public abstract class Card {
     }
 
     //Li Wen: 获取掌握情况
-    public int isForget(){
-        return forget;
+    public boolean isForget(){
+        if (forget == 0){
+            return false;
+        }
+        else return true;
     }
 
-    /*
-    created by Li Wen in 2021/4/29
-
-    Abstract:
-    设置当前单词卡片的状态forget参数：普通0/待拼写-1/已掌握1。
-
-    Para:
-    i: 目标状态
-
-    Return value:
-    null
-    */
-    public void setForget(int i){
-        switch(i){
-            case -1: forget = -1;break;//该去拼写
-            case  0: forget =  0;break;//一般单词
-            case  1: forget =  1;break;//已掌握
-        };
+    //Li Wen: 掌握单词
+    public void setForget(boolean ch){
+        forget = ch == true ? 1:0;
     }
 
-    /*
-    created by Li Wen in 2021/4/29
-
-    Abstract:
-    设置答对次数right，并根据答对次数设置是否进入拼单词模式。
-
-    Para:
-    i: 是否答对。为1时表示答对，为0时表示答错。
-
-    Return value:
-    Vector<Word>类型，表示所有查到的单词。
-    */
+    //Li Wen: 容易/模糊/困难，修改Right
     public void setRight(int i){
-        if ((i==0) && (right>0)){ //困难
+        if ((i==0) && (right>0)){
             right--;
         }
-        else if (i==1){ //容易，right到5就去拼写。
+        else if (i==1){
             right++;
             if (right == 5){
-                setForget(-1);
+                setForget(false);
             }
         }
     }
@@ -209,6 +189,11 @@ updated by Qingling Zhang in 2021/04/13
 更新内容：Problem带参构造函数，用于给Problem所有私有变量初始化（调用super初始化继承自父类的）
  */
 class Problem extends Card {
+    private String ProblemPosition;//图片位置
+    //存标签，暂时未定
+    public String getProblemPosition() { return ProblemPosition; }//得到图片的位置
+    public void setProblemPosition(String position){ProblemPosition=position;}//设置图片位置
+
     public Problem(String frontSide,String backSide,int right,int wrong,int star,boolean marked){
         super(frontSide,backSide,right,wrong,star,marked);
     }
