@@ -1,6 +1,8 @@
 import java.sql.*;
 import java.util.Date;
 import java.util.Vector;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 /*
 created by Yuxin Zhu in 2021/03/21
@@ -8,6 +10,9 @@ class:用户
 
 updated by Qingling Zhang in 2021/04/13
 更新内容：User带参构造函数以及接口（addWord、addProblem、……）
+
+updated by Qingling Zhang in 2021/05/04
+更新内容：增加用户备份（user_backup）函数
  */
 public class User {
     private String UserName;//用户名，可以重复
@@ -22,6 +27,7 @@ public class User {
 
 
     public User(){
+        //UserID="002";
         Words=new Vector<Word>();
         Problems=new Vector<Problem>();
     }
@@ -37,6 +43,21 @@ public class User {
         this.Problems=null;
         Words=new Vector<Word>();
         Problems=new Vector<Problem>();
+    }
+
+    //备份用户所有信息
+    public void user_backup(){
+
+        jdbc.ConnPostgreSql();      //连接数据库
+        if(!jdbc.JdbcExistUser(this)){
+            //用户不存在则添加用户
+            jdbc.JdbcAddUser(this);
+        }
+        else {
+            jdbc.JdbcUpdateUser(this);  //更新用户信息
+            jdbc.JdbcUpdateWandE(this); //更新用户单词表以及问题表
+        }
+        jdbc.DisConnPostgreSql();   //断联数据库
     }
     public void addWord(Word word){ this.Words.add(word); }
     public void addProblem(Problem problem){
@@ -87,27 +108,20 @@ created by Yuxin Zhu in 2021/03/21
 class:所有用户信息
 读写文件写成该类的方法
 
-updated by Qingling Zhang in 2021/04/13
+updated by Qingling Zhang in 2021/05/04
 更新内容：
-    1.Connection connectSql：用来与数据库连接。Statement stmtSql执行不带参数的简单SQL语句
-    2.与数据库建立连接、断开连接
-    3.从数据库中读取所有用户信息（包括单词表和问题表）保存到形参中的AllUser对象中
-    4.更新形参User个人信息
-    5.新增、删除形参User用户
-    6.更新形参User的单词表和问题表
+    1.将与数据库相关操作均移入AllUser子类jdbc中，调用无需实例化
+    2.将Users从private改成protected型
  */
 class AllUser{
-    private Vector<User> Users;//所有用户
+    protected Vector<User> Users;//所有用户
     private int UserNum;//用户数量，>0
-    static Connection connectSql =null;
-    static Statement stmtSql =null;
     public Vector<User> getUsers() {
         return Users;
     }
     public int getUserNum() {
         return UserNum;
     }
-
 
     public void setUserNum(int userNum) {
         UserNum = userNum;
@@ -116,6 +130,18 @@ class AllUser{
    public AllUser(){
         Users = new Vector<User>();
     }
+
+
+}
+
+/*
+created by Qingling Zhang in 2021/05/04
+class:数据库相关操作
+内部函数均写成静态函数，无需实例化可直接使用
+ */
+class jdbc extends AllUser{
+    static Connection connectSql =null;
+    static Statement stmtSql =null;
 
     /*
         created by Qingling Zhang in 2021/04/07
@@ -238,7 +264,7 @@ class AllUser{
     public static boolean JdbcUpdateUser(User updateUser){
         String updateSql="update users set UserName = '"+updateUser.getUserName()+"' ,Password= '"+updateUser.getPassword()
                 +"' ,School= '"+updateUser.getSchool()+"' ,Grade= '"+updateUser.getGrade()+"' ,DreamSchool= '"+updateUser.getDreamSchool()
-                +"' ,Date= '"+updateUser.getDateOfTest()+"' where UserId= '"+updateUser.getUserID()+"' ;";
+                +"' ,Date= "+updateUser.getDateOfTest()+" where UserId= '"+updateUser.getUserID()+"' ;";
         try {
             stmtSql.executeUpdate(updateSql);
             connectSql.commit();
@@ -317,6 +343,27 @@ class AllUser{
         return true;
     }
 
+    /*
+    created by Qingling Zhang in 2021/05/04
+    Abstract:查询User用户是否存在
+    Return value:Boolean类型，表示成功
+     */
+    public static boolean JdbcExistUser(User user){
+        try{
+            ResultSet querySql;
+
+            /*将指定用户从数据库读出*/
+            //System.out.println(user.getUserID());
+            querySql= stmtSql.executeQuery("select * from users where userid='"+user.getUserID()+"'");
+            //querySql= stmtSql.executeQuery("select * from users where userid='007'");
+            if(querySql==null)return false; //该用户不存在
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName()+":"+e.getMessage());
+            System.exit(0);
+        }
+        return true;
+    }
     /*
     created by Qingling Zhang in 2021/04/07
     Abstract:新增形参User用户
