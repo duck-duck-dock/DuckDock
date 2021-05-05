@@ -1,0 +1,32 @@
+ create table users(
+	UserName varchar(100) not null,
+	UserID varchar(100) primary key,
+	Password varchar(100) not null,
+	School varchar(80),
+	Grade int check (Grade>=0 and Grade<5),
+	DreamSchool varchar(80),
+	Date date
+)
+
+create table words(
+	UserID varchar(100),
+	FrontSide varchar(10000) unique,
+	BackSide varchar(100000),
+	right_count int,
+	wrong_count int,
+	star int check (star>=1 and star<=5),
+	marked bool,
+	EgSentence varchar(100000),
+	foreign key(UserID) references users(UserID) on delete cascade on update cascade
+)
+
+create table problems(
+	UserID varchar(100),
+	FrontSide varchar(10000) unique,
+	BackSide varchar(100000),
+	right_count int,
+	wrong_count int,
+	star int check (star>=1 and star<=5),
+	marked bool,
+	foreign key(UserID) references users(UserID)
+)
