@@ -11,13 +11,6 @@ created by Yuxin Zhu in 2021/04/22
 
 //整个页面
 //封装传递引用
-class conveyTime {
-    Integer remainTime;
-
-    public conveyTime(Integer t) {
-        remainTime = t;
-    }
-}
 
 public class TomatoFrame extends JFrame {
     int HEIGHT = 600;
@@ -25,6 +18,7 @@ public class TomatoFrame extends JFrame {
     TomatoPanel drawClock;//绘制钟的面板
     JPanel buttonPanel;
     JButton start, pulse;//开始键，暂停键
+    boolean Flag=false;//是否在运行
 
 
     @Override
@@ -59,21 +53,38 @@ public class TomatoFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 drawClock.mode = 1;
-                TimerTask t = new timerTest(drawClock.remainTime);
-                Timer timer = new Timer(true);
-                timer.scheduleAtFixedRate(t, 0, 1000);
-                try {//计时alltime秒
-                    Thread.sleep(drawClock.allTime * 1000);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-                timer.cancel();
+
+                Flag=true;
+
+                new Thread(new Runnable(){
+                    @Override
+                    public void run() {
+                        while(drawClock.remainTime>=0){
+                            if(Flag){
+                                try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                drawClock.remainTime--;
+                                SwingUtilities.invokeLater(new Runnable(){
+                                    public void run() {
+                                        drawClock.timeLabel=drawClock.timeToString();
+                                        drawClock.repaint();
+                                    }
+                                });
+                            }
+                        }
+
+                    }
+                }).start();
             }
         });
         pulse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 drawClock.mode = 2;
+                Flag=false;
             }
         });
         this.add(buttonPanel, BorderLayout.SOUTH);
@@ -92,11 +103,11 @@ public class TomatoFrame extends JFrame {
 
 //绘制番茄钟
 class TomatoPanel extends JPanel {
-    int HEIGHT = 600;
+    int HEIGHT = 300;
     int WIDTH = 300;
     int mode = 0;//0未开始 1已开始 2被暂停
     Integer allTime = 0;//倒计时初始时间和剩下时间(秒)
-    conveyTime remainTime = new conveyTime(0);
+    Integer remainTime = 0;
     int endX = WIDTH / 2, endY = HEIGHT / 2 - 100;
     int r = 100;//钟的半径
     String timeLabel = "00:00:00";
@@ -109,7 +120,7 @@ class TomatoPanel extends JPanel {
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                if (mode == 1)
+                if (mode == 1)//运行的时候禁止拖动
                     return;
                 super.mouseDragged(e);
                 int X = e.getX(), Y = e.getY();
@@ -145,17 +156,9 @@ class TomatoPanel extends JPanel {
                     }
                 }
                 allTime *= 60;//秒数
-                allTime = (Integer) allTime;
-                remainTime.remainTime = allTime;
+                remainTime=allTime;
                 //计算时分秒
-                int hour = (int) Math.floor(remainTime.remainTime / 3600);
-                int minute = (int) Math.floor((remainTime.remainTime - hour * 3600) / 60);
-                int sec = remainTime.remainTime % 60;
-                String m = Integer.toString(minute);//填充分钟到两位
-                if (minute < 10) m = '0' + m;
-                String s = Integer.toString(sec);//填充秒钟到两位
-                if (sec < 10) s = '0' + s;
-                timeLabel = '0' + Integer.toString(hour) + ":" + m + ':' + s;
+                timeLabel=timeToString();
                 repaint();
             }
         });
@@ -187,30 +190,17 @@ class TomatoPanel extends JPanel {
 
     }
 
-}
-
-//计时器
-class timerTest extends TimerTask {
-    conveyTime t;//剩余时间，封装以引用传递
-
-    //从外部传入数据初始化
-    public timerTest(conveyTime t) {
-        this.t = t;
-    }
-
-    //定时调用
-    @Override
-    public void run() {
-        System.out.println(Integer.toString(t.remainTime));
-        t.remainTime--;
-        //重绘
+    public String timeToString(){//将剩余秒数转换为HH:MM:SS
+        int hour = (int) Math.floor(remainTime / 3600);
+        int minute = (int) Math.floor((remainTime - hour * 3600) / 60);
+        int sec = remainTime % 60;
+        String m = Integer.toString(minute);//填充分钟到两位
+        if (minute < 10) m = '0' + m;
+        String s = Integer.toString(sec);//填充秒钟到两位
+        if (sec < 10) s = '0' + s;
+        String timeLabel1 = '0' + Integer.toString(hour) + ":" + m + ':' + s;
+        return timeLabel1;
     }
 
 }
 
-class Main {
-    public static void main(String[] args) {
-        TomatoFrame t = new TomatoFrame();
-        t.show();
-    }
-}

@@ -36,17 +36,13 @@ public class MainMenu extends JFrame {
         Upload = new JButton("+");
         Process = new JButton("进度");
         Setting = new JButton("设置");
-        ButtonBar.add(Box.createGlue());
+        Tomato=new JButton("番茄钟");
         ButtonBar.add(Review);
-        ButtonBar.add(Box.createGlue());
         ButtonBar.add(Practice);
-        ButtonBar.add(Box.createGlue());
         ButtonBar.add(Upload);
-        ButtonBar.add(Box.createGlue());
         ButtonBar.add(Process);
-        ButtonBar.add(Box.createGlue());
         ButtonBar.add(Setting);
-        ButtonBar.add(Box.createGlue());
+        ButtonBar.add(Tomato);
 
         BottomMenu.add(ButtonBar);
         BottomMenu.setFloatable(false);
@@ -82,6 +78,14 @@ public class MainMenu extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 MainLayout.show(MainPanel, "Upload");
 
+            }
+        });
+        Tomato.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TomatoFrame t = new TomatoFrame();
+                t.setSize(300,400);
+                t.show();
             }
         });
     }
