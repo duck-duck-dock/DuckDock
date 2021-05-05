@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="91531108-46fe-4cb9-866c-a519f21d2930" name="Default Changelist" comment="fixed login">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/Wordbgpic.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/100.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/101.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/102.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/103.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/104.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/150.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/153.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/154.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/300.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/301.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/302.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/303.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/304.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/305.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/306.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/307.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/308.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/309.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/310.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/311.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/312.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/313.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/314.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/315.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/316.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/317.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/318.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/350.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/351.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/399.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/400.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/401.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/402.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/403.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/404.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/405.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/406.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/407.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/408.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/409.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/410.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/456.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/457.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/499.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/500.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/501.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/502.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/503.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/504.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/507.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/508.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/509.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/510.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/511.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/513.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/514.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/515.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/900.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/901.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/999.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pics/weathericon-64/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/DuckDock/AllUser.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TodayPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DuckDock.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DuckDock.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EnglishPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EnglishPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoginMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReviewPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReviewPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="lwbranch" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1s7N5uEqbNrdykcgZ3HVJi3x2j4" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="jdk.selected.JAVA_MODULE" value="14" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/Tencent Files/752928525/FileRecv/lwlib" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.16509435" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="Java Scratch">
+      <option name="MAIN_CLASS_NAME" value="main" />
+      <module name="DuckDock" />
+      <option name="SCRATCH_FILE_URL" value="file://$PROJECT_DIR$/src/main.java" />
+      <shortenClasspath name="NONE" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="91531108-46fe-4cb9-866c-a519f21d2930" name="Default Changelist" comment="" />
+      <created>1620219492725</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1620219492725</updated>
+    </task>
+    <task id="LOCAL-00001" summary="fixed login">
+      <created>1620220315108</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1620220315108</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fixed login" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed login" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/DuckDock$main.ic" NAME="main Coverage Results" MODIFIED="1620220664291" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>

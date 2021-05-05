@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.Vector;
 
@@ -25,8 +26,8 @@ public class ReviewPage extends JPanel {
             v1Box = Box.createVerticalBox();
             AEnglishPage = new EnglishPanel(ThisUser);
             AEnglishPage.setPreferredSize(new Dimension(480,400));
-
-            this.setBackground(Color.green);
+            this.setBorder(new EmptyBorder(0,0,0,0));
+            this.setBackground(new Color(165, 222, 228));
             this.add(v1Box);
             h1Box.add(Box.createHorizontalStrut(50));
             h1Box.add(TestLabel);

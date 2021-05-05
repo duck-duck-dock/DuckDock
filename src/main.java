@@ -17,23 +17,23 @@ public class main {
     }
 
     public static void main(String[] args) {
-//        MainMenu Menu=new MainMenu();
-//        Menu.show();
+        MainMenu Menu=new MainMenu(new User());
+        Menu.show();
 
-        main M = new main();
-        LoginMenu Login = new LoginMenu(M.getAlluser());
-        MainMenu Menu = new MainMenu();
-        Login.LogLoginJButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (Login.JudgeLogin()) {
-                    Login.setVisible(false);
-                    Menu.setVisible(true);
-                }
-            }
-        });
-
-        Login.show();
+//        main M = new main();
+//        LoginMenu Login = new LoginMenu(M.getAlluser());
+//        Login.LogLoginJButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                if (Login.JudgeLogin()) {
+//                    Login.setVisible(false);
+//                    MainMenu Menu = new MainMenu(Login.tempUser);
+//                    Menu.setVisible(true);
+//                }
+//            }
+//        });
+//
+//        Login.show();
 
     }
 }
