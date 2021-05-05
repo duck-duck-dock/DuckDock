@@ -120,6 +120,9 @@ public class EnglishPanel extends JPanel {
                 QueryButton     = new JButton("查单词");
                 MemoryButton    = new JButton("背单词");
                 MyListButton    = new JButton("我的生词本");
+                QueryButton.setFocusPainted(false);QueryButton.setBorderPainted(false);QueryButton.setBackground(Color.yellow);
+                MemoryButton.setFocusPainted(false);MemoryButton.setBorderPainted(false);MemoryButton.setBackground(Color.yellow);
+                MyListButton.setFocusPainted(false);MyListButton.setBorderPainted(false);MyListButton.setBackground(Color.yellow);
 
                 QueryInputTextField = new JTextField();
                 QueryStartButton    = new JButton("查询");
@@ -128,6 +131,10 @@ public class EnglishPanel extends JPanel {
                 QueryWordText    = new JTextPane();
                 QueryMeanText    = new JTextPane();
                 QuerySentenceText    = new JTextPane();
+                QueryStartButton.setFocusPainted(false);QueryStartButton.setBorderPainted(false);QueryStartButton.setBackground(Color.yellow);
+                QueryAddButton.setFocusPainted(false);QueryAddButton.setBorderPainted(false);QueryAddButton.setBackground(Color.yellow);
+                QueryBackButton.setFocusPainted(false);QueryBackButton.setBorderPainted(false);QueryBackButton.setBackground(Color.yellow);
+
 
                 MemForgetButton = new JButton("不再出现");
                 MemEasyButton   = new JButton("容易");
@@ -137,6 +144,10 @@ public class EnglishPanel extends JPanel {
                 MemWordText     = new JTextPane();
                 MemMeanText     = new JTextPane();
                 MemSentenceText = new JTextPane();
+                MemForgetButton.setFocusPainted(false);MemForgetButton.setBorderPainted(false);MemForgetButton.setBackground(Color.yellow);
+                MemEasyButton.setFocusPainted(false);MemEasyButton.setBorderPainted(false);MemEasyButton.setBackground(Color.yellow);
+                MemHardButton.setFocusPainted(false);MemHardButton.setBorderPainted(false);MemHardButton.setBackground(Color.yellow);
+                MemBackButton.setFocusPainted(false);MemBackButton.setBorderPainted(false);MemBackButton.setBackground(Color.yellow);
 
                 DicBackButton = new JButton("返回");
                 DicClearButton = new JButton("清空");
@@ -146,8 +157,13 @@ public class EnglishPanel extends JPanel {
                 DicMeanText    = new JTextPane();
                 DicAccentText  = new JTextPane();
                 DicInputTextField = new JTextField();
+                DicBackButton.setFocusPainted(false);DicBackButton.setBorderPainted(false);DicBackButton.setBackground(Color.yellow);
+                DicClearButton.setFocusPainted(false);DicClearButton.setBorderPainted(false);DicClearButton.setBackground(Color.yellow);
+                DicHintsButton.setFocusPainted(false);DicHintsButton.setBorderPainted(false);DicHintsButton.setBackground(Color.yellow);
+                DicCheckButton.setFocusPainted(false);DicCheckButton.setBorderPainted(false);DicCheckButton.setBackground(Color.yellow);
 
                 MyListBackButton    = new JButton("返回");
+                MyListBackButton.setFocusPainted(false);MyListBackButton.setBorderPainted(false);MyListBackButton.setBackground(Color.yellow);
 
                 EnglishPages    = new JPanel();
                 ChoosePagePanel = new JPanel();

@@ -5,6 +5,8 @@ import javax.imageio.ImageIO;
 import javax.net.ssl.HttpsURLConnection;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.*;
@@ -13,6 +15,7 @@ import java.util.Calendar;
 
 public class TodayPage extends JFrame {
 
+    JPanel TodayPagePanel;      //Li Wen: 今日页面: 是父组件
     JPanel WordPanel;           //Li Wen: 今日鸡汤组件
     JPanel NewsPanel;           //Li Wen: 新闻推送组件
     JPanel WeatherPanel;        //Li Wen: 天气推送组件
@@ -32,6 +35,10 @@ public class TodayPage extends JFrame {
     JLabel  News1Label;         //Li Wen: 新闻: 1号新闻标签
     JLabel  News2Label;         //Li Wen: 新闻: 2号新闻标签
     JButton NewsChangeButton;   //Li Wen: 新闻: 新闻切换按键
+    String  News1title;         //Li Wen: 新闻: 1号新闻标题
+    String  News1mtime;         //Li Wen: 新闻: 1号新闻更新时间
+    String  News2title;         //Li Wen: 新闻: 2号新闻标题
+    String  News2mtime;         //Li Wen: 新闻: 2号新闻更新时间
 
     JLabel  WeaDateLabel;       //Li Wen: 天气: 日期显示标签
     JLabel  WeaWeatherLabel;    //Li Wen: 天气: 天气文字标签
@@ -58,6 +65,8 @@ public class TodayPage extends JFrame {
 
         //Li Wen: 组件注册
         {
+            TodayPagePanel = new JPanel();
+
             //给WordPanel加上了背景
             WordPanel   = new JPanel(new BorderLayout()){
                 public void paintComponent(Graphics g){
@@ -111,11 +120,11 @@ public class TodayPage extends JFrame {
             //页面布局: 主页面
             {
                 //设置组件的大小
-                this.setSize(480,400);
-                WordPanel.setPreferredSize(new Dimension(460,80));
-                NewsPanel.setPreferredSize(new Dimension(450,80));
-                WeatherPanel.setPreferredSize(new Dimension(180,180));
-                TodoPanel.setPreferredSize(new Dimension(200,200));
+                this.setSize(new Dimension(800,600));
+                WordPanel.setPreferredSize(new Dimension(780,150));
+                NewsPanel.setPreferredSize(new Dimension(780,150));
+                WeatherPanel.setPreferredSize(new Dimension(350,300));
+                TodoPanel.setPreferredSize(new Dimension(460,300));
 
                 //主页面布局
                 Box h1 = Box.createHorizontalBox();
@@ -133,13 +142,11 @@ public class TodayPage extends JFrame {
                 v1.add(h1);
                 v1.add(Box.createVerticalGlue());
 
-                this.add(v1);
+                TodayPagePanel.add(v1);
+                this.add(TodayPagePanel);
 
-                //之后记得删掉: 设置背景色
-                WordPanel.setBackground(Color.orange);
-                NewsPanel.setBackground(Color.gray);
-                WeatherPanel.setBackground(Color.pink);
-                TodoPanel.setBackground(Color.blue);
+                NewsPanel.setBackground(Color.yellow);
+                WeatherPanel.setBackground(Color.blue);
             }
 
             //页面布局: 今日鸡汤
@@ -185,7 +192,7 @@ public class TodayPage extends JFrame {
                 ImageIcon weaicon = new ImageIcon(WeaIconSrc);
                 weaicon.setImage(weaicon.getImage().getScaledInstance(50, 50, 1));
                 WeaIconLabel.setIcon(weaicon);
-                
+
                 WeatherPanel.add(WeaDateLabel);
                 WeatherPanel.add(WeaIconLabel);
                 WeatherPanel.add(WeaWeatherLabel);
@@ -195,12 +202,63 @@ public class TodayPage extends JFrame {
             }
 
             //页面布局: 新闻推送
+            {
+                //设置文本格式
+                Font newsft = new Font("等线",Font.ITALIC,10);
+                News1Label.setFont(newsft);
+                News2Label.setFont(newsft);
+                News1Label.setPreferredSize(new Dimension(480,20));
+                News2Label.setPreferredSize(new Dimension(480,20));
+                News1Label.setOpaque(true);
+                News2Label.setOpaque(true);
+                News1Label.setBackground(Color.gray);
+                News2Label.setBackground(Color.gray);
+
+                //设置切换按钮大小
+//                NewsChangeButton.setPreferredSize(new Dimension(30,20));
+                NewsChangeButton.setFont(new Font("等线",0,8));
+                NewsChangeButton.setFocusPainted(false);NewsChangeButton.setBorderPainted(false);NewsChangeButton.setBackground(Color.yellow);
+
+                //设置组件内容
+                NewsTitleLabel.setText("<html> 每日要闻 <html>");
+                News1Label.setText("<html>" + News1title + "\n" + News1mtime + "<html>");
+                News2Label.setText("<html>" + News2title + "\n" + News2mtime + "<html>");
+
+                Box v1 = Box.createVerticalBox();
+                Box h1 = Box.createHorizontalBox();
+
+                h1.add(Box.createHorizontalStrut(10));
+                h1.add(NewsChangeButton);
+                h1.add(Box.createHorizontalGlue());
+
+                v1.add(NewsTitleLabel);
+                v1.add(Box.createVerticalStrut(5));
+                v1.add(News1Label);
+                v1.add(Box.createVerticalStrut(5));
+                v1.add(News2Label);
+                v1.add(h1);
+                v1.add(Box.createVerticalGlue());
+
+                NewsPanel.add(v1);
+            }
+
+            //页面布局: Todo
+            {
+
+            }
 
         }
 
         //Li Wen: 事件绑定
         {
+            //新闻推送: 换一批
+            NewsChangeButton.addActionListener(new ActionListener(){
 
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                }
+            });
         }
 
     }
@@ -229,13 +287,67 @@ public class TodayPage extends JFrame {
     }
 
     /*
+    created by Li Wen in 2021/5/4
+
+    Abstract:
+    初始化新闻版块
+
+    Para:
+    null
+
+    Return value:
+    null
+    */
+    public void getNews(){
+        //这是扇贝每日一句的Web API地址
+        String urlpath = "http://c.m.163.com/nc/article/headline/T1348647853363/0-40.html";
+        HttpURLConnection conn;
+        BufferedReader br;
+        try {
+            URL url = new URL(urlpath);
+            conn = (HttpURLConnection) url.openConnection();
+
+            //设置传递方式
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setDoInput(true);
+
+            //设置不用缓存
+            conn.setUseCaches(false);
+
+            //开始连接请求
+            conn.connect();
+
+            //请求之后的处理
+            br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String a = br.readLine();
+
+            //转换成JSON对象，获得两条新闻的标题、更新时间
+            JSONObject newsjb = new JSONObject(a);
+            JSONArray newsitems   = new JSONArray(newsjb.getJSONArray("T1348647853363"));
+
+            News1title = newsitems.getJSONObject(0).getString("title");
+            News1mtime = newsitems.getJSONObject(0).getString("mtime");
+            News2title = newsitems.getJSONObject(1).getString("title");
+            News2mtime = newsitems.getJSONObject(1).getString("mtime");
+//            System.out.println("News1title: "+ News1title);
+//            System.out.println("News1mtime: "+ News1mtime);
+//            System.out.println("News2title: "+ News2title);
+//            System.out.println("News2mtime: "+ News2mtime);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*
         created by Li Wen in 2021/5/3
 
         Abstract:
         获得天气信息，初始化CurWeather, WeaIconSrc。
 
         Para:
-        null
+        city, 城市的拼音
 
         Return value:
         null
@@ -246,12 +358,15 @@ public class TodayPage extends JFrame {
         String weatherurl = "https://devapi.qweather.com/v7/weather/now?key=358b11f60b7e46c4bc7a4b1606b82083&gzip=n&location=";
         HttpURLConnection connloc;//Li Wen: 请求城市id的连接
         HttpURLConnection connwea;//Li Wen: 请求天气的连接
-        BufferedReader br = null;
-        StringBuilder line;
+        BufferedReader brloc = null;
+        BufferedReader brwea = null;
+        StringBuilder lineloc;
+        StringBuilder linewea;
         String templine = null;
 
         try {
-            line = new StringBuilder();
+            lineloc = new StringBuilder();
+            linewea = new StringBuilder();
 
             //开始请求城市id咯
             URL urlloc = new URL(locationurl);
@@ -262,18 +377,19 @@ public class TodayPage extends JFrame {
             connloc.connect();
 
             //成功请求之后的处理
-            br = new BufferedReader(new InputStreamReader(connloc.getInputStream(),"UTF-8"));
-            while ((templine = br.readLine()) != null){
-                line.append(templine);
+            brloc = new BufferedReader(new InputStreamReader(connloc.getInputStream(),"UTF-8"));
+            while ((templine = brloc.readLine()) != null){
+                lineloc.append(templine);
             }
 
             //转换成JSON对象，获得城市id，更新天气请求Web API
-            JSONObject jbloc   = new JSONObject(line.toString());
+            JSONObject jbloc   = new JSONObject(lineloc.toString());
             JSONArray cityarray = (JSONArray) jbloc.get("location");
             JSONObject city0 = (JSONObject) cityarray.get(0);
             String cityid = (String) city0.get("id");
             weatherurl = weatherurl+cityid;
             System.out.println("cityid: "+weatherurl);
+            templine = null;
 
             //开始请求实时天气信息咯
             URL urlwea = new URL(weatherurl);
@@ -283,24 +399,26 @@ public class TodayPage extends JFrame {
             connwea.connect();
 
             //成功请求之后的处理
-            br = new BufferedReader(new InputStreamReader(connloc.getInputStream(),"UTF-8"));
-            while ((templine = br.readLine()) != null){
-                line.append(templine);
+            brwea = new BufferedReader(new InputStreamReader(connwea.getInputStream(),"UTF-8"));
+            while ((templine = brwea.readLine()) != null){
+                linewea.append(templine);
             }
 
             //转换成JSON对象，获得城市id，更新天气请求Web API
-            JSONObject jboringin = new JSONObject(line.toString());
-            JSONObject jbwea = jboringin.getJSONObject("now");
+            JSONObject jboringin = new JSONObject(linewea.toString());
+//            System.out.println(linewea.toString());
+            JSONObject jbwea    = jboringin.getJSONObject("now");
+
+            System.out.println(jbwea.toString());
 
             WeaIconSrc          = "./Pics/weathericon-64/" + jbwea.getString("icon") + ".png";//图标文件地址
             String wea          = jbwea.getString("text");      //天气描述
             String temp         = jbwea.getString("temp");      //温度
-            String feelslike    = jbwea.getString("feelslike"); //体感温度
+            String feelslike    = jbwea.getString("feelsLike"); //体感温度
             String winddir      = jbwea.getString("windDir");   //风向
             String windspeed    = jbwea.getString("windSpeed"); //风速
             String visuality    = jbwea.getString("vis");       //可见度
             CurWeather = new Weather(CurDate,wea,temp,feelslike,winddir,windspeed,visuality);//初始化当前天气CurWeather
-
 
     }catch(Exception e){
             e.printStackTrace();
@@ -368,6 +486,7 @@ public class TodayPage extends JFrame {
     //Li Wen: 初始化图形界面
     public void initGUI(){
         initCurDate();
+        getNews();
         getWordforToday();
         getWeather("shenyang");//Li Wen: 不要传中文啊！
         initTodayPage();
