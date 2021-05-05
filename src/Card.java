@@ -61,11 +61,12 @@ public abstract class Card {
     }
 
     //Li Wen: 获取掌握情况
-    public boolean isForget(){
-        if (forget == 0){
-            return false;
-        }
-        else return true;
+    public int isForget(){
+//        if (forget == 0){
+//            return false;
+//        }
+//        else return true;
+        return forget;
     }
 
     //Li Wen: 掌握单词
@@ -194,6 +195,7 @@ class Problem extends Card {
     public String getProblemPosition() { return ProblemPosition; }//得到图片的位置
     public void setProblemPosition(String position){ProblemPosition=position;}//设置图片位置
 
+    public Problem(){}
     public Problem(String frontSide,String backSide,int right,int wrong,int star,boolean marked){
         super(frontSide,backSide,right,wrong,star,marked);
     }

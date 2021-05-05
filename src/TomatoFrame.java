@@ -21,18 +21,6 @@ public class TomatoFrame extends JFrame {
     boolean Flag=false;//是否在运行
 
 
-    @Override
-    public void paint(Graphics graphics) {
-        super.paint(graphics);
-        Graphics2D g2d = (Graphics2D)graphics;
-        g2d.setColor(new Color(165,222,228));
-        int r=100;
-
-        GradientPaint gradient =new GradientPaint(WIDTH/2, HEIGHT/2,Color.white, WIDTH, HEIGHT, new Color(111, 164, 229),true);
-        g2d.setPaint(gradient);
-        g2d.fillOval(WIDTH/2-r, HEIGHT/2-r, r*2, r*2);
-
-    }
 
     public void initGUI() {
         drawClock = new TomatoPanel();

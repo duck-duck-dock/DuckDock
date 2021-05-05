@@ -502,7 +502,7 @@ public class EnglishPanel extends JPanel {
                 MemForgetButton.addActionListener(new ActionListener(){
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        CurWord.setForget(1);
+                        CurWord.setForget(true);
                         roundcounter++;
                         //掌握的单词不需要拼写
                         MemoryingWords.remove(CurWord);
@@ -619,11 +619,11 @@ public class EnglishPanel extends JPanel {
 
                             //如果wrong的次数为0，就掌握它。
                             if (CurWord.isemptyWrong()){
-                                CurWord.setForget(1);
+                                CurWord.setForget(true);
                             }
                             //如果wrong的次数大于0，则之后还会背到这个单词，并清空拼错次数。
                             else {
-                                CurWord.setForget(0);
+                                CurWord.setForget(false);
                                 CurWord.setWrong(0);
 
                             }

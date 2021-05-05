@@ -13,7 +13,7 @@ import java.io.*;
 import java.net.*;
 import java.util.Calendar;
 
-public class TodayPage extends JFrame {
+public class TodayPage extends JPanel {
 
     JPanel TodayPagePanel;      //Li Wen: 今日页面: 是父组件
     JPanel WordPanel;           //Li Wen: 今日鸡汤组件
