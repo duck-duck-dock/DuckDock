@@ -70,7 +70,7 @@ public class TodayPage extends JPanel {
             //给WordPanel加上了背景
             WordPanel   = new JPanel(new BorderLayout()){
                 public void paintComponent(Graphics g){
-                    ImageIcon bgicon = new ImageIcon("./Pics/Wordbgpic.JPG");
+                    ImageIcon bgicon = new ImageIcon("./Pics/Wordbg/5.JPG");
                     g.drawImage(bgicon.getImage(),0,0,WordPanel.getWidth(),WordPanel.getHeight(),bgicon.getImageObserver());
                 }
             };
@@ -119,6 +119,8 @@ public class TodayPage extends JPanel {
         {
             //页面布局: 主页面
             {
+//                this.setSize(800, 600);
+//                this.setResizable(false);
                 //设置组件的大小
                 WordPanel.setPreferredSize(new Dimension(780,150));
                 NewsPanel.setPreferredSize(new Dimension(300,150));
