@@ -25,7 +25,7 @@ public class MainMenu extends JFrame {
     DefaultPage DefaultFrame;
     CardLayout MainLayout;//卡片布局
 
-    User ThisUser;
+    public User ThisUser;
 
     //Yuxin Zhu: initialize the memu GUI
     private void initTools() {
@@ -166,9 +166,7 @@ public class MainMenu extends JFrame {
 
     }
 
-    public MainMenu(){
-        initGUI();
-    }
+
     //Yuxin Zhu: main func, DON'T change this func
     public MainMenu(User thisuser) {
         super("主页");

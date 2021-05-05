@@ -22,6 +22,7 @@ public class LoginMenu extends JFrame{//zyx:登陆界面
     JXDatePicker DatePick;
     JComboBox RegGradeJComboBox,RegSchoolJComboBox,RegDreamSchoolJComboBox;//年级,学校
     CardLayout cl;
+    User tempUser;
     private void initLogTools() {
         LogNameJLabel=new JLabel("用户名");
         LogPwdJLabel=new JLabel("密   码");
@@ -280,6 +281,7 @@ public class LoginMenu extends JFrame{//zyx:登陆界面
         for (int i = 0; i < Users.getUserNum(); i++) {
             if (strName.equals(Users.getUsers().get(i).getUserName()) && strPwd.equals(Users.getUsers().get(i).getPassword())) {
                 JOptionPane.showMessageDialog(null, "登录成功！");
+                tempUser=Users.getUsers().get(i);
                 return true;
             }
         }

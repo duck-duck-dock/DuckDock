@@ -58,26 +58,80 @@ public abstract class Card {
     }
 
     //Li Wen: 获取掌握情况
-    public boolean isForget(){
-        if (forget == 0){
-            return false;
-        }
-        else return true;
+    public int isForget(){
+        return forget;
     }
 
-    //Li Wen: 掌握单词
-    public void setForget(boolean ch){
-        forget = ch == true ? 1:0;
+    /*
+    created by Li Wen in 2021/4/29
+
+    Abstract:
+    设置当前单词卡片的状态forget参数：普通0/待拼写-1/已掌握1。
+
+    Para:
+    i: 目标状态
+
+    Return value:
+    null
+    */
+    public void setForget(int i){
+        switch(i){
+            case -1: forget = -1;break;//该去拼写
+            case  0: forget =  0;break;//一般单词
+            case  1: forget =  1;break;//已掌握
+        };
     }
 
-    //Li Wen: 容易/模糊/困难，修改Right
+    /*
+    created by Li Wen in 2021/4/29
+
+    Abstract:
+    设置答对次数right，并根据答对次数设置是否进入拼单词模式。
+
+    Para:
+    i: 是否答对。为1时表示答对，为0时表示答错。
+
+    Return value:
+    Vector<Word>类型，表示所有查到的单词。
+    */
     public void setRight(int i){
-        if ((i==0) && (right>0)){
+        if ((i==0) && (right>0)){ //困难
             right--;
         }
-        else if (i==1){
+        else if (i==1){ //容易，right到5就去拼写。
             right++;
+            if (right == 5){
+                setForget(-1);
+            }
         }
+    }
+
+    /*
+    created by Li Wen in 2021/4/30
+
+    Abstract:
+    设置wrong
+
+    Para:
+    i, 对wrong的操作：i为1时，wrong+1; i为0时，wrong置0。
+
+    Return value:
+    null
+    */
+    public void setWrong(int i){
+        if (i == 0){
+            wrong = 0;
+        }
+        else{
+            wrong++;
+        }
+    }
+
+    //Li Wen: 判断wrong是否为0
+    public boolean isemptyWrong(){
+        if (wrong == 0)
+            return true;
+        else return false;
     }
 
     public abstract void display();//需要在派生类里override的函数，负责在图形界面显示卡片
@@ -128,6 +182,8 @@ class Word extends Card {
         super(frontSide,backSide,right,wrong,star,marked);
         this.EgSentence=egSentence;
     }
+
+    Word(){}
 
     //Li Wen: 获取例句
     public String getEgSentence(){
