@@ -39,9 +39,9 @@ public class TomatoFrame extends JFrame {
 
 }
 
-class Main{
-    public static void main(String[] args){
-        TomatoFrame t=new TomatoFrame();
-        t.show();
-    }
-}
+//class Main{
+//    public static void main(String[] args){
+//        TomatoFrame t=new TomatoFrame();
+//        t.show();
+//    }
+//}

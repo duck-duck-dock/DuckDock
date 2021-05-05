@@ -17,10 +17,18 @@ public class User {
     private Vector<Problem> Problems;//他的题目表
 
 
-
+    public void addWord(Word word){ this.Words.add(word); }
+    public void addProblem(Problem problem){
+        this.Problems.add(problem);
+    }
     public String getUserName() {
         return UserName;
     }
+    public String getSchool(){return School;}
+    public String getDreamSchool(){return DreamSchool;}
+    public int getGrade(){return Grade;}
+    public Date getDateOfTest(){return DateOfTest;}
+    public String getUserID(){return UserID;}
     public void setUserName(String userName) {
         UserName = userName;
     }
@@ -44,6 +52,34 @@ public class User {
     }
     public void setDateOfTest(Date dateOfTest) {
         DateOfTest = dateOfTest;
+    }
+    public Vector<Word> getWords() {
+        return Words;
+    }
+    public Vector<Problem> getProblems() {
+        return Problems;
+    }
+    public void setProblems(Vector<Problem> problems){//设置单词列表
+        Problems=problems;
+    }
+
+    public User(){
+        //UserID="002";
+        Words=new Vector<Word>();
+        Problems=new Vector<Problem>();
+    }
+    public User(String userName,String userID,String password,String school,int grade,String dreamSchool,Date dateOfTest){
+        this.UserName=userName;
+        this.UserID=userID;
+        this.Password=password;
+        this.School=school;
+        this.Grade=grade;
+        this.DreamSchool=dreamSchool;
+        this.DateOfTest=dateOfTest;
+        this.Words=null;
+        this.Problems=null;
+        Words=new Vector<Word>();
+        Problems=new Vector<Problem>();
     }
 }
 

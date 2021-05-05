@@ -98,7 +98,7 @@ public class MainMenu extends JFrame {
         MainLayout = new CardLayout();
         MainPanel.setLayout(MainLayout);
 
-        UploadFrame = new UploadPage();
+        UploadFrame = new UploadPage(ThisUser);//zhaohan在这添加了东西
         UploadFrame.setSize(MainPanel.getSize());
         PracticeFrame = new PracticePage();
         PracticeFrame.setSize(MainPanel.getSize());

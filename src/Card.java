@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Vector;
+
 /*
 created by Yuxin Zhu in 2021/03/21
 class:卡片（单词、题目）
@@ -118,6 +121,11 @@ created by Yuxin Zhu in 2021/03/21
 class:题目
  */
 class Problem extends Card {
+    private String ProblemPosition;//图片位置
+    //存标签，暂时未定
+    public String getProblemPosition() { return ProblemPosition; }//得到图片的位置
+    public void setProblemPosition(String position){ProblemPosition=position;}//设置图片位置
+
     @Override
     public void display() {//显示该题目
     }
