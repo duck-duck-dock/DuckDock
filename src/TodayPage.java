@@ -26,10 +26,10 @@ public class TodayPage extends JPanel {
     JLabel  WordLabel;          //Li Wen: 今日鸡汤: 句子标签
     JLabel  TransLabel;         //Li Wen: 今日鸡汤: 翻译标签
     JLabel  AuthorLabel;        //Li Wen: 今日鸡汤: 作者标签
-    JLabel  WordIconLabel;      //Li Wen: 今日鸡汤: 收藏图标按键
     String  WordofToday;        //Li Wen: 今日鸡汤: 每日一句的句子
     String  TransofWord;        //Li Wen: 今日鸡汤: 每日一句的翻译
     String  AuthorofWord;       //Li Wen: 今日鸡汤: 每日一句的作者
+    String  PicofToday;         //Li Wen: 今日鸡汤: 每日一句的背景图
 
     JLabel  NewsTitleLabel;     //Li Wen: 新闻: 新闻标题标签
     JLabel  NewsIconLabel;      //Li Wen: 新闻: 新闻图标标签
@@ -64,9 +64,15 @@ public class TodayPage extends JPanel {
     public TodayPage(User thiuser){
         initCurDate();              //Li Wen: 初始化当天日期
         getNews();                  //Li Wen: 连接新闻API
+        getPicforToday();           //Li Wen: 连接获得每日一图
         getWordforToday();          //Li Wen: 连接每日一次API
         getWeather("shenyang");//Li Wen: 连接天气API，不要传中文啊！
         initGUI();                  //Li Wen: 初始化图形界面
+    }
+
+    //Li Wen: 初始化图形界面
+    public void initGUI(){
+        initTodayPage();
     }
 
     //初始化TodayPage界面
@@ -79,7 +85,7 @@ public class TodayPage extends JPanel {
             //给WordPanel加上了背景
             WordPanel   = new JPanel(new BorderLayout()){
                 public void paintComponent(Graphics g){
-                    ImageIcon bgicon = new ImageIcon("./Pics/Wordbg/5.JPG");
+                    ImageIcon bgicon = new ImageIcon(PicofToday);
                     g.drawImage(bgicon.getImage(),0,0,WordPanel.getWidth(),WordPanel.getHeight(),bgicon.getImageObserver());
                 }
             };
@@ -92,7 +98,6 @@ public class TodayPage extends JPanel {
             WordLabel       = new JLabel();
             TransLabel      = new JLabel();
             AuthorLabel     = new JLabel();
-            WordIconLabel   = new JLabel();
 
             //组件注册: 新闻推送
             NewsTitleLabel  = new JLabel("今日热点");
@@ -384,7 +389,7 @@ public class TodayPage extends JPanel {
         int Month = now.get(Calendar.MONTH)+1;
         int Day = now.get(Calendar.DAY_OF_MONTH);
         CurDate = year + "-" + Month + "-" + Day;
-        System.out.println("CurrentDate: " + CurDate);
+//        System.out.println("CurrentDate: " + CurDate);
 
     }
 
@@ -545,6 +550,48 @@ public class TodayPage extends JPanel {
     created by Li Wen in 2021/5/4
 
     Abstract:
+    获得今日一图。
+
+    Para:
+    null
+
+    Return value:
+    null
+    */
+    public void getPicforToday(){
+        String urlpic = "https://api.kdcc.cn/img/bingimg/dayimg.jpg?day=" + CurDate;
+
+        HttpURLConnection conn = null;
+        BufferedReader br;
+        PicofToday = "./Pics/Wordbg/" + CurDate + ".jpg";
+
+        try {
+            URL url = new URL(urlpic);
+            DataInputStream datain = new DataInputStream(url.openStream());
+            FileOutputStream fos = new FileOutputStream(new File(PicofToday));
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+            byte[] buffer = new byte[2014];
+            int len;
+
+            while ((len = datain.read(buffer)) >0 ){
+                fos.write(buffer,0,len);
+            }
+
+            datain.close();
+            fos.close();
+            System.out.println("Pic Download finished!");
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    /*
+    created by Li Wen in 2021/5/4
+
+    Abstract:
     从扇贝单词API找到今日句子、翻译、作者，赋值给WordforToday、TransofWord、AuthorofWord。
 
     Para:
@@ -584,19 +631,14 @@ public class TodayPage extends JPanel {
             TransofWord     = jb.getString("translation");
             AuthorofWord    = "-" + jb.getString("author");
 
-            //Li Wen: 测试输出，之后注释掉
-            System.out.println("成功获得每日一句: " + WordofToday);
-            System.out.println("翻译: " + TransofWord);
-            System.out.println("作者: " + AuthorofWord);
+//            //Li Wen: 测试输出，之后注释掉
+//            System.out.println("成功获得每日一句: " + WordofToday);
+//            System.out.println("翻译: " + TransofWord);
+//            System.out.println("作者: " + AuthorofWord);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    //Li Wen: 初始化图形界面
-    public void initGUI(){
-        initTodayPage();
     }
 
 }
@@ -668,5 +710,6 @@ class Weather{
     }
 
 }
+
 
 
