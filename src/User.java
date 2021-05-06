@@ -47,8 +47,6 @@ public class User {
 
     //备份用户所有信息
     public void user_backup(){
-
-        jdbc.ConnPostgreSql();      //连接数据库
         if(!jdbc.JdbcExistUser(this)){
             //用户不存在则添加用户
             jdbc.JdbcAddUser(this);
@@ -57,7 +55,6 @@ public class User {
             jdbc.JdbcUpdateUser(this);  //更新用户信息
             jdbc.JdbcUpdateWandE(this); //更新用户单词表以及问题表
         }
-        jdbc.DisConnPostgreSql();   //断联数据库
     }
     public void addWord(Word word){ this.Words.add(word); }
     public void addProblem(Problem problem){
@@ -148,7 +145,7 @@ class jdbc extends AllUser{
         Abstract:与数据库建立连接初始化connectSql和stmtSql
         Return value:Boolean类型，表示连接成功
         */
-    public static boolean ConnPostgreSql(){
+    private static boolean ConnPostgreSql(){
         try {
             Class.forName("org.postgresql.Driver");
             connectSql =DriverManager.getConnection("jdbc:postgresql://192.168.98.1:5432/postgres","postgres","123456");
@@ -169,7 +166,7 @@ class jdbc extends AllUser{
     Abstract:断开与数据库的所有连接
     Return value:Boolean类型，表示成功
     */
-    public static boolean DisConnPostgreSql (){
+    private static boolean DisConnPostgreSql (){
         try{
             connectSql.commit();
             stmtSql.close();
@@ -190,6 +187,7 @@ class jdbc extends AllUser{
     */
     public static boolean JdbcInitAllUsers(AllUser users){
 
+        ConnPostgreSql();
         try {
             ResultSet querySql;
 
@@ -206,7 +204,6 @@ class jdbc extends AllUser{
 
                 User u=new User(userName,userID,password,school,grade,dreamSchool,dateOfTest);
 
-                System.out.println(userName);
                 users.Users.add(u);
             }
             querySql.close();
@@ -252,6 +249,7 @@ class jdbc extends AllUser{
             System.err.println(e.getClass().getName()+":"+e.getMessage());
             System.exit(0);
         }
+        DisConnPostgreSql();
         return true;
     }
 
@@ -262,6 +260,8 @@ class jdbc extends AllUser{
     Return value:Boolean类型，表示成功
     */
     public static boolean JdbcUpdateUser(User updateUser){
+        ConnPostgreSql();
+
         String updateSql="update users set UserName = '"+updateUser.getUserName()+"' ,Password= '"+updateUser.getPassword()
                 +"' ,School= '"+updateUser.getSchool()+"' ,Grade= '"+updateUser.getGrade()+"' ,DreamSchool= '"+updateUser.getDreamSchool()
                 +"' ,Date= "+updateUser.getDateOfTest()+" where UserId= '"+updateUser.getUserID()+"' ;";
@@ -274,6 +274,8 @@ class jdbc extends AllUser{
             System.err.println(e.getClass().getName()+":"+e.getMessage());
             System.exit(0);
         }
+        DisConnPostgreSql();
+
         return true;
     }
 
@@ -283,6 +285,8 @@ class jdbc extends AllUser{
     Return value:Boolean类型，表示成功
     */
     public static boolean JdbcUpdateWandE(User user){
+        ConnPostgreSql();
+
         String userID=user.getUserID();
         String frontSide;
         String backSide;
@@ -340,6 +344,8 @@ class jdbc extends AllUser{
             System.err.println(e.getClass().getName()+":"+e.getMessage());
             System.exit(0);
         }
+        DisConnPostgreSql();
+
         return true;
     }
 
@@ -349,6 +355,8 @@ class jdbc extends AllUser{
     Return value:Boolean类型，表示成功
      */
     public static boolean JdbcExistUser(User user){
+        ConnPostgreSql();
+
         try{
             ResultSet querySql;
 
@@ -362,6 +370,8 @@ class jdbc extends AllUser{
             System.err.println(e.getClass().getName()+":"+e.getMessage());
             System.exit(0);
         }
+        DisConnPostgreSql();
+
         return true;
     }
     /*
@@ -370,6 +380,8 @@ class jdbc extends AllUser{
     Return value:Boolean类型，表示成功
     */
     public static boolean JdbcAddUser(User newUser){
+        ConnPostgreSql();
+
         String newUserSql = "insert into users(UserName,UserId,Password,School,Grade,DreamSchool,Date)"
                 + "values('"+newUser.getUserName()+"','"+newUser.getUserID()+"','"+newUser.getPassword()+"','"+newUser.getSchool()
                 +"','"+newUser.getGrade()+"','"+newUser.getDreamSchool()+"','"+newUser.getDateOfTest()+"');";
@@ -381,6 +393,8 @@ class jdbc extends AllUser{
             System.err.println(e.getClass().getName() + ":" + e.getMessage());
             System.exit(0);
         }
+        DisConnPostgreSql();
+
         return true;
     }
 
@@ -390,6 +404,8 @@ class jdbc extends AllUser{
     Return value:Boolean类型，表示成功
     */
     public static boolean JdbcDeleteUser(User delUser){
+        ConnPostgreSql();
+
         String delUserSql = "delete from users where UserId='"+delUser.getUserID()+"';";
         try {
             stmtSql.executeUpdate(delUserSql);
@@ -399,7 +415,37 @@ class jdbc extends AllUser{
             System.err.println(e.getClass().getName() + ":" + e.getMessage());
             System.exit(0);
         }
+        DisConnPostgreSql();
+
         return true;
+    }
+
+    /*
+    created by Qingling Zhang in 2021/05/06
+    Abstract:从数据库中读取城市代号
+     */
+    public static void JdbcChinaCity(String CityName,Vector<String> CityId,Vector<String> Adm1,Vector<String> Adm2){
+
+        ConnPostgreSql();
+        try{
+            ResultSet querySql;
+            /*将指定城市从数据库读出*/
+            querySql= stmtSql.executeQuery("select * from chinacity where location_name_en='"+CityName+"'");
+            while (querySql.next()){
+                CityId.addElement(querySql.getString("location_id"));
+                Adm1.addElement(querySql.getString("adm1_en"));
+                Adm2.addElement(querySql.getString("adm1_en"));
+            }
+            querySql.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName()+":"+e.getMessage());
+            System.exit(0);
+        }
+
+        DisConnPostgreSql();
+
     }
 }
 

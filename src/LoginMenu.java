@@ -242,6 +242,7 @@ public class LoginMenu extends JFrame{//zyx:登陆界面
                 Users.getUsers().get(Users.getUserNum()-1).setSchool((String)RegSchoolJComboBox.getSelectedItem());
                 Users.getUsers().get(Users.getUserNum()-1).setDreamSchool((String)RegDreamSchoolJComboBox.getSelectedItem());
                 Users.getUsers().get(Users.getUserNum()-1).setDateOfTest(DatePick.getDate());
+                jdbc.JdbcAddUser(Users.getUsers().get(Users.getUserNum()-1));
                 JOptionPane.showMessageDialog(null, "保存成功！");
                 cl.show(CardsJPanel, "card1");
             }
