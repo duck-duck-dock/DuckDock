@@ -13,7 +13,7 @@ import java.io.*;
 import java.net.*;
 import java.util.Calendar;
 
-public class TodayPage extends JPanel {
+public class TodayPage extends JFrame {
 
     JPanel TodayPagePanel;      //Li Wen: 今日页面: 是父组件
     JPanel WordPanel;           //Li Wen: 今日鸡汤组件
@@ -40,11 +40,15 @@ public class TodayPage extends JPanel {
     String  News2title;         //Li Wen: 新闻: 2号新闻标题
     String  News2mtime;         //Li Wen: 新闻: 2号新闻更新时间
 
+    JLabel  WeaTitleLabel;      //Li Wen: 天气: 今日天气标签
     JLabel  WeaDateLabel;       //Li Wen: 天气: 日期显示标签
     JLabel  WeaWeatherLabel;    //Li Wen: 天气: 天气文字标签
     JLabel  WeaIconLabel;       //Li Wen: 天气: 天气图标标签
     JLabel  WeaTempLabel;       //Li Wen: 天气: 温度标签
+    JLabel  WeaFeelLabel;       //Li Wen: 天气: 体感温度标签
     JLabel  WeaWindLabel;       //Li Wen: 天气: 风标签
+    JLabel  WeaHumiLabel;       //Li Wen: 天气: 湿度标签
+    JLabel  WeaVisuLabel;       //Li Wen: 天气: 能见度标签
     String  WeaIconSrc;         //Li Wen: 天气: 天气图标相对地址
 
     JLabel  TodoDateLabel;      //Li Wen: Todo: 日期显示标签
@@ -93,11 +97,15 @@ public class TodayPage extends JPanel {
             NewsChangeButton= new JButton("换一批");
 
             //组件注册: 天气推送
+            WeaTitleLabel   = new JLabel();
             WeaDateLabel    = new JLabel();
             WeaWeatherLabel = new JLabel();
             WeaIconLabel    = new JLabel();
             WeaTempLabel    = new JLabel();
+            WeaFeelLabel    = new JLabel();
             WeaWindLabel    = new JLabel();
+            WeaHumiLabel    = new JLabel();
+            WeaVisuLabel    = new JLabel();
 
             //组件注册: Todo
             TodoDateLabel   = new JLabel();
@@ -119,8 +127,10 @@ public class TodayPage extends JPanel {
         {
             //页面布局: 主页面
             {
-//                this.setSize(800, 600);
-//                this.setResizable(false);
+                //Li Wen: 仅当TodayPage继承自JFrame时，才取消注释。
+                this.setSize(800, 600);
+                this.setResizable(false);
+
                 //设置组件的大小
                 WordPanel.setPreferredSize(new Dimension(780,150));
                 NewsPanel.setPreferredSize(new Dimension(300,150));
@@ -163,47 +173,140 @@ public class TodayPage extends JPanel {
                 TransLabel.setText("<html>" + TransofWord + "<html>");
                 AuthorLabel.setText("<html>" + AuthorofWord + "<html>");
 
-                Box v1 = Box.createVerticalBox();
-                Box h1 = Box.createHorizontalBox();
-                Box h2 = Box.createHorizontalBox();
+                //日期标签格式
+                Font Dateft = new Font("",Font.BOLD,20);
+                DateLabel.setFont(Dateft);
+                DateLabel.setForeground(new Color(112,194,178));
+                //句子标签格式
+                Font Wordft = new Font("",Font.BOLD,14);
+                WordLabel.setFont(Wordft);
+                TransLabel.setFont(Wordft);
+                WordLabel.setForeground(new Color(242,238,214));
+                TransLabel.setForeground(new Color(242,238,214));
+                //作者标签格式
+                Font authorft = new Font("",Font.BOLD,13);
+                AuthorLabel.setFont(authorft);
+                AuthorLabel.setForeground(new Color(242,238,214));
 
-                v1.add(Box.createVerticalStrut(180));
+                //设置布局
+                Box v1 = Box.createVerticalBox();
+                Box v2 = Box.createVerticalBox();
+                Box h1 = Box.createHorizontalBox();
+
+                v1.add(Box.createVerticalStrut(30));
                 v1.add(DateLabel);
-                v1.add(Box.createVerticalStrut(10));
-                v1.add(WordLabel);
-                v1.add(Box.createHorizontalStrut(10));
+                v1.add(Box.createVerticalStrut(15));
                 v1.add(AuthorLabel);
                 v1.add(Box.createVerticalStrut(10));
+                v1.add(WordLabel);
+                v1.add(Box.createVerticalStrut(5));
                 v1.add(TransLabel);
-                v1.add(Box.createVerticalStrut(10));
                 v1.add(Box.createVerticalGlue());
 
-                h1.add(Box.createHorizontalStrut(50));
+                v2.add(Box.createVerticalStrut(110));
+                v2.add(Box.createVerticalGlue());
+
+                h1.add(Box.createHorizontalStrut(20));
                 h1.add(v1);
-                h1.add(Box.createHorizontalStrut(5));
+                h1.add(Box.createHorizontalStrut(300));
                 h1.add(Box.createHorizontalGlue());
+
                 WordPanel.add(h1);
 
             }
 
             //页面布局: 天气推送
             {
-                WeaDateLabel.setText("<html>" + CurDate + "<html>");
+                //设置文本
+                WeaTitleLabel.setText("<html>"+"今日天气"+"<html>");
+                WeaDateLabel.setText("<html>"+CurDate+"<html>");
                 WeaWeatherLabel.setText("<html>" + CurWeather.getWea() + "<html>");
-                WeaTempLabel.setText("<html>" + CurWeather.getTemp() + "/"
-                                    + CurWeather.getFeelslike() + "<html>");
+                WeaTempLabel.setText("<html>" + CurWeather.getTemp() + "° /"
+                                    + CurWeather.getFeelslike() + "°<html>");
+                WeaFeelLabel.setText("<html>" + CurWeather.getFeelslike() + "°<html>");
                 WeaWindLabel.setText("<html>" + CurWeather.getWindDir() + " "
-                                    + CurWeather.getWindSpeed() + "<html>");
+                                    + CurWeather.getWindSpeed() + "级<html>");
+                WeaHumiLabel.setText("<html>湿度: " + CurWeather.getHumidity() + "<html>");
+                WeaVisuLabel.setText("<html>能见度: " + CurWeather.getVisuality() + "<html>");
 
+                //设置标签格式
+                Font ft1 = new Font("",Font.BOLD,25);
+                Font ft2 = new Font("",Font.BOLD,20);
+                Font ft3 = new Font("",Font.PLAIN,15);
+                Font ft4 = new Font("",Font.BOLD,22);
+                Font ft5 = new Font("",Font.PLAIN,13);
+                WeaDateLabel.setFont(ft1);
+                WeaWeatherLabel.setFont(ft2);
+                WeaWindLabel.setFont(ft3);
+                WeaTempLabel.setFont(ft3);
+                WeaFeelLabel.setFont(ft4);
+                WeaHumiLabel.setFont(ft5);
+                WeaVisuLabel.setFont(ft5);
+                WeaDateLabel.setFont(ft5);
+
+                //设置字体颜色
+                WeaTitleLabel.setForeground(new Color(222,222,222));
+                WeaDateLabel.setForeground(new Color(222,222,222));
+                WeaWeatherLabel.setForeground(new Color(222,222,222));
+                WeaTempLabel.setForeground(new Color(222,222,222));
+                WeaFeelLabel.setForeground(new Color(222,222,222));
+                WeaWindLabel.setForeground(new Color(222,222,222));
+                WeaHumiLabel.setForeground(new Color(222,222,222));
+                WeaVisuLabel.setForeground(new Color(222,222,222));
+
+
+                //设置天气图标
                 ImageIcon weaicon = new ImageIcon(WeaIconSrc);
-                weaicon.setImage(weaicon.getImage().getScaledInstance(50, 50, 1));
+                weaicon.setImage(weaicon.getImage().getScaledInstance(100, 100, 2));
                 WeaIconLabel.setIcon(weaicon);
 
-                WeatherPanel.add(WeaDateLabel);
-                WeatherPanel.add(WeaIconLabel);
-                WeatherPanel.add(WeaWeatherLabel);
-                WeatherPanel.add(WeaTempLabel);
-                WeatherPanel.add(WeaWindLabel);
+                //布局设置
+                Box v1 = Box.createVerticalBox();   //最外层
+                Box v2 = Box.createVerticalBox();   //中间一层
+                Box v3 = Box.createVerticalBox();   //放温度的
+                Box h1 = Box.createHorizontalBox(); //第一行
+                Box h2 = Box.createHorizontalBox(); //第二行
+                Box h3 = Box.createHorizontalBox(); //第二行
+
+                v1.add(WeaDateLabel);
+                v1.add(h1);
+                v1.add(Box.createVerticalStrut(5));
+                v1.add(h2);
+                v1.add(Box.createVerticalStrut(15));
+                v1.add(h3);
+                v1.add(Box.createVerticalGlue());
+
+                v2.add(Box.createVerticalStrut(25));
+                v2.add(WeaWeatherLabel);
+                v2.add(Box.createVerticalStrut(5));
+                v2.add(WeaWindLabel);
+                v2.add(Box.createVerticalGlue());
+
+                v3.add(WeaFeelLabel);
+                v3.add(Box.createVerticalStrut(5));
+                v3.add(WeaTempLabel);
+                v2.add(Box.createVerticalGlue());
+
+                h1.add(Box.createHorizontalStrut(20));
+                h1.add(WeaIconLabel);
+                h1.add(v2);
+                h1.add(Box.createHorizontalStrut(30));
+                h1.add(v3);
+                h1.add(Box.createHorizontalStrut(50));
+                h1.add(Box.createHorizontalGlue());
+
+                h2.add(Box.createHorizontalStrut(100));
+                h2.add(WeaHumiLabel);
+                h2.add(Box.createHorizontalStrut(50));
+                h2.add(WeaVisuLabel);
+                h2.add(Box.createHorizontalGlue());
+
+                h3.add(Box.createHorizontalStrut(240));
+                h3.add(WeaDateLabel);
+                h3.add(Box.createHorizontalStrut(60));
+                h3.add(Box.createHorizontalGlue());
+
+                WeatherPanel.add(v1);
 
             }
 
@@ -424,7 +527,8 @@ public class TodayPage extends JPanel {
             String winddir      = jbwea.getString("windDir");   //风向
             String windspeed    = jbwea.getString("windSpeed"); //风速
             String visuality    = jbwea.getString("vis");       //可见度
-            CurWeather = new Weather(CurDate,wea,temp,feelslike,winddir,windspeed,visuality);//初始化当前天气CurWeather
+            String humidity     = jbwea.getString("humidity");  //湿度
+            CurWeather = new Weather(CurDate,wea,temp,feelslike,winddir,windspeed,visuality,humidity);//初始化当前天气CurWeather
 
     }catch(Exception e){
             e.printStackTrace();
@@ -498,11 +602,10 @@ public class TodayPage extends JPanel {
         initTodayPage();
     }
 
-//    public static void main(String[] args){
-//        TodayPage tempTodayPage = new TodayPage();
-//        tempTodayPage.show();
-//    }
-//
+    public static void main(String[] args){
+        TodayPage tempTodayPage = new TodayPage();
+        tempTodayPage.show();
+    }
 
 }
 
@@ -514,12 +617,13 @@ class Weather{
     String  WindDir;    //Li Wen: 风向
     String  WindSpeed;  //Li Wen: 风级
     String  Visuality;  //Li Wen: 能见度
+    String  Humidity;   //Li Wen: 湿度
 
     //Li Wen: Weather的构造函数
     public Weather(String date, String wea,
                    String temp, String feelslike,
                    String winddir, String windspeed,
-                   String visuality){
+                   String visuality,String humidity){
         Date    = date;
         Wea     = wea;
         Temp    = temp;
@@ -527,6 +631,7 @@ class Weather{
         WindDir   = winddir;
         WindSpeed = windspeed;
         Visuality = visuality;
+        Humidity  = humidity;
     }
 
     //Li Wen: 获得日期
@@ -562,6 +667,11 @@ class Weather{
     //Li Wen: 获得可见度
     public String getVisuality(){
         return Visuality;
+    }
+
+    //Li Wen: 获得湿度
+    public String getHumidity(){
+        return Humidity;
     }
 
 }
