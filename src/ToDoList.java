@@ -86,7 +86,7 @@ public class ToDoList extends JPanel implements ActionListener {
     //构造函数
     public ToDoList(User user) {
         Userr = new User();
-        Userr = user;
+//        Userr = user;
 //      UserToDoList t = new UserToDoList();
 //        t.setFinishIns(true);
 //        t.setContent("vsd");

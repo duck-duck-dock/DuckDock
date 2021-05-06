@@ -54,6 +54,7 @@ public class TodayPage extends JPanel {
     JLabel  WeaVisuLabel;       //Li Wen: 天气: 能见度标签
     String  WeaIconSrc;         //Li Wen: 天气: 天气图标相对地址
 
+    JLabel  TodoTileLabel;      //Li Wen: Todo: 标题标签
     ToDoList AtodoList;         //Li Wen: Todo: 一个TodoList组件
 
     String  CurDate;            //Li Wen: 当前日期，格式: 2021-05-04
@@ -118,6 +119,7 @@ public class TodayPage extends JPanel {
             WeaVisuLabel    = new JLabel();
 
             //组件注册: Todo
+            TodoTileLabel   = new JLabel();
             AtodoList = new ToDoList(ThisUser);
 
         }
@@ -350,7 +352,22 @@ public class TodayPage extends JPanel {
 
             //页面布局: Todo
             {
-                TodoPanel.add(AtodoList);
+                //设置文本
+                TodoTileLabel.setText("今日Todo");
+
+                Font todotitlefont = new Font("",Font.BOLD,20);
+                TodoTileLabel.setFont(todotitlefont);
+
+                Box v1 = Box.createVerticalBox();
+
+                v1.add(Box.createVerticalStrut(10));
+                v1.add(TodoTileLabel);
+                v1.add(Box.createVerticalStrut(5));
+                v1.add(AtodoList);
+                v1.add(Box.createVerticalGlue());
+
+                TodoPanel.add(v1);
+
             }
 
         }
