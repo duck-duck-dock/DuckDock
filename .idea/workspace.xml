@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="91531108-46fe-4cb9-866c-a519f21d2930" name="Default Changelist" comment="merged">
+    <list default="true" id="91531108-46fe-4cb9-866c-a519f21d2930" name="Default Changelist" comment="polished some colors">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/TodayPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/TodayPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/TomatoFrame$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/TomatoFrame$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/TomatoPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/TomatoPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoginMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TodayPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TodayPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UploadPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UploadPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/LoginMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/LoginMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/WordUpLoadPanel$CsvActionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/WordUpLoadPanel$CsvActionListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/WordUpLoadPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/WordUpLoadPanel.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +94,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620223193306</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="polished some colors">
+      <created>1620272281321</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1620272281321</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -103,7 +119,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fixed login" />
     <MESSAGE value="merged" />
-    <option name="LAST_COMMIT_MESSAGE" value="merged" />
+    <MESSAGE value="polished some colors" />
+    <option name="LAST_COMMIT_MESSAGE" value="polished some colors" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/DuckDock$main.ic" NAME="main Coverage Results" MODIFIED="1620220664291" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
