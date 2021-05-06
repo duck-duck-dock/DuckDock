@@ -23,6 +23,7 @@ class WordUpLoadPanel extends JPanel {
 
     //初始化
     public void setup(){
+        this.setBackground(new Color(165, 222, 228));
         SinglWordUploadButton =new JButton("单个单词上传");
         SinglWordUploadButton.setFocusPainted(false);//去边框
         SinglWordUploadButton.setBorderPainted(false);
@@ -132,6 +133,7 @@ class SingleWordUploadPanel extends JPanel{
     /*方法*/
     //初始化
     public void setup() {
+        this.setBackground(new Color(165, 222, 228));
         WordText = new JTextField(18);
         WordText.setForeground(Color.lightGray);
         WordText.setText("--请输入单词--");
@@ -245,6 +247,7 @@ class LabelSelectPanel extends JPanel{
     /*方法*/
     //初始化
     public void setup(User ThisUser){
+        this.setBackground(new Color(165, 222, 228));
         UpLoadButton=new JButton("选择上传图片");
         UpLoadButton.setFocusPainted(false);
         UpLoadButton.setBorderPainted(false);
@@ -413,6 +416,7 @@ class WordViewPanel extends JPanel{
     int index=0;//显示时用的下标
 
     void setup(User ThisUser){//初始化
+        this.setBackground(new Color(165, 222, 228));
         LastButton =new JButton("上一个");
         NextButton=new JButton("下一个");
         BackButton =new JButton("返回");
@@ -497,6 +501,7 @@ class PictureViewPanel extends JPanel{
     int index=0;//指示应该读取图片的位置
 
     void setup(User ThisUser){
+        this.setBackground(new Color(165, 222, 228));
         ProblemList=new Vector<>();
         Problem p=new Problem();
         p.setProblemPosition("C:\\Users\\AAAAA\\Desktop\\8a5a20370815e97d35e71ac496387697.jpeg");
@@ -574,6 +579,7 @@ public class UploadPage extends JPanel {
 
     /*初始化界面*/
     private void initGUI() {
+        this.setBackground(new Color(165, 222, 228));
         WordUploadButton = new JButton("上传单词");
         WordUploadButton.setFocusPainted(false);//去边框
         WordUploadButton.setBorderPainted(false);

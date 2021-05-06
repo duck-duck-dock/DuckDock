@@ -145,8 +145,8 @@ public class TodayPage extends JPanel {
                 TodayPagePanel.add(v1);
                 this.add(TodayPagePanel);
 
-                NewsPanel.setBackground(Color.yellow);
-                WeatherPanel.setBackground(Color.blue);
+                NewsPanel.setBackground(new Color(165, 222, 228));
+                WeatherPanel.setBackground(new Color(168, 148, 199));
             }
 
             //页面布局: 今日鸡汤

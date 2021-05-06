@@ -3,47 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="91531108-46fe-4cb9-866c-a519f21d2930" name="Default Changelist" comment="merged">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/AllUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/AllUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/Card.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/Card.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/DefaultPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/DefaultPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/EnglishPanel$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/EnglishPanel$17.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/EnglishPanel$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/EnglishPanel$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/MainMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/MainMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/Problem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/Problem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/TomatoFrame$1$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/TomatoFrame$1$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/TodayPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/TodayPage.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/DuckDock/TomatoFrame$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/TomatoFrame$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/TomatoFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/TomatoFrame$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/TomatoFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/TomatoFrame$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/TomatoFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/TomatoFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/TomatoPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/TomatoPanel$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/DuckDock/TomatoPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/TomatoPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/Word.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/Word.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/WordUpLoadPanel$CsvActionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/WordUpLoadPanel$CsvActionListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/WordUpLoadPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/WordUpLoadPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/lwbranchREADME.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/DuckDock/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/pgSQL-create_table.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DefaultPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DefaultPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EnglishPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EnglishPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoginMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TodayPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TodayPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UploadPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UploadPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

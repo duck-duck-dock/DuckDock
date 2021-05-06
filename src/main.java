@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 import java.util.Random;
 
 public class main {
-    private AllUser alluser;
+    protected AllUser alluser;
     private User currentUser;
 
     MainMenu Menu;

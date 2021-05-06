@@ -55,7 +55,7 @@ public class TomatoFrame extends JFrame {
                 new Thread(new Runnable(){
                     @Override
                     public void run() {
-                        while(drawClock.remainTime>=0){
+                        while(drawClock.remainTime>0){
                             if(Flag){
                                 try {
                                     Thread.sleep(1000);
@@ -71,7 +71,7 @@ public class TomatoFrame extends JFrame {
                                 });
                             }
                         }
-
+                        if(drawClock.remainTime<=0) drawClock.mode=3;
                     }
                 }).start();
             }
@@ -99,7 +99,7 @@ public class TomatoFrame extends JFrame {
 class TomatoPanel extends JPanel {
     int HEIGHT = 300;
     int WIDTH = 300;
-    int mode = 0;//0未开始 1已开始 2被暂停
+    int mode = 0;//0未开始 1已开始 2被暂停 3计时结束
     Integer allTime = 0;//倒计时初始时间和剩下时间(秒)
     Integer remainTime = 0;
     int endX = WIDTH / 2, endY = HEIGHT / 2 - 100;
@@ -166,9 +166,19 @@ class TomatoPanel extends JPanel {
 
     @Override
     public void paintComponent(Graphics graphics) {
+        //不同状态下背景色
+        if(mode==0)
+            setBackground(Color.white);
+        else
+            setBackground(new Color(165, 222, 228));
+
         super.paintComponent(graphics);
         Graphics2D g2d = (Graphics2D) graphics;
-        g2d.setColor(new Color(165, 222, 228));
+        //-----------------------圆盘-----------------------------
+        if(mode==0)//不同状态下的圆盘颜色不同
+            g2d.setColor(new Color(165, 222, 228));
+        else g2d.setColor(Color.white);
+
         drawOval(WIDTH / 2, HEIGHT / 2, r, graphics);//时钟圆盘
         g2d.setColor(Color.orange);
         g2d.setStroke(new BasicStroke(10));
@@ -179,7 +189,10 @@ class TomatoPanel extends JPanel {
         drawOval(endX, endY, 10, graphics);
         Font MyFont1 = new Font("雅黑", 12, 30);
         graphics.setFont(MyFont1);
-        graphics.setColor(Color.white);
+        if(mode==0)
+            graphics.setColor(Color.white);
+        else if(mode==3) graphics.setColor(Color.orange);
+        else graphics.setColor(new Color(165, 222, 228));
         graphics.drawString(timeLabel, WIDTH / 2 - 57, HEIGHT / 2 + 10);
 
     }

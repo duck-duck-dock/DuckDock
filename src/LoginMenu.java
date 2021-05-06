@@ -140,10 +140,10 @@ public class LoginMenu extends JFrame{//zyx:登陆界面
         Reg2JPanel.add(DatePick);
     }
     private void initTools() {
-        JPanel CardsJPanel = new JPanel(new CardLayout());
-        LogJPanel = new JPanel(null);
-        RegJPanel = new JPanel(null);
-        Reg2JPanel = new JPanel(null);
+        JPanel CardsJPanel = new JPanel(new CardLayout());CardsJPanel.setBackground(new Color(165, 222, 228));
+        LogJPanel = new JPanel(null);LogJPanel.setBackground(new Color(165, 222, 228));
+        RegJPanel = new JPanel(null);RegJPanel.setBackground(new Color(165, 222, 228));
+        Reg2JPanel = new JPanel(null);Reg2JPanel.setBackground(new Color(165, 222, 228));
         CardsJPanel.add(LogJPanel, "card1");
         CardsJPanel.add(RegJPanel, "card2");
         CardsJPanel.add(Reg2JPanel, "card3");
