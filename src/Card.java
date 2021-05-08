@@ -140,6 +140,7 @@ updated by Li Wen in 2021/04/20
 
 updated by Qingling Zhang in 2021/04/13
 更新内容：Word带参构造函数，用于给Word所有私有变量初始化（调用super初始化继承自父类的）；以及get接口
+
  */
 class Word extends Card {
     private String EgSentence;//单词例句
@@ -158,7 +159,7 @@ class Word extends Card {
         Accent = accent;
     }
 
-    public Word(String frontSide,String backSide,int right,int wrong,int star,boolean marked,String egSentence){
+   public Word(String frontSide,String backSide,int right,int wrong,int star,boolean marked,String egSentence){
         super(frontSide,backSide,right,wrong,star,marked);
         this.EgSentence=egSentence;
     }

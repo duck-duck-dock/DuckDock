@@ -1,6 +1,8 @@
 import java.sql.*;
 import java.util.Date;
 import java.util.Vector;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 /*
 created by Yuxin Zhu in 2021/03/21
@@ -8,6 +10,9 @@ class:用户
 
 updated by Qingling Zhang in 2021/04/13
 更新内容：User带参构造函数以及接口（addWord、addProblem、……）
+
+updated by Qingling Zhang in 2021/05/04
+更新内容：增加用户备份（user_backup）函数
  */
 public class User {
     private String UserName;//用户名，可以重复
@@ -41,6 +46,17 @@ public class User {
         Problems=new Vector<Problem>();
     }
 
+    //备份用户所有信息
+    public void user_backup(){
+        if(!jdbc.JdbcExistUser(this)){
+            //用户不存在则添加用户
+            jdbc.JdbcAddUser(this);
+        }
+        else {
+            jdbc.JdbcUpdateUser(this);  //更新用户信息
+            jdbc.JdbcUpdateWandE(this); //更新用户单词表以及问题表
+        }
+    }
     public void addWord(Word word){ this.Words.add(word); }
     public void addProblem(Problem problem){
         this.Problems.add(problem);
@@ -101,27 +117,20 @@ created by Yuxin Zhu in 2021/03/21
 class:所有用户信息
 读写文件写成该类的方法
 
-updated by Qingling Zhang in 2021/04/13
+updated by Qingling Zhang in 2021/05/04
 更新内容：
-    1.Connection connectSql：用来与数据库连接。Statement stmtSql执行不带参数的简单SQL语句
-    2.与数据库建立连接、断开连接
-    3.从数据库中读取所有用户信息（包括单词表和问题表）保存到形参中的AllUser对象中
-    4.更新形参User个人信息
-    5.新增、删除形参User用户
-    6.更新形参User的单词表和问题表
+    1.将与数据库相关操作均移入AllUser子类jdbc中，调用无需实例化
+    2.将Users从private改成protected型
  */
 class AllUser{
-    private Vector<User> Users;//所有用户
+    protected Vector<User> Users;//所有用户
     private int UserNum;//用户数量，>0
-    static Connection connectSql =null;
-    static Statement stmtSql =null;
     public Vector<User> getUsers() {
         return Users;
     }
     public int getUserNum() {
         return UserNum;
     }
-
 
     public void setUserNum(int userNum) {
         UserNum = userNum;
@@ -131,12 +140,24 @@ class AllUser{
         Users = new Vector<User>();
     }
 
+
+}
+
+/*
+created by Qingling Zhang in 2021/05/04
+class:数据库相关操作
+内部函数均写成静态函数，无需实例化可直接使用
+ */
+class jdbc extends AllUser{
+    static Connection connectSql =null;
+    static Statement stmtSql =null;
+
     /*
         created by Qingling Zhang in 2021/04/07
         Abstract:与数据库建立连接初始化connectSql和stmtSql
         Return value:Boolean类型，表示连接成功
         */
-    public static boolean ConnPostgreSql(){
+    private static boolean ConnPostgreSql(){
         try {
             Class.forName("org.postgresql.Driver");
             connectSql =DriverManager.getConnection("jdbc:postgresql://192.168.98.1:5432/postgres","postgres","123456");
@@ -157,7 +178,7 @@ class AllUser{
     Abstract:断开与数据库的所有连接
     Return value:Boolean类型，表示成功
     */
-    public static boolean DisConnPostgreSql (){
+    private static boolean DisConnPostgreSql (){
         try{
             connectSql.commit();
             stmtSql.close();
@@ -178,6 +199,7 @@ class AllUser{
     */
     public static boolean JdbcInitAllUsers(AllUser users){
 
+        ConnPostgreSql();
         try {
             ResultSet querySql;
 
@@ -194,7 +216,6 @@ class AllUser{
 
                 User u=new User(userName,userID,password,school,grade,dreamSchool,dateOfTest);
 
-                System.out.println(userName);
                 users.Users.add(u);
             }
             querySql.close();
@@ -240,6 +261,7 @@ class AllUser{
             System.err.println(e.getClass().getName()+":"+e.getMessage());
             System.exit(0);
         }
+        DisConnPostgreSql();
         return true;
     }
 
@@ -250,9 +272,11 @@ class AllUser{
     Return value:Boolean类型，表示成功
     */
     public static boolean JdbcUpdateUser(User updateUser){
+        ConnPostgreSql();
+
         String updateSql="update users set UserName = '"+updateUser.getUserName()+"' ,Password= '"+updateUser.getPassword()
                 +"' ,School= '"+updateUser.getSchool()+"' ,Grade= '"+updateUser.getGrade()+"' ,DreamSchool= '"+updateUser.getDreamSchool()
-                +"' ,Date= '"+updateUser.getDateOfTest()+"' where UserId= '"+updateUser.getUserID()+"' ;";
+                +"' ,Date= "+updateUser.getDateOfTest()+" where UserId= '"+updateUser.getUserID()+"' ;";
         try {
             stmtSql.executeUpdate(updateSql);
             connectSql.commit();
@@ -262,6 +286,8 @@ class AllUser{
             System.err.println(e.getClass().getName()+":"+e.getMessage());
             System.exit(0);
         }
+        DisConnPostgreSql();
+
         return true;
     }
 
@@ -271,6 +297,8 @@ class AllUser{
     Return value:Boolean类型，表示成功
     */
     public static boolean JdbcUpdateWandE(User user){
+        ConnPostgreSql();
+
         String userID=user.getUserID();
         String frontSide;
         String backSide;
@@ -328,15 +356,44 @@ class AllUser{
             System.err.println(e.getClass().getName()+":"+e.getMessage());
             System.exit(0);
         }
+        DisConnPostgreSql();
+
         return true;
     }
 
+    /*
+    created by Qingling Zhang in 2021/05/04
+    Abstract:查询User用户是否存在
+    Return value:Boolean类型，表示成功
+     */
+    public static boolean JdbcExistUser(User user){
+        ConnPostgreSql();
+
+        try{
+            ResultSet querySql;
+
+            /*将指定用户从数据库读出*/
+            //System.out.println(user.getUserID());
+            querySql= stmtSql.executeQuery("select * from users where userid='"+user.getUserID()+"'");
+            //querySql= stmtSql.executeQuery("select * from users where userid='007'");
+            if(querySql==null)return false; //该用户不存在
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName()+":"+e.getMessage());
+            System.exit(0);
+        }
+        DisConnPostgreSql();
+
+        return true;
+    }
     /*
     created by Qingling Zhang in 2021/04/07
     Abstract:新增形参User用户
     Return value:Boolean类型，表示成功
     */
     public static boolean JdbcAddUser(User newUser){
+        ConnPostgreSql();
+
         String newUserSql = "insert into users(UserName,UserId,Password,School,Grade,DreamSchool,Date)"
                 + "values('"+newUser.getUserName()+"','"+newUser.getUserID()+"','"+newUser.getPassword()+"','"+newUser.getSchool()
                 +"','"+newUser.getGrade()+"','"+newUser.getDreamSchool()+"','"+newUser.getDateOfTest()+"');";
@@ -348,6 +405,8 @@ class AllUser{
             System.err.println(e.getClass().getName() + ":" + e.getMessage());
             System.exit(0);
         }
+        DisConnPostgreSql();
+
         return true;
     }
 
@@ -357,6 +416,8 @@ class AllUser{
     Return value:Boolean类型，表示成功
     */
     public static boolean JdbcDeleteUser(User delUser){
+        ConnPostgreSql();
+
         String delUserSql = "delete from users where UserId='"+delUser.getUserID()+"';";
         try {
             stmtSql.executeUpdate(delUserSql);
@@ -366,7 +427,37 @@ class AllUser{
             System.err.println(e.getClass().getName() + ":" + e.getMessage());
             System.exit(0);
         }
+        DisConnPostgreSql();
+
         return true;
+    }
+
+    /*
+    created by Qingling Zhang in 2021/05/06
+    Abstract:从数据库中读取城市代号
+     */
+    public static void JdbcChinaCity(String CityName,Vector<String> CityId,Vector<String> Adm1,Vector<String> Adm2){
+
+        ConnPostgreSql();
+        try{
+            ResultSet querySql;
+            /*将指定城市从数据库读出*/
+            querySql= stmtSql.executeQuery("select * from chinacity where location_name_en='"+CityName+"'");
+            while (querySql.next()){
+                CityId.addElement(querySql.getString("location_id"));
+                Adm1.addElement(querySql.getString("adm1_en"));
+                Adm2.addElement(querySql.getString("adm1_en"));
+            }
+            querySql.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName()+":"+e.getMessage());
+            System.exit(0);
+        }
+
+        DisConnPostgreSql();
+
     }
 }
 

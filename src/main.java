@@ -1,12 +1,12 @@
-import com.sun.tools.javac.Main;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
+import java.util.Vector;
 
 public class main {
     private AllUser alluser;
+
     public AllUser getAlluser() {
         return alluser;
     }
@@ -15,16 +15,24 @@ public class main {
          return Userr;
     }
 
-    public main(){
-        this.alluser=new AllUser();
-        this.Userr =new User();
-    }
-    public  static void main(String[] args) {
-        main M=new main();
 
+
+    public void setAlluser() {
+        jdbc.JdbcInitAllUsers(this.alluser);
+        System.out.println(this.alluser.getUsers().elementAt(0).getUserName());
+        this.alluser.setUserNum(this.alluser.getUsers().size());
+    }
+
+    public main() {
+        this.alluser = new AllUser();
+    }
+
+    public static void main(String[] args) {
+        main M = new main();
+        M.setAlluser();
+        System.out.println(M.getAlluser().getUsers().elementAt(0).getPassword());
         LoginMenu Login = new LoginMenu(M.getAlluser());
-        MainMenu Menu = new MainMenu(M.getUserr());
-//        ToDoList list=new ToDoList(M.getUserr());
+        MainMenu Menu = new MainMenu();
         Login.LogLoginJButton.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
@@ -35,10 +43,7 @@ public class main {
           }
       });
 
-       Login.show();
-
-//        list.show();
-
+        Login.show();
 
     }
 }

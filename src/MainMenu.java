@@ -1,3 +1,5 @@
+import com.sun.tools.javac.Main;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -8,13 +10,16 @@ import java.awt.event.ActionListener;
 created by Yuxin Zhu in 2021/03/21
 updated by Yuxin Zhu in 2021/04/22
 new feature: Tomato Clock
+
+updated by Qingling Zhang in 2021/05/04
+new feature: backup
  */
 public class MainMenu extends JFrame {
     JToolBar BottomMenu;//zyx:底部菜单栏
     Box ButtonBar;//底部按钮布局
     Box MainBar;//总布局
     JPanel MainPanel;//主界面
-    JButton Review, Practice, Upload, Process, Setting,Tomato;//按钮组件
+    JButton Review, Practice, Upload, Process, Setting,Backup,Tomato;//按钮组件
     UploadPage UploadFrame;//功能模块
     SettingPage SettingFrame;//下为内嵌的分功能页面
     ReviewPage ReviewFrame;
@@ -23,7 +28,7 @@ public class MainMenu extends JFrame {
     DefaultPage DefaultFrame;
     CardLayout MainLayout;//卡片布局
 
-    User ThisUser;
+    User ThisUser=new User();
 
     //Yuxin Zhu: initialize the memu GUI
     private void initTools() {
@@ -35,12 +40,21 @@ public class MainMenu extends JFrame {
         Process = new JButton("进度");
         Setting = new JButton("设置");
         Tomato=new JButton("番茄钟");
+        Backup=new JButton("备份");
+        ButtonBar.add(Box.createGlue());
         ButtonBar.add(Review);
+        ButtonBar.add(Box.createGlue());
         ButtonBar.add(Practice);
+        ButtonBar.add(Box.createGlue());
         ButtonBar.add(Upload);
+        ButtonBar.add(Box.createGlue());
         ButtonBar.add(Process);
+        ButtonBar.add(Box.createGlue());
         ButtonBar.add(Setting);
         ButtonBar.add(Tomato);
+        ButtonBar.add(Box.createGlue());
+        ButtonBar.add(Backup);
+        ButtonBar.add(Box.createGlue());
 
         BottomMenu.add(ButtonBar);
         BottomMenu.setFloatable(false);
@@ -84,6 +98,13 @@ public class MainMenu extends JFrame {
                 TomatoFrame t = new TomatoFrame();
                 t.setSize(300,400);
                 t.show();
+            }
+        });
+        Backup.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ThisUser.user_backup();
+                JOptionPane.showMessageDialog(null, "备份成功！");
             }
         });
     }
@@ -168,6 +189,9 @@ public class MainMenu extends JFrame {
 
     }
 
+    public MainMenu(){
+        initGUI();
+    }
     //Yuxin Zhu: main func, DON'T change this func
     public MainMenu(User thisuser) {
         super("主页");
