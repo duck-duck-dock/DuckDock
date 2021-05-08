@@ -9,6 +9,8 @@ class OneToDoJPanel extends JPanel {
     int index;//编号
 
     public OneToDoJPanel(User Userr,String AddText,int index) {
+        this.setPreferredSize(new Dimension(100,30));
+        this.setLayout(new BorderLayout());
         this.setBackground(new Color(165, 222, 228));
         this.index=index;
         ChangeJCheckBox = new JCheckBox();
@@ -18,9 +20,9 @@ class OneToDoJPanel extends JPanel {
         ToDoJLabel = new JLabel(AddText);
         DeleteJButton = new JButton("删除");
         DeleteJButton.setBorderPainted(false);DeleteJButton.setFocusPainted(false);DeleteJButton.setBackground(Color.white);
-        add(ChangeJCheckBox);
-        add(ToDoJLabel);
-        add(DeleteJButton);
+        add(ChangeJCheckBox,BorderLayout.WEST);
+        add(ToDoJLabel,BorderLayout.CENTER);
+        add(DeleteJButton,BorderLayout.EAST);
 
         ChangeJCheckBox.addActionListener(new ActionListener() {
             @Override
@@ -32,6 +34,8 @@ class OneToDoJPanel extends JPanel {
 
     }
     public OneToDoJPanel(User Userr,int index) {
+
+        this.setLayout(new BorderLayout());
         this.setBackground(new Color(165, 222, 228));
         this.index=index;
         ChangeJCheckBox = new JCheckBox();
@@ -41,9 +45,9 @@ class OneToDoJPanel extends JPanel {
         ToDoJLabel = new JLabel(Userr.getToDoLists().get(index).getContent());
         DeleteJButton = new JButton("删除");
         DeleteJButton.setBorderPainted(false);DeleteJButton.setFocusPainted(false);DeleteJButton.setBackground(Color.white);
-        add(ChangeJCheckBox);
-        add(ToDoJLabel);
-        add(DeleteJButton);
+        add(ChangeJCheckBox,BorderLayout.WEST);
+        add(ToDoJLabel,BorderLayout.CENTER);
+        add(DeleteJButton,BorderLayout.EAST);
 //        DeleteJButton.addActionListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent e) {

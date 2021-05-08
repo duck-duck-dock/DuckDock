@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -36,28 +37,35 @@ public class ToDoList extends JPanel implements ActionListener {
 
     private void initGUI() {
         todos=new Vector<>();
+        this.setLayout(new BorderLayout());
         ToDoListJPanel = new JPanel();
         ToDoListJPanel.setBackground(new Color(165, 222, 228));
         ToDoListJPanel.setLayout(new BoxLayout(ToDoListJPanel, BoxLayout.Y_AXIS));//盒子布局.从上到下
         ToDoListJPanel.setBorder(new EmptyBorder(0,0,0,0));
         RollJScrollPane = new JScrollPane(ToDoListJPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         RollJScrollPane.setBackground(new Color(165, 222, 228));RollJScrollPane.setBorder(new EmptyBorder(0,0,0,0));
-        add(RollJScrollPane);
+        RollJScrollPane.setPreferredSize(new Dimension(200,300));
+        RollJScrollPane.setLayout(new ScrollPaneLayout());
         AddButton = new JButton("+");AddButton.setFocusPainted(false);AddButton.setBackground(Color.white);AddButton.setBorderPainted(false);
         AddJTextField = new JTextField(15);
         AddButton.addActionListener(this);
         AddJTextField.addActionListener(this);
-        JPanel jps = new JPanel();jps.setBackground(new Color(165, 222, 228));
-        jps.add(AddButton);
-        jps.add(AddJTextField);
-        add(jps, BorderLayout.NORTH);
-        this.setSize(300, 220);//大小
+//        JPanel jps = new JPanel();jps.setBackground(new Color(165, 222, 228));
+        JPanel jps = new JPanel();jps.setBackground(Color.orange);
+        jps.setPreferredSize(new Dimension(200,50));
+        jps.setLayout(new BorderLayout());
+        jps.add(AddButton,BorderLayout.WEST);
+        jps.add(AddJTextField,BorderLayout.EAST);
+        add(jps,BorderLayout.NORTH);
+
+        this.setSize(200, 470);//大小
         this.setVisible(true);
         for (int i = 0; i < Userr.getToDoLists().size(); i++) {//初始化user中的内容
             OneToDoJPanel tmp = new OneToDoJPanel(Userr, i);
             todos.add(tmp);
-            ToDoListJPanel.add(tmp);
+            RollJScrollPane.add(tmp);
         }
+        add(RollJScrollPane,BorderLayout.SOUTH);
         initDelete();
 
     }
