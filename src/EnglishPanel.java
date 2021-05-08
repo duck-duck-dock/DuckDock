@@ -3,9 +3,9 @@ import org.json.JSONObject;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,59 +17,37 @@ created by Li Wen in 2021/04/1
 
  */
 public class EnglishPanel extends JPanel {
-    JButton     QueryButton;    //Li Wen: 打开查单词页面按键
-    JButton     MemoryButton;   //Li Wen: 打开背单词页面按键
-    JButton     MyListButton;   //Li Wen: 打开我的生词本页面按键
-    JComboBox   SetCountCBox;   //Li Wen: 设置单轮记忆单词数
+    JButton QueryButton;        //Li Wen: 打开查单词页面按键
+    JButton MemoryButton;       //Li Wen: 打开背单词页面按键
+    JButton MyListButton;       //Li Wen: 打开我的生词本页面按键
+    JTextField QueryInputTextField; //Li Wen: 查单词模式：用户输入框
+    JButton QueryStartButton;   //Li Wen: 查单词模式：开始查询按键
+    JButton QueryAddButton;     //Li Wen: 查单词模式：加入生词本按键
+    JButton QueryBackButton;    //Li Wen: 查单词模式：返回按键
+    JTextPane  QueryWordText;   //Li Wen: 查单词模式：单词显示
+    JTextPane  QueryMeanText;   //Li Wen: 查单词模式：单词释义
+    JTextPane  QuerySentenceText;   //Li Wen: 查单词模式：单词例句和翻译
+    JButton MemEasyButton;      //Li Wen: 背单词模式：容易按键
+    JButton MemMediumButton;    //Li Wen: 背单词模式：模糊按键
+    JButton MemHardButton;      //Li Wen: 背单词模式：困难按键
+    JButton MemBackButton;      //Li Wen: 背单词模式：返回按键
+    JTextPane  MemWordText;     //Li Wen: 背单词模式：单词显示
+    JTextPane  MemMeanText;     //Li Wen: 背单词模式：单词释义
+    JTextPane  MemSentenceText; //Li Wen: 背单词模式：单词例句和翻译
+    JButton MyListBackButton;   //Li Wen: 我的生词本模式：返回按钮
 
-    JTextField  QueryInputTextField; //Li Wen: 查单词模式：用户输入框
-    JButton     QueryStartButton;   //Li Wen: 查单词模式：开始查询按键
-    JButton     QueryAddButton;     //Li Wen: 查单词模式：加入生词本按键
-    JButton     QueryBackButton;    //Li Wen: 查单词模式：返回按键
-    JTextPane   QueryWordText;      //Li Wen: 查单词模式：单词显示
-    JTextPane   QueryMeanText;      //Li Wen: 查单词模式：单词释义
-    JTextPane   QuerySentenceText;  //Li Wen: 查单词模式：单词例句和翻译
+    JPanel EnglishPages;        //Li Wen: 页面容器
+    JPanel ChoosePagePanel;     //Li Wen: 选择模式卡片页面
+    JPanel QueryPagePanel;      //Li Wen: 查单词卡片页面
+    JPanel MemoryPagePanel;     //Li Wen: 背单词卡片页面
+    JPanel MyListPagePanel;     //Li Wen: 生词本卡片页面
+    CardLayout EnglishPagesLayout;//Li Wen: 页面卡片布局
 
-    JButton     MemForgetButton;    //Li Wen: 背单词模式：不再出现按键
-    JButton     MemEasyButton;      //Li Wen: 背单词模式：容易按键
-    JButton     MemMediumButton;    //Li Wen: 背单词模式：模糊按键
-    JButton     MemHardButton;      //Li Wen: 背单词模式：困难按键
-    JButton     MemBackButton;      //Li Wen: 背单词模式：返回按键
-
-    JTextPane   MemWordText;        //Li Wen: 背单词模式：单词显示
-    JTextPane   MemMeanText;        //Li Wen: 背单词模式：单词释义
-    JTextPane   MemSentenceText;    //Li Wen: 背单词模式：单词例句和翻译
-
-    JButton     DicBackButton;      //Li Wen: 拼单词模式：返回按键
-    JButton     DicClearButton;     //Li Wen: 拼单词模式：清空输入按键
-    JButton     DicHintsButton;     //Li Wen: 拼单词模式：提示按键
-    JButton     DicCheckButton;     //Li Wen: 拼单词模式：验证按键
-    JTextPane   DicWordText;        //Li Wen: 拼单词模式：正确单词
-    JTextPane   DicMeanText;        //Li Wen: 拼单词模式：中文释义
-    JTextPane   DicAccentText;      //Li Wen: 拼单词模式：音标提示
-    JTextField  DicInputTextField;  //Li Wen: 拼单词模式：用户输入框
-
-    JButton     MyListBackButton;   //Li Wen: 我的生词本模式：返回按键
-
-    JPanel      EnglishPages;       //Li Wen: 页面容器
-    JPanel      ChoosePagePanel;    //Li Wen: 选择模式卡片页面
-    JPanel      QueryPagePanel;     //Li Wen: 查单词卡片页面
-    JPanel      MemoryPagePanel;    //Li Wen: 背单词卡片页面
-    JPanel      DictatePagePanel;   //Li Wen: 拼单词卡片页面
-    JPanel      MyListPagePanel;    //Li Wen: 生词本卡片页面
-    CardLayout  EnglishPagesLayout; //Li Wen: 页面卡片布局
-
-    User    ThisUser;       //Li Wen: 当前用户
-    Word    CurWord;        //Li Wen: 当前单词，默认为WordList的第0个单词。
-    Word    NewWord;        //Li Wen: 查到的单词，初始为null
-    int     Curposition;    //Li Wen: 当前背到WordList单词表的哪个单词了，初始值为WordList中第一个未被掌握的词的位置。每次打开背单词页面就会被更新。
-    int     roundcounter;   //Li Wen: 本轮：待拼写+掌握。达到capcounter时，就去拼写。初始为0。
-    int     capcounter;     //Li Wen: 单轮单词数。通过下拉框选择，初始为10
-    int     WordsOverFlag;  //Li Wen: 为1时，表示已经背完所有单词。
-    Vector<Word> WordList;  //Li Wen: 当前用户的单词表
-    Vector<Word> MemoryingWords;//Li Wen: 用户正在记录的15个单词,正在背的+正在拼写的
-    Vector<Word> MasteredWords; //Li Wen: 用户已经掌握的单词表
-
+    User ThisUser;      //Li Wen: 当前用户
+    Vector<Word> WordList;//Li Wen: 当前用户的单词表
+    Vector<Word> MemoryingWords; //Li Wen: 用户正在记录的15个单词
+    Word currentWord;   //Li Wen: 当前单词
+    Word NewWord;       //Li Wen: 查到的单词
 
     /*
     created by Li Wen in 2021/4/20
@@ -89,14 +67,7 @@ public class EnglishPanel extends JPanel {
     public EnglishPanel(User thisuser){
         ThisUser = thisuser;
         WordList = thisuser.getWords();
-        MemoryingWords = new Vector<Word>();
-        MasteredWords = new Vector<Word>();
-
-        NewWord = null;
-        Curposition = 0;
-        roundcounter = 0;
-        capcounter = 3;
-
+        MemoryingWords = new Vector<>();
         initGUI();
     }
 
@@ -121,23 +92,16 @@ public class EnglishPanel extends JPanel {
                 QueryButton     = new JButton("查单词");
                 MemoryButton    = new JButton("背单词");
                 MyListButton    = new JButton("我的生词本");
-                QueryButton.setFocusPainted(false);QueryButton.setBorderPainted(false);QueryButton.setBackground(Color.white);
-                MemoryButton.setFocusPainted(false);MemoryButton.setBorderPainted(false);MemoryButton.setBackground(Color.white);
-                MyListButton.setFocusPainted(false);MyListButton.setBorderPainted(false);MyListButton.setBackground(Color.white);
 
                 QueryInputTextField = new JTextField();
-                QueryStartButton    = new JButton("   查询   ");
+                QueryStartButton    = new JButton("查询");
                 QueryAddButton      = new JButton("添加到生词本");
                 QueryBackButton     = new JButton("返回");
                 QueryWordText    = new JTextPane();
                 QueryMeanText    = new JTextPane();
                 QuerySentenceText    = new JTextPane();
-                QueryStartButton.setFocusPainted(false);QueryStartButton.setBorderPainted(false);QueryStartButton.setBackground(Color.white);
-                QueryAddButton.setFocusPainted(false);QueryAddButton.setBorderPainted(false);QueryAddButton.setBackground(Color.white);
-                QueryBackButton.setFocusPainted(false);QueryBackButton.setBorderPainted(false);QueryBackButton.setBackground(Color.white);
 
 
-                MemForgetButton = new JButton("不再出现");
                 MemEasyButton   = new JButton("容易");
                 MemMediumButton = new JButton("模糊");
                 MemHardButton   = new JButton("没想起");
@@ -145,57 +109,28 @@ public class EnglishPanel extends JPanel {
                 MemWordText     = new JTextPane();
                 MemMeanText     = new JTextPane();
                 MemSentenceText = new JTextPane();
-                MemForgetButton.setFocusPainted(false);MemForgetButton.setBorderPainted(false);MemForgetButton.setBackground(Color.white);
-                MemEasyButton.setFocusPainted(false);MemEasyButton.setBorderPainted(false);MemEasyButton.setBackground(Color.white);
-                MemHardButton.setFocusPainted(false);MemHardButton.setBorderPainted(false);MemHardButton.setBackground(Color.white);
-                MemBackButton.setFocusPainted(false);MemBackButton.setBorderPainted(false);MemBackButton.setBackground(Color.white);
-                MemMediumButton.setFocusPainted(false);MemMediumButton.setBorderPainted(false);MemMediumButton.setBackground(Color.white);
-
-                DicBackButton = new JButton("返回");
-                DicClearButton = new JButton("清空");
-                DicHintsButton = new JButton("提示");
-                DicCheckButton = new JButton("√");
-                DicWordText    = new JTextPane();
-                DicMeanText    = new JTextPane();
-                DicAccentText  = new JTextPane();
-                DicInputTextField = new JTextField();
-                DicBackButton.setFocusPainted(false);DicBackButton.setBorderPainted(false);DicBackButton.setBackground(Color.white);
-                DicClearButton.setFocusPainted(false);DicClearButton.setBorderPainted(false);DicClearButton.setBackground(Color.white);
-                DicHintsButton.setFocusPainted(false);DicHintsButton.setBorderPainted(false);DicHintsButton.setBackground(Color.white);
-                DicCheckButton.setFocusPainted(false);DicCheckButton.setBorderPainted(false);DicCheckButton.setBackground(Color.white);
 
                 MyListBackButton    = new JButton("返回");
-                MyListBackButton.setFocusPainted(false);MyListBackButton.setBorderPainted(false);MyListBackButton.setBackground(Color.white);
 
-                EnglishPages    = new JPanel();EnglishPages.setBackground(new Color(165, 222, 228));
-                ChoosePagePanel = new JPanel();ChoosePagePanel.setBackground(new Color(165, 222, 228));
-                QueryPagePanel  = new JPanel();QueryPagePanel.setBackground(new Color(165, 222, 228));
-                MemoryPagePanel = new JPanel();MemoryPagePanel.setBackground(new Color(165, 222, 228));
-                DictatePagePanel = new JPanel();DictatePagePanel.setBackground(new Color(165, 222, 228));
-                MyListPagePanel = new JPanel();MyListPagePanel.setBackground(new Color(165, 222, 228));
+                EnglishPages    = new JPanel();
+                ChoosePagePanel = new JPanel();
+                QueryPagePanel  = new JPanel();
+                MemoryPagePanel = new JPanel();
+                MyListPagePanel = new JPanel();
                 EnglishPagesLayout  = new CardLayout();
 
                 EnglishPages.setPreferredSize(this.getPreferredSize());
-                EnglishPages.setBackground(new Color(165, 222, 228));
                 this.add(EnglishPages);
                 EnglishPages.setLayout(EnglishPagesLayout);
                 EnglishPages.add("ChoosePage",ChoosePagePanel);
                 EnglishPages.add("QueryPage", QueryPagePanel);
                 EnglishPages.add("MemoryPage", MemoryPagePanel);
-                EnglishPages.add("DictatePage", DictatePagePanel);
                 EnglishPages.add("MyListPage", MyListPagePanel);
             }
 
             //ChoosePagePanel布局
             {
                 ChoosePagePanel.setPreferredSize(EnglishPages.getPreferredSize());
-
-                //设置选择单轮单词数下拉框
-                final String[] CBoxItemData = new String[]{"10","15","20"};
-                SetCountCBox = new JComboBox<String>(CBoxItemData);
-                SetCountCBox.setPreferredSize(new Dimension(30,20));
-
-                //ChoosPagePanel布局
                 Box Choosev1 = Box.createVerticalBox();
                 ChoosePagePanel.add(Choosev1);
                 Choosev1.add(Box.createVerticalStrut(60));
@@ -204,28 +139,25 @@ public class EnglishPanel extends JPanel {
                 Choosev1.add(MemoryButton);
                 Choosev1.add(Box.createVerticalStrut(30));
                 Choosev1.add(MyListButton);
-                Choosev1.add(Box.createVerticalStrut(30));
-                Choosev1.add(SetCountCBox);
                 Choosev1.add(Box.createVerticalGlue());
             }
 
             //QueryPagePanel布局
             {
-                QueryPagePanel.setPreferredSize(EnglishPages.getPreferredSize());
                 QueryWordText.setEditable(false);//不可被编辑
                 QueryMeanText.setEditable(false);
                 QuerySentenceText.setEditable(false);
 
-                QueryWordText.setBackground(new Color(197, 237, 241));
-                QueryMeanText.setBackground(new Color(197, 237, 241));
-                QuerySentenceText.setBackground(new Color(197, 237, 241));
+                QueryWordText.setBackground(Color.orange);
+                QueryMeanText.setBackground(Color.orange);
+                QuerySentenceText.setBackground(Color.orange);
 
                 QueryWordText.setPreferredSize(new Dimension(100,50));
                 QueryMeanText.setPreferredSize(new Dimension(100,50));
                 QuerySentenceText.setPreferredSize(new Dimension(100,50));
 
                 QueryPagePanel.setPreferredSize(EnglishPages.getPreferredSize());
-                QueryPagePanel.setBackground(new Color(165, 222, 228));
+                QueryPagePanel.setBackground(Color.gray);
                 Box Queryv1 = Box.createVerticalBox();
                 Box Queryh1 = Box.createHorizontalBox();
                 QueryPagePanel.add(Queryv1);
@@ -249,14 +181,13 @@ public class EnglishPanel extends JPanel {
 
             //MemoryPagePanel布局
             {
-                MemoryPagePanel.setPreferredSize(EnglishPages.getPreferredSize());
                 MemWordText.setEditable(false);//不可被编辑
                 MemMeanText.setEditable(false);
                 MemSentenceText.setEditable(false);
 
-                MemWordText.setBackground(new Color(197, 237, 241));
-                MemMeanText.setBackground(new Color(197, 237, 241));
-                MemSentenceText.setBackground(new Color(197, 237, 241));
+                MemWordText.setBackground(Color.gray);
+                MemMeanText.setBackground(Color.gray);
+                MemSentenceText.setBackground(Color.gray);
 
                 MemWordText.setPreferredSize(new Dimension(80,50));
                 MemMeanText.setPreferredSize(new Dimension(100,80));
@@ -277,71 +208,19 @@ public class EnglishPanel extends JPanel {
 
                 //Li Wen: 存放容易、模糊、困难按键的布局
                 Memh1.add(MemHardButton);
-                Memh1.add(Box.createHorizontalStrut(20));
+                Memh1.add(Box.createHorizontalStrut(60));
                 Memh1.add(MemMediumButton);
-                Memh1.add(Box.createHorizontalStrut(20));
+                Memh1.add(Box.createHorizontalStrut(60));
                 Memh1.add(MemEasyButton);
-                Memh1.add(Box.createHorizontalStrut(20));
-                Memh1.add(MemForgetButton);
                 Memh1.add(Box.createHorizontalGlue());
 
                 //Li Wen: Memory总体布局
-                Memv1.add(MemBackButton);
-                Memv1.add(Box.createVerticalStrut(10));
+                Memv1.add(Box.createVerticalStrut(30));
                 Memv1.add(Memv2);
                 Memv1.add(Box.createVerticalStrut(30));
                 Memv1.add(Memh1);
                 Memv1.add(Box.createVerticalGlue());
                 MemoryPagePanel.add(Memv1);
-            }
-
-            //DictatePagePanel布局
-            {
-                DictatePagePanel.setPreferredSize(EnglishPages.getPreferredSize());
-
-                DicWordText.setBackground(Color.pink);
-                DicMeanText.setBackground(Color.pink);
-                DicAccentText.setBackground(Color.pink);
-
-                DicWordText.setPreferredSize(new Dimension(70,30));
-                DicMeanText.setPreferredSize(new Dimension(70,30));
-                DicAccentText.setPreferredSize(new Dimension(70,30));
-
-                DicWordText.setEditable(false);
-                DicMeanText.setEditable(false);
-                DicAccentText.setEditable(false);
-
-                DicWordText.setVisible(false);
-                DicAccentText.setVisible(false);
-
-                Box v1 = Box.createVerticalBox();   //页面总体的垂直布局
-                Box v2 = Box.createVerticalBox();   //显示内容的垂直布局
-                Box h1 = Box.createHorizontalBox(); //下方按钮的水平布局
-
-                v2.add(DicMeanText);
-                v2.add(Box.createVerticalStrut(15));
-                v2.add(DicInputTextField);
-                v2.add(Box.createVerticalStrut(15));
-                v2.add(DicWordText);
-                v2.add(Box.createVerticalStrut(15));
-                v2.add(DicAccentText);
-                v2.add(Box.createVerticalGlue());
-
-                h1.add(DicClearButton);
-                h1.add(Box.createHorizontalStrut(20));
-                h1.add(DicHintsButton);
-                h1.add(Box.createHorizontalStrut(20));
-                h1.add(DicCheckButton);
-                h1.add(Box.createHorizontalGlue());
-
-                v1.add(DicBackButton);
-                v1.add(Box.createVerticalStrut(20));
-                v1.add(v2);
-                v1.add(Box.createVerticalStrut(20));
-                v1.add(h1);
-
-                DictatePagePanel.add(v1);
-
             }
 
             //MyListPagePanel布局
@@ -365,56 +244,11 @@ public class EnglishPanel extends JPanel {
                     }
                 });
 
-                //选择单轮单词书下拉框
-                SetCountCBox.addItemListener(new ItemListener(){
-                    @Override
-                    public void itemStateChanged(ItemEvent e) {
-                        if (e.getStateChange() == ItemEvent.SELECTED){
-                            System.out.println(SetCountCBox.getSelectedIndex());
-                            capcounter = 5 * (SetCountCBox.getSelectedIndex()+2);
-                        }
-                    }
-                });
-
                 //打开背单词页面按键
                 MemoryButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-
-                        //若用户的生词本为空，则提示，停留在本页面
-                        if (WordList.isEmpty()){
-                            JOptionPane.showMessageDialog(ChoosePagePanel,"您的生词本为空呢，快去发现生词吧~","Failure",2);
-                            return;
-                        }
-
-                        //若用户的生词本不为空
-                        Word tempNextWord = new Word();//循环需要
-                        int i = 0;
-
-                        //找到第一个未被掌握的单词的位置
-                        for (; i<WordList.size();i++){
-                            tempNextWord = WordList.elementAt(i);
-                            if (tempNextWord.isForget() != 1){
-                                Curposition = i;
-                                break;
-                            }
-                        }
-
-                        //如果有生词，就打开背单词页面，否则提示。
-                        if (i == WordList.size()){
-                            JOptionPane.showMessageDialog(ChoosePagePanel, "今天没有需要复习的生词，你太棒啦！", "Success", 2);
-                            return;
-                        }
-                        else{
-                            //把第一个没掌握的词加到正在背诵的单词列表，并设置组件的显示值。
-                            CurWord = WordList.elementAt(Curposition);
-
-                            MemWordText.setText(CurWord.getFrontSide());
-                            MemMeanText.setText(CurWord.getBackSide());
-                            MemSentenceText.setText(CurWord.getEgSentence()+"\n"+CurWord.getEgSentenceTrans());
-                            MemoryingWords.add(CurWord);
-                            EnglishPagesLayout.show(EnglishPages, "MemoryPage");
-                        }
+                        EnglishPagesLayout.show(EnglishPages, "MemoryPage");
                     }
                 });
 
@@ -429,35 +263,41 @@ public class EnglishPanel extends JPanel {
 
             //QueryPagePanel
             {
+//                //查单词模式：输入框限制输入
+//                QueryInputTextField.addCaretListener(new CaretListener() {
+//                    @Override
+//                    public void caretUpdate(CaretEvent e) {
+//                        String input = QueryInputTextField.getText().toString();//获得输入内容
+//                        if (input.length()==0) {
+//                            return;
+//                        }
+//                        char ch = input.charAt(input.length()-1);
+//                        if (!(ch >='A') && (ch <= 'z')){
+//                            JOptionPane.showMessageDialog(QueryInputTextField,"只能输入大小写英文字母","提示",2);
+//                        }
+//                        SwingUtilities.invokeLater(new Runnable(){
+//                            @Override
+//                            public void run() {
+//                                QueryInputTextField.setText(input.substring(0,input.length()-1));
+//                            }
+//                        });
+//                    }
+//                });
                 //查单词模式：开始查询按键
                 QueryStartButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        //清空上次显示内容
-                        QueryWordText.setText("");
-                        QueryMeanText.setText("");
-                        QuerySentenceText.setText("");
-
-                        //获取输入，并按空格切片
-                        String tempinput = QueryInputTextField.getText();
-                        String input[] = tempinput.split("\\s+");
-
-                        //若没有输入/只输入了空格，则提示要输入单词，并清空输入框
-                        if (tempinput.equals("") || input.length == 0){
-                            JOptionPane.showMessageDialog(QueryPagePanel,"请输入您要查询的单词哦~","Failure",2);
-                            QueryInputTextField.setText("");
+                        QueryWordText.setText("");//清除上一次的结果
+                        String input = QueryInputTextField.getText().toString();
+                        //按空格切片，若输入为空，则提示要输入单词
+                        if (input.length()==0){
+                            JOptionPane.showMessageDialog(QueryStartButton,"请输入您要查询的单词哦~","查询失败",2);
                         }
-                        else{//否则，按空格分割，取第一个合法输入
-                            //从API获得单词相关内容，并显示。
-                            NewWord = getWordByName(input[0]);
-                            if (NewWord != null){
-                                QueryWordText.setText(NewWord.getFrontSide()+" "+NewWord.getAccent());
-                                QueryMeanText.setText(NewWord.getBackSide());
-                                QuerySentenceText.setText(NewWord.getEgSentence()+"\n"+NewWord.getEgSentenceTrans());
-                            }else{
-                                JOptionPane.showMessageDialog(QueryPagePanel,"没有查到该单词呢，试试其他单词~","Failure",2);
-                            }
-                        }
+                        //若输入多个单词，以空格隔开，则只显示第一个单词的查询结果。
+                        NewWord = getWordByName(input);   //从API获得单词相关内容
+                        QueryWordText.setText(NewWord.getFrontSide()+" "+NewWord.getAccent());
+                        QueryMeanText.setText(NewWord.getBackSide());
+                        QuerySentenceText.setText(NewWord.getEgSentence()+"\n"+NewWord.getEgSentenceTrans());
                     }
                 });
 
@@ -465,24 +305,9 @@ public class EnglishPanel extends JPanel {
                 QueryAddButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        //当有查询结果，且不在生词本中时，添加到生词本
-                        if (NewWord != null){
-                            int flag = 0;   //为1时表示已在单词本
-                            for (int i=0; i<WordList.size(); i++){
-                                if (WordList.elementAt(i).getFrontSide().equals(NewWord.getFrontSide())){
-                                    flag = 1;
-                                    break;
-                                }
-                            }
-                            if (flag==0){
-                                WordList.add(NewWord);
-                                JOptionPane.showMessageDialog(QueryPagePanel, "已添加到生词本！", "Success", 1);
-                            }else{
-                                JOptionPane.showMessageDialog(QueryPagePanel, "这个单词已经在单词本啦~", "Failure", 2);
-                            }
-                        }
-                        else{
-                            JOptionPane.showMessageDialog(QueryPagePanel, "没有返回结果的单词，怎么能入生词本呢！", "Failure", 1);
+                        //当新单词有返回结果时，才会加入到生词本。
+                        if (NewWord.getFrontSide()!=""){
+                            WordList.add(NewWord);
                         }
                     }
                 });
@@ -498,30 +323,16 @@ public class EnglishPanel extends JPanel {
 
             //MemoryPagePanel
             {
-                //背单词模式：不再出现按键
-                MemForgetButton.addActionListener(new ActionListener(){
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        CurWord.setForget(true);
-                        roundcounter++;
-                        //掌握的单词不需要拼写
-                        MemoryingWords.remove(CurWord);
-                        JOptionPane.showMessageDialog(MemoryPagePanel,"后续不会出现该单词的记忆环节啦~","Success",2);
-                        toSpell();
-                        getNextWord(1);
-                    }
-                });
-
                 //背单词模式：容易按键
                 MemEasyButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        CurWord.setRight(1);
-                        if(CurWord.isForget()==-1){
-                            roundcounter++;
-                            toSpell();
+                        currentWord.setRight(1);
+                        //当前记住15个单词时，进入拼写模式
+                        if (MemoryingWords.size()>14){
+
                         }
-                        getNextWord(1);
+                        getNextWord();
                     }
                 });
 
@@ -529,7 +340,7 @@ public class EnglishPanel extends JPanel {
                 MemMediumButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        getNextWord(1);
+                        getNextWord();
                     }
                 });
 
@@ -537,8 +348,8 @@ public class EnglishPanel extends JPanel {
                 MemHardButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        CurWord.setRight(0);
-                        getNextWord(1);
+                        currentWord.setRight(0);
+                        getNextWord();
                     }
                 });
 
@@ -547,97 +358,6 @@ public class EnglishPanel extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         EnglishPagesLayout.show(EnglishPages,"ChoosePage");
-                    }
-                });
-
-            }
-
-            //DictatePagePanel
-            {
-
-                //拼单词模式：返回按键
-                DicBackButton.addActionListener(new ActionListener(){
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        EnglishPagesLayout.show(EnglishPages,"ChoosePage");
-                    }
-                });
-
-                //拼单词模式：输入框焦点获得/失去事件
-                DicInputTextField.addFocusListener(new FocusListener() {
-                    @Override
-                    public void focusGained(FocusEvent e) {
-                        DicWordText.setVisible(false);
-                        DicAccentText.setVisible(false);
-                    }
-
-                    @Override
-                    public void focusLost(FocusEvent e) {
-
-                    }
-                });
-
-                //拼单词模式：清空输入按键
-                DicClearButton.addActionListener(new ActionListener(){
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-
-                        System.out.println("Clear Input");
-
-                        DicInputTextField.setText("");
-                        DicWordText.setVisible(false);
-                        DicAccentText.setVisible(false);
-                    }
-                });
-
-                //拼单词模式：提示按键
-                DicHintsButton.addActionListener(new ActionListener(){
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        System.out.println("Hint");
-                        DicAccentText.setVisible(true);
-                    }
-                });
-
-                //拼单词模式：验证按键
-                DicCheckButton.addActionListener(new ActionListener(){
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        System.out.println("Checking");
-                        System.out.println("now the Word is: "+CurWord.getFrontSide());
-                        System.out.println("now WordText is: "+DicWordText.getText());
-
-                        String inputValue = DicInputTextField.getText();
-
-                        //若未输入拼写，则提示
-                        if (inputValue.equals("")){
-                            JOptionPane.showMessageDialog(DictatePagePanel, "请输入你的答案啦~", "Failure",2);
-                        }
-
-                        //若拼写正确
-                        else if (inputValue.equals(DicWordText.getText())){
-
-                            //如果wrong的次数为0，就掌握它。
-                            if (CurWord.isemptyWrong()){
-                                CurWord.setForget(true);
-                            }
-                            //如果wrong的次数大于0，则之后还会背到这个单词，并清空拼错次数。
-                            else {
-                                CurWord.setForget(false);
-                                CurWord.setWrong(0);
-
-                            }
-                            //从MemoryingWords中移出当前单词，并找到下一个单词。
-                            MemoryingWords.remove(CurWord);
-                            getNextWord(2);
-                            DicInputTextField.setText("");
-                        }
-
-                        //若拼写错误,则wrong+1，继续拼写该单词。短暂显示正确答案。
-                        else{
-                            CurWord.setWrong(1);
-                            DicWordText.setVisible(true);
-                        }
                     }
                 });
 
@@ -655,7 +375,6 @@ public class EnglishPanel extends JPanel {
 
         }
 
-        //默认显示选择页
         EnglishPagesLayout.show(EnglishPages,"ChoosePage");
     }
 
@@ -663,7 +382,24 @@ public class EnglishPanel extends JPanel {
     created by Li Wen in 2021/4/20
 
     Abstract:
-    从API中找到单词资料，处理后返回一个Word实例。
+    找到下一个要显示的单词。
+
+    Para:
+    null
+
+    Return value：
+    Word类型，表示下一个要背的单词。
+    */
+    public void getNextWord(){
+
+    }
+
+
+    /*
+    created by Li Wen in 2021/4/20
+
+    Abstract:
+    从百词斩API中找到单词资料，处理后返回一个Word实例。
 
     Para:
     wordname: 待查询单词
@@ -743,145 +479,20 @@ public class EnglishPanel extends JPanel {
         }
         return null;
     }
-
-    /*
-    created by Li Wen in 2021/4/20
-
-    Abstract:
-    找到下一个要显示的单词。
-
-    Para:
-    choice: 应用场景。1表示正在背单词，2表示正在背单词。
-
-    Return value:
-    null
-    */
-    public void getNextWord(int choice){
-        Word tempNextWord = new Word();//循环需要
-        int i = 0;//循环需要
-
-        //正在背单词，找新词哎~
-        if (choice == 1){
-
-            //若当前memoryingWords的个数小于capcount，则从WordList中取一个新的加到MemoryingWords中，并设置curentWord。
-            if(MemoryingWords.size() < capcounter){
-                for (; Curposition < WordList.size()-1 ;) {
-                    Curposition = (++Curposition) % WordList.size();
-                    tempNextWord = WordList.elementAt(Curposition);
-                    if(tempNextWord.isForget() == 0){
-                        CurWord = tempNextWord;
-                        MemoryingWords.add(CurWord);
-
-                        MemWordText.setText(CurWord.getFrontSide());
-                        MemMeanText.setText(CurWord.getBackSide());
-                        MemSentenceText.setText(CurWord.getEgSentence()+"\n"+CurWord.getEgSentenceTrans());
-                        return;
-                    }
-                }
-
-                //如果Wordlist已经没有新的生词，就从正在记忆的生词里面找下一个单词
-                for (i=MemoryingWords.size()-1; i >-1 ;i--) {
-                    tempNextWord = MemoryingWords.elementAt(i);
-                    if(tempNextWord.isForget() == 0) {
-                        CurWord = tempNextWord;
-
-                        MemWordText.setText(CurWord.getFrontSide());
-                        MemMeanText.setText(CurWord.getBackSide());
-                        MemSentenceText.setText(CurWord.getEgSentence()+"\n"+CurWord.getEgSentenceTrans());
-                        return;
-                    }
-                }
-
-                //都找不到的话，就是该去拼写啦。
-                System.out.println("没有新词可以复习，可能去拼写。");
-                WordsOverFlag = 1;
-                toSpell();
-            }
-
-            //若当前memoryingwords的个数等于capcount，但是还不能拼写，则从memoryingowrds中找一个。一定找的到.
-            else{
-                for (i=0; i < capcounter ;i++) {
-                    tempNextWord = MemoryingWords.elementAt(i);
-
-                    //若遇到一个普通单词，就切换到该单词。
-                    if(tempNextWord.isForget() == 0) {
-                        CurWord = tempNextWord;
-                        MemWordText.setText(CurWord.getFrontSide());
-                        MemMeanText.setText(CurWord.getBackSide());
-                        MemSentenceText.setText(CurWord.getEgSentence()+"\n"+CurWord.getEgSentenceTrans());
-                        return;
-                    }
-                }
-            }
-        }
-
-        //正在拼单词
-        else{
-            int flagcount = 0;//标志是否成功背完这组单词。小于capcount则表示没有背完。
-
-            //找到没拼写通过的词就返回。
-            for (;flagcount < roundcounter;) {
-                Curposition = (++Curposition) % roundcounter;
-                tempNextWord = MemoryingWords.elementAt(Curposition);
-                if(tempNextWord.isForget() == -1) {
-                    CurWord = tempNextWord;
-                    DicWordText.setText(CurWord.getFrontSide());
-                    DicMeanText.setText(CurWord.getBackSide());
-                    DicAccentText.setText(CurWord.getAccent());
-                    return;
-                }
-                else{
-                    flagcount++;
-                }
-            }
-
-            //本轮所有的词都拼写通过，开始新一轮背单词。
-            System.out.println("这轮单词都拼写通过了，去背新单词了。");
-            roundcounter = 0;
-            JOptionPane.showMessageDialog(DictatePagePanel,"本轮拼单词结束","Success",2);
-            EnglishPagesLayout.show(EnglishPages, "MemoryPage");
-        }
-
-    }
-
-    /*
-    created by Li Wen in 2021/4/30
-
-    Abstract:
-    判断是否达到打开拼单词模式条件。
-    若roundcounter等于10，打开拼单词模式。
-
-    Para:
-    null
-
-    Return value:
-    null
-    */
-    public void toSpell(){
-        if ((WordsOverFlag == 1) || (roundcounter == capcounter) ){
-            if (MemoryingWords.size() != 0){
-                JOptionPane.showMessageDialog(EnglishPages,"即将进入拼单词模式","Success",2);
-
-                //初始化DictatePagePanel的一些组件
-                Curposition = 0;
-                CurWord = MemoryingWords.elementAt(Curposition);
-                DicWordText.setText(CurWord.getFrontSide());
-                DicMeanText.setText(CurWord.getBackSide());
-                DicAccentText.setText(CurWord.getAccent());
-                EnglishPagesLayout.show(EnglishPages,"DictatePage");
-            }
-        }
-    }
     
     private void initGUI() {
 
         Border lineBorder = BorderFactory.createLineBorder(Color.BLUE);
-        this.setBorder(new EmptyBorder(0,0,0,0));
-        this.setPreferredSize(new Dimension(800,600));
-        this.setBackground(new Color(165, 222, 228));
+        this.setBorder(lineBorder);
+        this.setPreferredSize(new Dimension(480,400));
+
         //Li Wen: 生成EnglishPanel界面
         initEnglishPanel();
 
     }
 
+    //Yuxin Zhu: construction func, DON'T change this func unless necessary
+    public EnglishPanel() {
+        initGUI();
+    }
 }

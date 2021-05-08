@@ -61,12 +61,11 @@ public abstract class Card {
     }
 
     //Li Wen: 获取掌握情况
-    public int isForget(){
-//        if (forget == 0){
-//            return false;
-//        }
-//        else return true;
-        return forget;
+    public boolean isForget(){
+        if (forget == 0){
+            return false;
+        }
+        else return true;
     }
 
     //Li Wen: 掌握单词

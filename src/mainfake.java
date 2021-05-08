@@ -1,30 +1,20 @@
-import com.sun.tools.javac.Main;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
-public class main {
+public class mainfake {
     private AllUser alluser;
     public AllUser getAlluser() {
         return alluser;
     }
-    private User Userr;
-    public User getUserr() {
-         return Userr;
-    }
-
-    public main(){
+    public mainfake(){
         this.alluser=new AllUser();
-        this.Userr =new User();
     }
     public  static void main(String[] args) {
-        main M=new main();
-
+        mainfake M=new mainfake();
         LoginMenu Login = new LoginMenu(M.getAlluser());
-        MainMenu Menu = new MainMenu(M.getUserr());
-//        ToDoList list=new ToDoList(M.getUserr());
+        MainMenu Menu = new MainMenu(new User());
         Login.LogLoginJButton.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
@@ -36,9 +26,6 @@ public class main {
       });
 
        Login.show();
-
-//        list.show();
-
 
     }
 }

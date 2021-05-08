@@ -19,6 +19,7 @@ public class User {
     private Date DateOfTest;//考研时间
     private Vector<Word> Words;//他的单词表
     private Vector<Problem> Problems;//他的题目表
+    private Vector<UserToDoList> ToDoLists;//他的待办
 
 
     public User(){
@@ -75,6 +76,12 @@ public class User {
     public void setDateOfTest(Date dateOfTest) {
         DateOfTest = dateOfTest;
     }
+
+    public Vector<UserToDoList> getToDoLists() {
+         return ToDoLists;
+    }
+    public User(){ToDoLists=new Vector<UserToDoList>(); }
+
     public Vector<Word> getWords() {
         return Words;
     }

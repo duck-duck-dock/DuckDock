@@ -1,5 +1,3 @@
-import com.sun.tools.javac.Main;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -25,7 +23,7 @@ public class MainMenu extends JFrame {
     DefaultPage DefaultFrame;
     CardLayout MainLayout;//卡片布局
 
-    public User ThisUser;
+    User ThisUser;
 
     //Yuxin Zhu: initialize the memu GUI
     private void initTools() {
@@ -112,7 +110,7 @@ public class MainMenu extends JFrame {
         ReviewFrame.setSize(MainPanel.getSize());
         SettingFrame = new SettingPage();
         SettingFrame.setSize(MainPanel.getSize());
-        DefaultFrame = new DefaultPage();
+        DefaultFrame = new DefaultPage(ThisUser);
         DefaultFrame.setSize(MainPanel.getSize());
 
         MainPanel.add("Default", DefaultFrame);
@@ -165,12 +163,10 @@ public class MainMenu extends JFrame {
     //Yuxin Zhu: init all the GUI
     private void initGUI() {//zyx:初始化界面
         this.setSize(800, 600);
-        this.setResizable(false);
         initTools();
         initPages();
 
     }
-
 
     //Yuxin Zhu: main func, DON'T change this func
     public MainMenu(User thisuser) {

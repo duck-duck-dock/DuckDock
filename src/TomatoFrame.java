@@ -9,9 +9,6 @@ import java.util.Objects;
 created by Yuxin Zhu in 2021/04/22
  */
 
-//整个页面
-//封装传递引用
-
 public class TomatoFrame extends JFrame {
     int HEIGHT = 600;
     int WIDTH = 300;
