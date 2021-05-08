@@ -129,7 +129,7 @@ public class TodayPage extends JPanel {
             {
                 //Li Wen: 仅当TodayPage继承自JFrame时，才取消注释。
                 this.setSize(800, 600);
-                this.setResizable(false);
+
 
                 //设置组件的大小
                 WordPanel.setPreferredSize(new Dimension(780,150));
