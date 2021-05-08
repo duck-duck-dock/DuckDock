@@ -14,7 +14,7 @@ updated by Qingling Zhang in 2021/04/13
  */
 public abstract class Card {
     private String FrontSide, BackSide; //卡片正面和背面内容
-    private int right = 0, wrong = 0;   //正确、错误次数
+    protected int right = 0, wrong = 0;   //正确、错误次数
     private int star;   //星级，1-5的整数
     private boolean marked; //是否被标注，true/false
     private int forget = 0; //Li Wen: 默认为0, 为1时表示已掌握, 为-1时表示该去拼写。
@@ -61,17 +61,19 @@ public abstract class Card {
     }
 
     //Li Wen: 获取掌握情况
-    public boolean isForget(){
-        if (forget == 0){
-            return false;
-        }
-        else return true;
+    public int isForget(){
+        return forget;
     }
 
     //Li Wen: 掌握单词
-    public void setForget(boolean ch){
-        forget = ch == true ? 1:0;
+    public void setForget(int i){
+        switch(i){
+            case -1: forget = -1;break;//该去拼写
+            case  0: forget =  0;break;//一般单词
+            case  1: forget =  1;break;//已掌握
+        };
     }
+
 
     //Li Wen: 容易/模糊/困难，修改Right
     public void setRight(int i){
@@ -150,7 +152,7 @@ class Word extends Card {
     @Override
     public void display() {//显示该单词
     }
-
+    Word(){}
     //Li Wen: Word构造函数
     Word(String frontside, String backside, String eg, String egtrans, String accent){
         super.Card(frontside,backside);
@@ -175,11 +177,38 @@ class Word extends Card {
     public String getEgSentenceTrans(){
         return EgSentenceTrans;
     }
+    //Li Wen: 判断wrong是否为0
+    public boolean isemptyWrong(){
+        if (wrong == 0)
+            return true;
+        else return false;
+    }
 
     //Li Wen: 获取音标
     public String getAccent(){
         return Accent;
     }
+
+    public void setWrong(int i){
+        if (i == 0){
+            wrong = 0;
+        }
+        else{
+            wrong++;
+        }
+    }
+    public void setRight(int i){
+        if ((i==0) && (right>0)){
+            right--;
+        }
+        else if (i==1){ //容易，right到5就去拼写。
+            right++;
+            if (right == 5){
+                setForget(-1);
+            }
+        }
+    }
+
 }
 
 /*
