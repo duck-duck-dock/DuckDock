@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
@@ -8,6 +9,9 @@ class:用户
 
 updated by Qingling Zhang in 2021/04/13
 更新内容：User带参构造函数以及接口（addWord、addProblem、……）
+
+updated by Han Zhao in 2021/05/07
+更新内容：给每一个用户的错题表第一张给一个封面，图片在Cover中；增加向problems中增加元素的方法；增加给problems整体赋值的方法;增加标签
  */
 public class User {
     private String UserName;//用户名，可以重复
@@ -23,7 +27,13 @@ public class User {
 
     public User(){
         Words=new Vector<Word>();
-        Problems=new Vector<Problem>();
+        this.Problems=new Vector<Problem>();//
+        Problem p=new Problem();
+        p.setProblemPosition("./Cover/cover.jpeg");//初始化的时候，就给用户的错题图片给一个封面
+        this.Problems.add(p);
+        ArrayList l=new ArrayList();//初始化标签
+        l.add("这是封面！！");l.add("");l.add("");
+        p.setLabel(l);
     }
     public User(String userName,String userID,String password,String school,int grade,String dreamSchool,Date dateOfTest){
         this.UserName=userName;
@@ -34,15 +44,19 @@ public class User {
         this.DreamSchool=dreamSchool;
         this.DateOfTest=dateOfTest;
         this.Words=null;
-        this.Problems=null;
+        //this.Problems=null;
         Words=new Vector<Word>();
-        Problems=new Vector<Problem>();
+        this.Problems=new Vector<Problem>();
+        Problem p=new Problem();
+        p.setProblemPosition("./Cover/cover.jpeg");//初始化的时候，就给用户的错题图片给一个封面
+        this.Problems.add(p);
+        ArrayList l=new ArrayList();//初始化标签
+        l.add("这是封面！！");l.add("");l.add("");
+        p.setLabel(l);
     }
 
     public void addWord(Word word){ this.Words.add(word); }
-    public void addProblem(Problem problem){
-        this.Problems.add(problem);
-    }
+    public void addProblem(Problem problem){ this.Problems.add(problem); }//向问题列表添加问题，被添加的是问题对象
     public String getUserName() {
         return UserName;
     }
@@ -81,11 +95,6 @@ public class User {
     public Vector<Problem> getProblems() {
         return Problems;
     }
-    public void setProblems(Vector<Problem> problems){//设置单词列表
-        Problems=problems;
-    }
-
-
 }
 
 /*
