@@ -82,7 +82,7 @@ public class TodayPage extends JPanel {
         //Li Wen: 组件注册
         {
             TodayPagePanel = new JPanel();
-
+            TodayPagePanel.setBackground(new Color(144, 199, 226));
             //给WordPanel加上了背景
             WordPanel   = new JPanel(new BorderLayout()){
                 public void paintComponent(Graphics g){
@@ -162,8 +162,8 @@ public class TodayPage extends JPanel {
                 TodayPagePanel.add(v1);
                 this.add(TodayPagePanel);
 
-                NewsPanel.setBackground(Color.yellow);
-                WeatherPanel.setBackground(Color.blue);
+                NewsPanel.setBackground(new Color(88,178,220));
+                WeatherPanel.setBackground(new Color(88,178,220));
             }
 
             //页面布局: 今日鸡汤

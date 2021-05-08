@@ -25,6 +25,7 @@ public class User {
     public User(){
         Words=new Vector<Word>();
         Problems=new Vector<Problem>();
+        ToDoLists=new Vector<UserToDoList>();
     }
     public User(String userName,String userID,String password,String school,int grade,String dreamSchool,Date dateOfTest){
         this.UserName=userName;
@@ -80,7 +81,7 @@ public class User {
     public Vector<UserToDoList> getToDoLists() {
          return ToDoLists;
     }
-    public User(){ToDoLists=new Vector<UserToDoList>(); }
+
 
     public Vector<Word> getWords() {
         return Words;

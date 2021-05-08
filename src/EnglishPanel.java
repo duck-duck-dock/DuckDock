@@ -135,9 +135,9 @@ public class EnglishPanel extends JPanel {
                 ChoosePagePanel.add(Choosev1);
                 Choosev1.add(Box.createVerticalStrut(60));
                 Choosev1.add(QueryButton);
-                Choosev1.add(Box.createVerticalStrut(30));
+//                Choosev1.add(Box.createVerticalStrut(30));
                 Choosev1.add(MemoryButton);
-                Choosev1.add(Box.createVerticalStrut(30));
+//                Choosev1.add(Box.createVerticalStrut(30));
                 Choosev1.add(MyListButton);
                 Choosev1.add(Box.createVerticalGlue());
             }

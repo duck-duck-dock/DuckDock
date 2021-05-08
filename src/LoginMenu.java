@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class LoginMenu extends JFrame{//zyx:登陆界面
     private AllUser Users;
-    JPanel LogJPanel,RegJPanel,Reg2JPanel,CardsJPanel;//登录,注册面板
+    JPanel LogJPanel,RegJPanel,Reg2JPanel;//登录,注册面板
     JLabel LogNameJLabel,LogPwdJLabel,LogMsgLabel;//登录用户名，密码，消息标签
     JLabel RegNameJLabel,RegPwdJLabel,RegRePwdJLabel,RegMsgLabel;//注册用户名，密码，确认密码，消息标签
     JLabel RegGradeJLabel,RegSchoolJLabel,RegDreamSchoolJLabel,RegTimeJLabel;//年级，学校，目标院校，考研时间
@@ -35,6 +35,12 @@ public class LoginMenu extends JFrame{//zyx:登陆界面
         LogRegJButton=new JButton("注册");
         LogLoginJButton= new JButton("登录");
         LogExitJButton= new JButton("退出");
+        LogRegJButton.setBackground(Color.white);
+        LogRegJButton.setBorderPainted(false);LogRegJButton.setFocusPainted(false);
+        LogLoginJButton.setBackground(Color.white);
+        LogLoginJButton.setBorderPainted(false);LogLoginJButton.setFocusPainted(false);
+        LogExitJButton.setBackground(Color.white);
+        LogExitJButton.setBorderPainted(false);LogExitJButton.setFocusPainted(false);
         //显示信息的标签
         LogMsgLabel= new JLabel();
         LogNameJLabel.setBounds(200,100,100,50);
@@ -70,7 +76,11 @@ public class LoginMenu extends JFrame{//zyx:登陆界面
         RegReTxtPwdJPasswordField.setEchoChar('*');
         //创建两个按钮
         RegRegisterJButton=new JButton("注册");
+        RegRegisterJButton.setBackground(Color.white);
+        RegRegisterJButton.setBorderPainted(false);RegRegisterJButton.setFocusPainted(false);
         RegCancelJButton= new JButton("取消");
+        RegCancelJButton.setBackground(Color.white);
+        RegCancelJButton.setBorderPainted(false);RegCancelJButton.setFocusPainted(false);
         //显示信息的标签
         RegMsgLabel= new JLabel();
 
@@ -101,6 +111,8 @@ public class LoginMenu extends JFrame{//zyx:登陆界面
         RegDreamSchoolJLabel=new JLabel("目标院校：");
         RegTimeJLabel=new JLabel("考研时间：");
         RegReserveJButton=new JButton("保存");
+        RegReserveJButton.setFocusPainted(false);RegReserveJButton.setBorderPainted(false);
+        RegReserveJButton.setBackground(Color.white);
         Date RegOfTestDate=new Date();
         DatePick = new JXDatePicker();
         DatePick.setDate(RegOfTestDate);
