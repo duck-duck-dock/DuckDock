@@ -5,6 +5,7 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 import java.util.List;
+import java.io.FileInputStream;
 
 /*
 created by Han Zhao in 2021/04/02
@@ -22,8 +23,7 @@ class WordUpLoadPanel extends JPanel {
     /*方法*/
 
     //初始化
-    public void setup(){
-        this.setBackground(new Color(165, 222, 228));
+    public void setup(User ThisUser){
         SinglWordUploadButton =new JButton("单个单词上传");
         SinglWordUploadButton.setFocusPainted(false);//去边框
         SinglWordUploadButton.setBorderPainted(false);
@@ -112,8 +112,8 @@ class WordUpLoadPanel extends JPanel {
         }
     }
     //构造函数
-    public WordUpLoadPanel(){
-        setup();
+    public WordUpLoadPanel(User ThisUser){
+        setup(ThisUser);
     }
 }
 
@@ -125,15 +125,14 @@ class SingleWordUploadPanel extends JPanel{
     /*变量*/
     JTextField WordText;//单词输入文本框
     JTextField ExplainText;//解释输入（暂时未定如何输入解释的格式）文本框
-    String Word=new String("");
-    String Explain=new String("");//单词和解释字符串
+    String word=new String("");
+    String explain=new String("");//单词和解释字符串
     JButton UploadButton;//确定上传按钮
     JButton GiveupButton;//放弃上传按钮，返回单词上传面板（WordULPanel）
 
     /*方法*/
     //初始化
-    public void setup() {
-        this.setBackground(new Color(165, 222, 228));
+    public void setup(User ThisUser) {
         WordText = new JTextField(18);
         WordText.setForeground(Color.lightGray);
         WordText.setText("--请输入单词--");
@@ -175,7 +174,7 @@ class SingleWordUploadPanel extends JPanel{
                     WordText.setForeground(Color.lightGray);
                     WordText.setText("--请输入单词--");
                 }
-                else Word=WordText.getText().toString();
+                else word=WordText.getText().toString();
 
             }
         });
@@ -194,14 +193,14 @@ class SingleWordUploadPanel extends JPanel{
                     ExplainText.setForeground(Color.lightGray);
                     ExplainText.setText("--请输入解释--");
                 }
-                 else Explain=ExplainText.getText().toString();
+                 else explain=ExplainText.getText().toString();
             }
         });
         //确认上传成功弹窗
         this.UploadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(Explain.length()>0&&Word.length()>0){
+                if(explain.length()>0&&word.length()>0){
                     JOptionPane.showMessageDialog(null,"上传成功！","提示框",JOptionPane.PLAIN_MESSAGE);
                 }
                 else {
@@ -212,8 +211,8 @@ class SingleWordUploadPanel extends JPanel{
     }
 
     //构造函数
-    public SingleWordUploadPanel(){
-        setup();
+    public SingleWordUploadPanel(User Thisuser){
+        setup(Thisuser);
     }
 }
 
@@ -240,8 +239,6 @@ class LabelSelectPanel extends JPanel{
     String[] s34={"--请选择--","选择","填空","简答"};//专业课
 
     String str="";//错题图片的路径
-    Problem problem;//错题
-    Vector<Problem> ProblemList;//错题图片路径列表
     ArrayList Label=new ArrayList();//存放标签的，暂时存先存成字符串
 
     /*方法*/
@@ -325,9 +322,7 @@ class LabelSelectPanel extends JPanel{
                 int val=fc.showOpenDialog(null);//显示选择文件的窗口
                 if(val==fc.APPROVE_OPTION){
                     str = fc.getSelectedFile().toString();//获得图片的路径
-                    problem.setProblemPosition(str);//问题路径保存
-                    ThisUser.addProblem(problem);//添加问题图片
-                    SubjectComboBox1.setEnabled(true);
+                    SubjectComboBox1.setEnabled(true);//可以进行标签的选择
                     AddItem(s1,SubjectComboBox1);
                 }
             }
@@ -357,7 +352,7 @@ class LabelSelectPanel extends JPanel{
                         SubjectComboBox2.setEnabled(true);
                         SubjectComboBox3.setEnabled(true);
                         AddItem(s22,SubjectComboBox2);
-                        AddItem(s32,SubjectComboBox3);
+                        AddItem(s33,SubjectComboBox3);
                         break;
                     default:
                         SubjectComboBox3.setEnabled(true);
@@ -368,7 +363,7 @@ class LabelSelectPanel extends JPanel{
             }
         });
 
-        this.SureButton.addActionListener(new ActionListener() {
+        this.SureButton.addActionListener(new ActionListener() {//确定上传
             @Override
             public void actionPerformed(ActionEvent e) {
                 Label.add(SubjectComboBox1.getSelectedItem().toString());
@@ -386,6 +381,24 @@ class LabelSelectPanel extends JPanel{
                     Label.clear();
                 }
                 else {
+                    Problem problem=new Problem();
+                    problem.setProblemPosition(str);//问题路径保存
+                    problem.setLabel(Label);//标签添加
+                    ThisUser.addProblem(problem);//添加问题图片
+                    //写文件
+                    {
+                        String filename="C:\\Users\\AAAAA\\Desktop\\"+ThisUser.getUserID()+".txt";//文件名
+                        File f=new File(filename);//打开文件，
+                        try {
+                            FileWriter fw=new FileWriter(f,true);//写文件
+                            String t=str+"\r\n";//加入换行符
+                            fw.write(t);//写入字符串
+                            fw.flush();//刷新
+                            fw.close();//关闭流
+                        }catch (IOException ex){
+                            ex.printStackTrace();
+                        }
+                    }
                     JOptionPane.showMessageDialog(null,"上传成功","提示",JOptionPane.PLAIN_MESSAGE);
                 }
             }
@@ -400,7 +413,7 @@ class LabelSelectPanel extends JPanel{
     }
 
     //构造函数
-    public LabelSelectPanel(User ThisUser){ setup(ThisUser);ThisUser.setProblems(ProblemList); }
+    public LabelSelectPanel(User ThisUser){ setup(ThisUser);}
 }
 
 /*
@@ -416,26 +429,16 @@ class WordViewPanel extends JPanel{
     int index=0;//显示时用的下标
 
     void setup(User ThisUser){//初始化
-        this.setBackground(new Color(165, 222, 228));
-        LastButton =new JButton("上一个");
-        NextButton=new JButton("下一个");
+        LastButton =new JButton("上一页");
+        NextButton=new JButton("下一页");
         BackButton =new JButton("返回");
         WordList=ThisUser.getWords();//获得单词表
-        ShowWord =new JTextArea(30,100);//显示单词的文本框创建
-
-        //第一页的设置
-        for(index=0;index<WordList.size()&&index<30&&index>0;index++){
-            String word=WordList.get(index).getFrontSide();
-            String expression=WordList.get(index).getBackSide();
-            String row=word+" "+expression;
-            ShowWord.append(row);
-        }
+        ShowWord =new JTextArea(15,10);//显示单词的文本框创建
 
         //排版
         {
             ShowWord.setLineWrap(true);//自动换行
-            ShowWord.isEnabled();//显示单词的文本框，设置成只能看，不能改
-            JScrollPane jsp=new JScrollPane(ShowWord);//滑动显示
+            ShowWord.setEditable(false);//显示单词的文本框，设置成只能看，不能改
 
             Box SetBox1=Box.createVerticalBox();
             Box SetBox2=Box.createVerticalBox();
@@ -444,7 +447,7 @@ class WordViewPanel extends JPanel{
             SetBox1.add(SetBox2);
             SetBox1.add(Box.createHorizontalStrut(30));
             SetBox1.add(SetBox3);
-            SetBox2.add(jsp);
+            SetBox2.add(ShowWord);
             SetBox3.add(Box.createHorizontalStrut(150));
             SetBox3.add(LastButton);
             SetBox3.add(Box.createHorizontalStrut(100));
@@ -458,13 +461,18 @@ class WordViewPanel extends JPanel{
             LastButton.addActionListener(new ActionListener() {//上一页单词
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    ShowWord.setText("");//清空文本框
-                    int temp=0;
-                    for(index=index-30;index<WordList.size()&&temp<30&&index>0;index++,temp++){
-                        String word=WordList.get(index).getFrontSide();
-                        String expression=WordList.get(index).getBackSide();
-                        String row=word+" "+expression;
-                        ShowWord.append(row);
+                    if(index-20<=0){//判断下标是否溢出
+                        JOptionPane.showMessageDialog(null,"这已经是第一页了！！","警告",JOptionPane.WARNING_MESSAGE);
+                    }
+                    else{
+                        ShowWord.setText("");//清空文本框
+                        int temp=0;
+                        for(index=index-index%15-15;index<WordList.size()&&temp<15;index++,temp++){
+                            String word=WordList.get(index).getFrontSide();
+                            String expression=WordList.get(index).getBackSide();
+                            String row=word+" "+expression+"\r\n";
+                            ShowWord.append(row);
+                        }
                     }
                 }
             });
@@ -472,13 +480,18 @@ class WordViewPanel extends JPanel{
             NextButton.addActionListener(new ActionListener() {//下一页单词
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    ShowWord.setText("");//清空文本框
                     int temp=0;
-                    for(;index<WordList.size()&&temp<30&&index>0;index++,temp++){
-                        String word=WordList.get(index).getFrontSide();
-                        String expression=WordList.get(index).getBackSide();
-                        String row=word+" "+expression;
-                        ShowWord.append(row);
+                    if(index>=WordList.size()){
+                        JOptionPane.showMessageDialog(null,"这已经是最后一页了！！","警告",JOptionPane.WARNING_MESSAGE);
+                    }
+                    else {
+                        ShowWord.setText("");//清空文本框
+                        for(;index<WordList.size()&&temp<15&&index>=0;index++,temp++){
+                            String word=WordList.get(index).getFrontSide();
+                            String expression=WordList.get(index).getBackSide();
+                            String row=word+" "+expression+"\r\n";
+                            ShowWord.append(row);
+                        }
                     }
                 }
             });
@@ -498,54 +511,84 @@ class PictureViewPanel extends JPanel{
     JButton LastButton;
     JButton NextButton;
     JButton BackButton;
-    int index=0;//指示应该读取图片的位置
+    JPanel Picture;//展示图片用的面板
+    Box SetBox1=Box.createVerticalBox();//为了初始化能够显示而定义的,垂直的
+    int index=0;//表示当前显示的这一页的下标（从0开始的）
 
     void setup(User ThisUser){
-        this.setBackground(new Color(165, 222, 228));
-        ProblemList=new Vector<>();
-        Problem p=new Problem();
-        p.setProblemPosition("C:\\Users\\AAAAA\\Desktop\\8a5a20370815e97d35e71ac496387697.jpeg");
-        ProblemList.add(p);
-
         LastButton =new JButton("上一个");
         NextButton=new JButton("下一个");
         BackButton =new JButton("返回");
 
-//***************这里有点问题，如果不注释，那么一开始就直接看不见初始界面的按钮，不知道原因
-        //ImageIcon imageIcon=new ImageIcon(ProblemList.get(index).getProblemPosition());//显示图片
-        index++;//获得下一个
-        //JLabel Picture=new JLabel(imageIcon);//显示图片用的
-
         //排版
         {
-            Box SetBox1=Box.createVerticalBox();
-            Box SetBox2=Box.createVerticalBox();
-            Box SetBox3=Box.createHorizontalBox();
-            this.add(SetBox1);
-            SetBox1.add(SetBox2);
-            SetBox1.add(Box.createHorizontalStrut(30));
-            SetBox1.add(SetBox3);
-            //SetBox2.add(Picture);//添加的图片
-            SetBox3.add(Box.createHorizontalStrut(150));
-            SetBox3.add(LastButton);
-            SetBox3.add(Box.createHorizontalStrut(100));
-            SetBox3.add(NextButton);
-            SetBox3.add(Box.createHorizontalStrut(150));
-            SetBox3.add(BackButton);
+            Box SetBox2=Box.createHorizontalBox();//水平的
+            Box SetBox3=Box.createVerticalBox();//垂直的
+            this.add(SetBox3);
+            SetBox3.add(SetBox2);
+            SetBox3.add(Box.createVerticalStrut(20));
+            SetBox3.add(this.SetBox1);
+            SetBox2.add(Box.createHorizontalStrut(100));
+            SetBox2.add(LastButton);
+            SetBox2.add(Box.createHorizontalStrut(100));
+            SetBox2.add(NextButton);
+            SetBox2.add(Box.createHorizontalStrut(100));
+            SetBox2.add(BackButton);
         }
         //事件监听
         {
             LastButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    index--;
-
+                    if(index<=0){
+                        JOptionPane.showMessageDialog(null,"这已经是第一页了！！","警告",JOptionPane.WARNING_MESSAGE);
+                    }
+                    else{
+                        index--;
+                        Picture=new JPanel(new BorderLayout()){
+                            public void paintComponent(Graphics g){
+                                ImageIcon bgicon = new ImageIcon(ThisUser.getProblems().get(index).getProblemPosition());
+                                g.drawImage(bgicon.getImage(),0,0,Picture.getWidth(),Picture.getHeight(),bgicon.getImageObserver());
+                            }
+                        };
+                        SetBox1.removeAll();
+                        SetBox1.repaint();
+                        Picture.setPreferredSize(new Dimension(600,300));//调整布局
+                        SetBox1.add(Picture);//添加的图片
+                        String[] l={"科目：","具体科目：","题型："};
+                        String n="";
+                        for(int i=0;i<3;i++){
+                            n=n+l[i]+ThisUser.getProblems().get(0).getLabel().get(i).toString();
+                        }
+                        SetBox1.add(new JLabel(n));
+                    }
                 }
             });
             NextButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
+                    if(index+1>=ThisUser.getProblems().size()){
+                        JOptionPane.showMessageDialog(null,"这已经是最后一页了！！","警告",JOptionPane.WARNING_MESSAGE);
+                    }
+                    else {
+                        index++;
+                        SetBox1.removeAll();
+                        SetBox1.repaint();
+                        Picture=new JPanel(new BorderLayout()){
+                            public void paintComponent(Graphics g){
+                                ImageIcon bgicon = new ImageIcon(ThisUser.getProblems().get(index).getProblemPosition());
+                                g.drawImage(bgicon.getImage(),0,0,Picture.getWidth(),Picture.getHeight(),bgicon.getImageObserver());
+                            }
+                        };
+                        Picture.setPreferredSize(new Dimension(600,300));//调整布局
+                        SetBox1.add(Picture);//添加的图片
+                        String[] l={"科目：","具体科目：","题型："};
+                        String n="   ";
+                        for(int i=0;i<3;i++){
+                            n=n+l[i]+ThisUser.getProblems().get(index).getLabel().get(i).toString();
+                        }
+                        SetBox1.add(new JLabel(n));
+                    }
                 }
             });
         }
@@ -601,8 +644,8 @@ public class UploadPage extends JPanel {
         CardPanel.setLayout(CdLayout);//设置面板的布局管理为卡片式
 
         MainPanel = new JPanel();//主面板
-        Wd_UploadPanel= new WordUpLoadPanel();//创建面板
-        SWd_UploadPanel =new SingleWordUploadPanel();//单个单词上传面板
+        Wd_UploadPanel= new WordUpLoadPanel(ThisUser);//创建面板
+        SWd_UploadPanel =new SingleWordUploadPanel(ThisUser);//单个单词上传面板
         L_SelectPanel=new LabelSelectPanel(ThisUser);//图片上传面板
         WvPanel=new WordViewPanel(ThisUser);//单词查看面板
         PvPanel=new PictureViewPanel(ThisUser);//错题查看面板
@@ -677,19 +720,42 @@ public class UploadPage extends JPanel {
         this.WordButton.addActionListener(new ActionListener() {//查看单词
             @Override
             public void actionPerformed(ActionEvent e) {
+                WvPanel.ShowWord.setText("");//清空文本框
+                //第一页的设置
+                for(WvPanel.index=0;WvPanel.index<WvPanel.WordList.size()&&WvPanel.index<15;WvPanel.index++){
+                    String word=WvPanel.WordList.get(WvPanel.index).getFrontSide();
+                    String expression=WvPanel.WordList.get(WvPanel.index).getBackSide();
+                    String row=word+" "+expression+"\r\n";
+                    WvPanel.ShowWord.append(row);
+                }
                 CdLayout.show(CardPanel,"WordViewPanel");
             }
         });
         this.WvPanel.BackButton.addActionListener(new ActionListener() {//返回主面板
             @Override
-            public void actionPerformed(ActionEvent e) {
-                CdLayout.show(CardPanel,"Main");
-            }
+            public void actionPerformed(ActionEvent e) { CdLayout.show(CardPanel,"Main"); }
         });
 
         this.PictureButton.addActionListener(new ActionListener() {//查看错题图片
             @Override
             public void actionPerformed(ActionEvent e) {
+                PvPanel.index=0;
+                PvPanel.SetBox1.removeAll();
+                PvPanel.SetBox1.repaint();
+                PvPanel.Picture=new JPanel(new BorderLayout()){//设置初始图片
+                    public void paintComponent(Graphics g){
+                        ImageIcon bgicon = new ImageIcon(ThisUser.getProblems().get(0).getProblemPosition());//通过当前User得到第一张图片
+                        g.drawImage(bgicon.getImage(),0,0,PvPanel.Picture.getWidth(),PvPanel.Picture.getHeight(),bgicon.getImageObserver());
+                    }
+                };
+                PvPanel.Picture.setPreferredSize(new Dimension(600,300));//调整布局
+                PvPanel.SetBox1.add(PvPanel.Picture);//添加的图片
+                PvPanel.SetBox1.add(Box.createVerticalStrut(20));
+                String n="";
+                for(int i=0;i<3;i++){
+                    n=n+ThisUser.getProblems().get(0).getLabel().get(i).toString();
+                }
+                PvPanel.SetBox1.add(new JLabel(n));
                 CdLayout.show(CardPanel,"PictureViewPanel");
             }
         });
@@ -703,7 +769,42 @@ public class UploadPage extends JPanel {
 
     //Yuxin Zhu: construction func, DON'T change this func unless necessary
     public UploadPage(User thisUser) {
-        ThisUser=thisUser;
+        ThisUser=new User();//初始化
+        ThisUser=thisUser;//将当前用户的信息传递过来
+
+        String filename="C:\\Users\\AAAAA\\Desktop\\"+ThisUser.getUserID()+".txt";//文件名
+        File f=new File(filename);//创建文件
+        //读文件
+        {
+            if(!f.exists()){//如果该文件不存在，创建之后进行读操作
+                try{
+                    f.createNewFile();//创建文件，新用户，故创建文件以存放信息
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+            else {//文件存在，直接进行读操作
+                try{
+                    InputStream in=new FileInputStream(f);//读文件用的
+                    byte[] buffer=new byte[1024];//一次读入的大小
+                    ByteArrayOutputStream bos=new ByteArrayOutputStream();
+                    int len=in.read(buffer);//用于判断是否读到文件尾
+                    while (len!=-1){
+                        bos.write(buffer,0,len);
+                        len=in.read(buffer);
+                    }
+                    String b=new String(buffer);//将读出的内容转换为字符串型
+                    String[] pictures=b.split("\r\n");//切分字符串，以换行为分隔符
+                    for (int i=0;i<pictures.length;i++){//将该用户之前图片的位置信息全部读出来
+                        Problem p=new Problem();
+                        p.setProblemPosition(pictures[i]);
+                        ThisUser.addProblem(p);
+                    }
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        }
         initGUI();
     }//构造函数，创建时直接调用了
 }

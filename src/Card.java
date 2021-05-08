@@ -188,15 +188,22 @@ class:题目
 
 updated by Qingling Zhang in 2021/04/13
 更新内容：Problem带参构造函数，用于给Problem所有私有变量初始化（调用super初始化继承自父类的）
+
+updated by Han Zhao in 2021/05/07
+更新内容：Problem中添加了私有变量表示图片的位置，以及获得和设置它的方法；增加标签
  */
 class Problem extends Card {
-    private String ProblemPosition;//图片位置
+    private String Position;//图片位置
+    private ArrayList Label;//图片的标签
     //存标签，暂时未定
-    public String getProblemPosition() { return ProblemPosition; }//得到图片的位置
-    public void setProblemPosition(String position){ProblemPosition=position;}//设置图片位置
+    public String getProblemPosition() { return Position; }//得到图片的位置
+    public void setProblemPosition(String position){Position=position;}//设置图片位置
 
-    public Problem(){}
-    public Problem(String frontSide,String backSide,int right,int wrong,int star,boolean marked){
+    public ArrayList getLabel(){ return Label; }//获得标签
+    public void setLabel(ArrayList label){Label=label;}//设置标签
+
+    public Problem(){}//构造函数
+    public Problem(String frontSide,String backSide,int right,int wrong,int star,boolean marked){//构造函数
         super(frontSide,backSide,right,wrong,star,marked);
     }
     @Override
