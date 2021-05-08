@@ -3,24 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="91531108-46fe-4cb9-866c-a519f21d2930" name="Default Changelist" comment="polished some colors">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/LabelSelectPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/LoginMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/LoginMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/SingleWordUploadPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/UploadPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/UploadPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/WordUpLoadPanel$CsvActionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/WordUpLoadPanel$CsvActionListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/WordUpLoadPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/WordUpLoadPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/MainMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/MainMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/TodayPage$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/TodayPage$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/TodayPage$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/TodayPage$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/TodayPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/TodayPage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DuckDock/Weather.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DuckDock/Weather.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +36,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="14" />
     <property name="last_opened_file_path" value="$USER_HOME$/Documents/Tencent Files/752928525/FileRecv/lwlib" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.16509435" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
@@ -101,7 +88,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620272281321</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="polished some colors">
+      <created>1620466377445</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1620466377445</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
