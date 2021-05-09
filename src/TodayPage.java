@@ -136,7 +136,8 @@ public class TodayPage extends JPanel {
                 WordPanel.setPreferredSize(new Dimension(780,150));
                 NewsPanel.setPreferredSize(new Dimension(320,160));
                 WeatherPanel.setPreferredSize(new Dimension(300,160));
-                TodoPanel.setPreferredSize(new Dimension(450,440));
+                TodoPanel.setPreferredSize(new Dimension(450,320));
+                TodoPanel.setBackground(Color.green);
 
                 //主页面布局
                 Box h1 = Box.createHorizontalBox();

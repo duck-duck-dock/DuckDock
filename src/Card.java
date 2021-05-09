@@ -82,7 +82,7 @@ public abstract class Card {
         }
         else if (i==1){
             right++;
-            if (right == 5){
+            if (right == 1){
                 setForget(-1);
             }
         }
@@ -187,27 +187,6 @@ class Word extends Card {
     public String getAccent(){
         return Accent;
     }
-
-    public void setWrong(int i){
-        if (i == 0){
-            wrong = 0;
-        }
-        else{
-            wrong++;
-        }
-    }
-    public void setRight(int i){
-        if ((i==0) && (right>0)){
-            right--;
-        }
-        else if (i==1){ //容易，right到5就去拼写。
-            right++;
-            if (right == 5){
-                setForget(-1);
-            }
-        }
-    }
-
 }
 
 /*

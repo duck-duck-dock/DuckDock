@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,14 +10,17 @@ class OneToDoJPanel extends JPanel {
     int index;//编号
 
     public OneToDoJPanel(User Userr,String AddText,int index) {
-        this.setPreferredSize(new Dimension(100,30));
+        this.setBorder(BorderFactory.createLineBorder(new Color(38, 145, 196)));
+        this.setPreferredSize(new Dimension(430,40));
+        this.setMaximumSize(new Dimension(430,40));
+        this.setMinimumSize(new Dimension(430,40));
         this.setLayout(new BorderLayout());
-        this.setBackground(new Color(165, 222, 228));
+        this.setBackground(new Color(88,178,220));
         this.index=index;
         ChangeJCheckBox = new JCheckBox();
-        ChangeJCheckBox.setBorderPainted(false);ChangeJCheckBox.setBackground(new Color(165, 222, 228));
+        ChangeJCheckBox.setBorderPainted(false);ChangeJCheckBox.setBackground(new Color(88,178,220));
         ChangeJCheckBox.setFocusPainted(false);
-        ChangeJCheckBox.setSelected(Userr.getToDoLists().get(index).getFinishIns());
+//        ChangeJCheckBox.setSelected(Userr.getToDoLists().get(index-1).getFinishIns());
         ToDoJLabel = new JLabel(AddText);
         DeleteJButton = new JButton("删除");
         DeleteJButton.setBorderPainted(false);DeleteJButton.setFocusPainted(false);DeleteJButton.setBackground(Color.white);
@@ -34,12 +38,15 @@ class OneToDoJPanel extends JPanel {
 
     }
     public OneToDoJPanel(User Userr,int index) {
-
+        this.setBorder(BorderFactory.createLineBorder(new Color(38, 145, 196)));
         this.setLayout(new BorderLayout());
-        this.setBackground(new Color(165, 222, 228));
+        this.setBackground(new Color(88,178,220));
+        this.setPreferredSize(new Dimension(430,40));
+        this.setMaximumSize(new Dimension(430,40));
+        this.setMinimumSize(new Dimension(430,40));
         this.index=index;
         ChangeJCheckBox = new JCheckBox();
-        ChangeJCheckBox.setBorderPainted(false);ChangeJCheckBox.setBackground(new Color(165, 222, 228));
+        ChangeJCheckBox.setBorderPainted(false);ChangeJCheckBox.setBackground(new Color(88,178,220));
         ChangeJCheckBox.setFocusPainted(false);
         ChangeJCheckBox.setSelected(Userr.getToDoLists().get(index).getFinishIns());
         ToDoJLabel = new JLabel(Userr.getToDoLists().get(index).getContent());

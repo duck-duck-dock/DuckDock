@@ -10,7 +10,7 @@ public class main {
     public AllUser getAlluser() {
         return alluser;
     }
-    private User Userr;
+    private static User Userr;
     public User getUserr() {
          return Userr;
     }
@@ -32,11 +32,11 @@ public class main {
         M.setAlluser();
         System.out.println(M.getAlluser().getUsers().elementAt(0).getPassword());
         LoginMenu Login = new LoginMenu(M.getAlluser());
-        MainMenu Menu = new MainMenu();
         Login.LogLoginJButton.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
-                  if(Login.JudgeLogin()){
+                  if((Userr=Login.JudgeLogin())!=null){
+                      MainMenu Menu = new MainMenu(Userr);
                       Login.setVisible(false);
                       Menu.setVisible(true);
                   }

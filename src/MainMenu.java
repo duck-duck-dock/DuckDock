@@ -28,7 +28,7 @@ public class MainMenu extends JFrame {
     DefaultPage DefaultFrame;
     CardLayout MainLayout;//卡片布局
 
-    User ThisUser=new User();
+    User ThisUser;//当前用户
 
     //Yuxin Zhu: initialize the memu GUI
     private void initTools() {
@@ -37,8 +37,8 @@ public class MainMenu extends JFrame {
         Review = new JButton("复习");
         Practice = new JButton("练习");
         Upload = new JButton("+");
-        Process = new JButton("进度");
-        Setting = new JButton("设置");
+//        Process = new JButton("进度");
+//        Setting = new JButton("设置");
         Tomato=new JButton("番茄钟");
         Backup=new JButton("备份");
         ButtonBar.add(Box.createGlue());
@@ -48,9 +48,9 @@ public class MainMenu extends JFrame {
         ButtonBar.add(Box.createGlue());
         ButtonBar.add(Upload);
         ButtonBar.add(Box.createGlue());
-        ButtonBar.add(Process);
+//        ButtonBar.add(Process);
         ButtonBar.add(Box.createGlue());
-        ButtonBar.add(Setting);
+//        ButtonBar.add(Setting);
         ButtonBar.add(Tomato);
         ButtonBar.add(Box.createGlue());
         ButtonBar.add(Backup);
@@ -72,19 +72,19 @@ public class MainMenu extends JFrame {
                 MainLayout.show(MainPanel, "Practice");
             }
         });
-        Process.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                MainLayout.show(MainPanel, "Process");
-            }
-        });
-        Setting.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                MainLayout.show(MainPanel, "Setting");
-
-            }
-        });
+//        Process.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                MainLayout.show(MainPanel, "Process");
+//            }
+//        });
+//        Setting.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                MainLayout.show(MainPanel, "Setting");
+//
+//            }
+//        });
         Upload.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -189,9 +189,9 @@ public class MainMenu extends JFrame {
 
     }
 
-    public MainMenu(){
-        initGUI();
-    }
+//    public MainMenu(){
+//        initGUI();
+//    }
     //Yuxin Zhu: main func, DON'T change this func
     public MainMenu(User thisuser) {
         super("主页");

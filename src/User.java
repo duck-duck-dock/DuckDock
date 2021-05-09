@@ -37,10 +37,10 @@ public class User {
         ToDoLists=new Vector<UserToDoList>();
         this.Problems=new Vector<Problem>();//
         Problem p=new Problem();
-        p.setProblemPosition("./Cover/cover.jpeg");//初始化的时候，就给用户的错题图片给一个封面
+        p.setProblemPosition("./Cover/cover.png");//初始化的时候，就给用户的错题图片给一个封面
         this.Problems.add(p);
         ArrayList l=new ArrayList();//初始化标签
-        l.add("这是封面！！");l.add("");l.add("");
+        l.add("政治");l.add("");l.add("");
         p.setLabel(l);
     }
     public User(String userName,String userID,String password,String school,int grade,String dreamSchool,Date dateOfTest){
@@ -56,10 +56,10 @@ public class User {
         Words=new Vector<Word>();
         this.Problems=new Vector<Problem>();
         Problem p=new Problem();
-        p.setProblemPosition("./Cover/cover.jpeg");//初始化的时候，就给用户的错题图片给一个封面
+        p.setProblemPosition("./Cover/cover.png");//初始化的时候，就给用户的错题图片给一个封面
         this.Problems.add(p);
         ArrayList l=new ArrayList();//初始化标签
-        l.add("这是封面！！");l.add("");l.add("");
+        l.add("政治");l.add("");l.add("");
         p.setLabel(l);
     }
 
@@ -286,7 +286,7 @@ class jdbc extends AllUser{
 
         String updateSql="update users set UserName = '"+updateUser.getUserName()+"' ,Password= '"+updateUser.getPassword()
                 +"' ,School= '"+updateUser.getSchool()+"' ,Grade= '"+updateUser.getGrade()+"' ,DreamSchool= '"+updateUser.getDreamSchool()
-                +"' ,Date= "+updateUser.getDateOfTest()+" where UserId= '"+updateUser.getUserID()+"' ;";
+                +/*"' ,Date= "+updateUser.getDateOfTest()+*/"' where UserId= '"+updateUser.getUserID()+"' ;";
         try {
             stmtSql.executeUpdate(updateSql);
             connectSql.commit();
@@ -323,20 +323,20 @@ class jdbc extends AllUser{
             connectSql.commit();
 
             /*将user中单词信息保存到数据库*/
+            if(!user.getWords().isEmpty())
             for(int i=0;i<user.getWords().size();i++){
 
                 frontSide=user.getWords().elementAt(i).getFrontSide();
                 backSide=user.getWords().elementAt(i).getBackSide();
-                right=user.getWords().elementAt(i).getRight();
-                wrong=user.getWords().elementAt(i).getWrong();
                 star=user.getWords().elementAt(i).getStar();
                 marked=user.getWords().elementAt(i).getmarked();
                 String egSentence=user.getWords().elementAt(i).getEgSentence();
 
                 String addUserWordSql="insert into words(UserID,FrontSide,BackSide,right_count,wrong_count,star,marked,EgSentence)"+
-                        "values('"+userID+"','"+frontSide+"','"+backSide+"','"+right+"','"+wrong+"','"+star+"','"+marked+"','"+egSentence+"');";
+                        "values('"+userID+"','"+frontSide+"','"+backSide+"','0','0','"+(star+1)+"','"+marked+"','"+egSentence+"');";
 
                 stmtSql.executeUpdate(addUserWordSql);
+
                 connectSql.commit();
             }
 
@@ -346,6 +346,7 @@ class jdbc extends AllUser{
             connectSql.commit();
 
             /*将user中所有问题保存到数据库*/
+            if(user.getProblems().elementAt(0).getFrontSide()!=null)
             for(int i=0;i<user.getProblems().size();i++){
                 frontSide=user.getProblems().elementAt(i).getFrontSide();
                 backSide=user.getProblems().elementAt(i).getBackSide();

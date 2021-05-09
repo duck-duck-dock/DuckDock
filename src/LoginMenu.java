@@ -113,9 +113,15 @@ public class LoginMenu extends JFrame{//zyx:登陆界面
         RegReserveJButton=new JButton("保存");
         RegReserveJButton.setFocusPainted(false);RegReserveJButton.setBorderPainted(false);
         RegReserveJButton.setBackground(Color.white);
-        Date RegOfTestDate=new Date();
+        RegOfTestDate=new Date();
         DatePick = new JXDatePicker();
         DatePick.setDate(RegOfTestDate);
+        DatePick.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RegOfTestDate=DatePick.getDate();
+            }
+        });
          RegGradeJComboBox=new JComboBox();
         RegGradeJComboBox.addItem("1");
         RegGradeJComboBox.addItem("2");
@@ -270,7 +276,7 @@ public class LoginMenu extends JFrame{//zyx:登陆界面
         Return value:
         boolean类型，表示是否查到此用户名和密码
         */
-    public boolean JudgeLogin(){
+    public User JudgeLogin(){
         //设置信息标签为空 清楚原来的历史信息
         LogMsgLabel.setText("");
         //获取用户输入的用户名
@@ -279,25 +285,26 @@ public class LoginMenu extends JFrame{//zyx:登陆界面
         String strPwd = new String(LogTxtPwdJPasswordField.getPassword());
         if ((strName == null && strPwd == null) || (strName.equals("") && strPwd.equals(""))) {
             LogMsgLabel.setText("用户名密码不能为空");
-            return false;
+            return null;
         }
         if (strName == null || strName.equals("")) {
             LogMsgLabel.setText("用户名不能为空");
-            return false;
+            return null;
         }
         if (strPwd == null || strPwd.equals("")) {
             LogMsgLabel.setText("密码不能为空");
-            return false;
+            return null;
         }
        //判断密码是否与用户名相匹配
         for (int i = 0; i < Users.getUserNum(); i++) {
             if (strName.equals(Users.getUsers().get(i).getUserName()) && strPwd.equals(Users.getUsers().get(i).getPassword())) {
+                User u=Users.getUsers().get(i);
                 JOptionPane.showMessageDialog(null, "登录成功！");
-                return true;
+                return u;
             }
         }
         LogMsgLabel.setText("用户名与密码不匹配");
-        return false;
+        return null;
     }
     public LoginMenu(AllUser alluser){
         super("登录界面");
