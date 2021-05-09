@@ -83,7 +83,7 @@ public abstract class Card {
         else if (i==1){
             right++;
             if (right == 5){
-                setForget(false);
+                setForget(-1);
             }
         }
     }
@@ -166,7 +166,6 @@ class Word extends Card {
         this.EgSentence=egSentence;
     }
 
-    Word(){}
 
     //Li Wen: 获取例句
     public String getEgSentence(){

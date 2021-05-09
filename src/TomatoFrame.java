@@ -17,8 +17,6 @@ public class TomatoFrame extends JFrame {
     JButton start, pulse;//开始键，暂停键
     boolean Flag=false;//是否在运行
 
-
-
     public void initGUI() {
         drawClock = new TomatoPanel();
         getContentPane().add(drawClock, BorderLayout.CENTER);
